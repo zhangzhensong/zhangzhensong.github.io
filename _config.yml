@@ -102,3 +102,6 @@ facebook_like: false
 # duoshuo comments
 duoshuo_comments: true
 duoshuo_short_name: zhangzhensong
+
+#weibo
+weibo_share: true
