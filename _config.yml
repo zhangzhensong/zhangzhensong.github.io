@@ -63,14 +63,17 @@ default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.
 # ----------------------- #
 
 # Github repositories
-github_user:
-github_repo_count: 0
+github_user: zhangzhensong
+github_repo_count: 1
 github_show_profile_link: true
 github_skip_forks: true
 
+#LinkedIn
+linkedin_user: zhensong-zhang/84/27a/9a4
+
 # Twitter
 twitter_user:
-twitter_tweet_button: true
+twitter_tweet_button: false
 
 # Google +1
 google_plus_one: false
@@ -105,3 +108,6 @@ duoshuo_short_name: zhangzhensong
 
 #weibo
 weibo_share: true
+
+#douban
+douban_user: Jason_Chueng
