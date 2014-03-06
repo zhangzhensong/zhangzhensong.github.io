@@ -1,16 +1,36 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>http://zhangzhensong.github.io/blog/2014/03/06/my-first-octopress-blog/</loc>
+        <lastmod>2014-03-06T10:02:58+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://zhangzhensong.github.io/blog/2014/03/06/my-first-project/</loc>
+        <lastmod>2014-03-06T09:42:54+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://zhangzhensong.github.io/blog/archives/</loc>
-        <lastmod>2014-03-05T17:43:20+08:00</lastmod>
+        <lastmod>2014-03-06T10:02:58+08:00</lastmod>
     </url>
     <url>
         <loc>http://zhangzhensong.github.io/blog/categories/</loc>
         <lastmod>2014-03-05T17:43:20+08:00</lastmod>
     </url>
     <url>
-        <loc>http://zhangzhensong.github.io/</loc>
+        <loc>http://zhangzhensong.github.io/blog/</loc>
+        <lastmod>2014-03-06T10:02:58+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://zhangzhensong.github.io/blog.html</loc>
         <lastmod>2014-03-05T17:43:20+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://zhangzhensong.github.io/</loc>
+        <lastmod>2014-03-06T10:40:40+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://zhangzhensong.github.io/publications/</loc>
+        <lastmod>2014-03-05T21:36:47+08:00</lastmod>
     </url>
     <url>
         <loc>http://zhangzhensong.github.io/robots.txt</loc>
