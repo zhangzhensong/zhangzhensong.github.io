@@ -9,7 +9,7 @@ footer: true
 -----------------------
 ##About Me
 
-I'm 3rd year student of Master's majoring Computer Science at [Institute of Software, Chinese Academy of Sciences](http://english.is.cas.cn/). This site has my [sideprojects]({{BASE_PATH}}/blog/categories/project/) and occasional [blog posts](blog).
+I'm a 3rd year student of Master's course majoring Computer Science at [Institute of Software, Chinese Academy of Sciences](http://english.is.cas.cn/). This site has my [sideprojects]({{BASE_PATH}}/blog/categories/project/) and occasional [blog posts](blog).
 
 Please refer to my [CV]({{BASE_PATH}}/resume/resume.pdf) for more detail.
 
