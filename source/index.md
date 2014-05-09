@@ -2,7 +2,7 @@
 layout: page
 title: "About"
 date: 2014-03-05 20:25
-comments: true
+comments: false
 sharing: true
 footer: true
 ---
@@ -21,7 +21,7 @@ I am widely interested in, but not limited to
 
 * **Human-computer interaction**  
 * **Computer Vision**
-* **Augmented Reality**
+* **Virtual Reality/Augmented Reality**
 * **SLAM/PTAM**
 
 Please refer to my [publications]({{BASE_PATH}}/publications).
