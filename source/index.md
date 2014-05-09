@@ -21,9 +21,8 @@ I am widely interested in, but not limited to
 
 * **Human-computer interaction**  
 * **Computer Vision**
-* **Computer Graphics**
-* **Data Mining**  
-* **Machine Learning**
+* **Augmented Reality**
+* **SLAM/PTAM**
 
 Please refer to my [publications]({{BASE_PATH}}/publications).
 
