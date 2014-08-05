@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: blog | Zhensong Zhang]]></title>
+  <link href="http://zhensongzhang.com/blog/categories/blog/atom.xml" rel="self"/>
+  <link href="http://zhensongzhang.com/"/>
+  <updated>2014-08-05T19:27:17+08:00</updated>
+  <id>http://zhensongzhang.com/</id>
+  <author>
+    <name><![CDATA[Zhensong Zhang]]></name>
+    <email><![CDATA[zhensongzhang@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[My first octopress blog]]></title>
+    <link href="http://zhensongzhang.com/blog/2014/03/06/my-first-octopress-blog/"/>
+    <updated>2014-03-06T09:38:35+08:00</updated>
+    <id>http://zhensongzhang.com/blog/2014/03/06/my-first-octopress-blog</id>
+    <content type="html"><![CDATA[<p>This is my first post.</p>
+]]></content>
+  </entry>
+  
+</feed>
