@@ -1,0 +1,27 @@
+# jemdoc: menu{MENU}{research.html}, nofooter
+== Research
+
+== Research Interests
+
+I am widely interested in, but not limited to
+- Human-Computer Interaction
+- Virtual Reality/Augmented Reality
+- Computer Vision
+- Computer Graphics
+
+== Publications
+
+=== Conference Proceedings
+
+- *[http://dl.acm.org/citation.cfm?id=2828616 \[VRST'15\] Color correspondence of image warping using plane constraints]* \n
+*Zhensong ZHANG*, YongWei NIE, Hanqiu SUN \n
+In /Proceedings of the 21st ACM Symposium on Virtual Reality Software and Technology/, Beijing, China, 2015.
+
+- *[http://dl.acm.org/citation.cfm?id=2557525 \[IUI'14\] Left and right hand distinction for multi-touch tabletop interactions]* \n
+*Zhensong ZHANG*, Fengjun ZHANG, Hui CHEN, Jiasheng LIU, Hongan WANG and Guozhong DAI \n
+In /Proceedings of the 19th international conference on Intelligent User Interfaces/, Haifa, Israel, 2014.
+
+=== Journal Articles
+- *[http://www.sciencedirect.com/science/article/pii/S0169023X13000049 \[DKE\] Multi-objective optimization integration of query interfaces for the Deep Web based on attribute constraints]* \n
+Yanni LI, Yuping WANG, Peng JIANG and *Zhensong ZHANG* \n
+In /Data & Knowledge Engineering/, 2013.
