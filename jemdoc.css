@@ -375,3 +375,9 @@ table.imgtable, table.imgtable td {
     border: none;
     text-align: left;
 }
+
+.scrollblock, .scrollblock .blockcontent {
+    max-height: 200px !important;
+    overflow-y: auto !important;
+    display: block !important;
+}
