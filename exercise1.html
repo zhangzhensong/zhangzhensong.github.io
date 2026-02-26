@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>上肢日跟练 DAY A</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", sans-serif;
+  background: #0a0a1a;
+  color: #e8e8f0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  padding-top: env(safe-area-inset-top, 16px);
+  padding-bottom: env(safe-area-inset-bottom, 16px);
+  -webkit-user-select: none;
+  user-select: none;
+}
+h1 { font-size: 1.4em; margin-bottom: 4px; color: #7ecfff; }
+.subtitle { font-size: 0.85em; color: #888; margin-bottom: 16px; }
+
+#mainArea {
+  width: 100%;
+  max-width: 420px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card {
+  background: #151528;
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid #2a2a4a;
+}
+
+#exerciseLabel {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #ffd866;
+  text-align: center;
+  min-height: 2.6em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+#exerciseNameEn {
+  font-size: 0.65em;
+  color: #a0a080;
+  font-weight: normal;
+  margin-top: 2px;
+}
+
+#muscleLabel {
+  font-size: 0.9em;
+  color: #a0a0c0;
+  text-align: center;
+  margin-top: 4px;
+}
+
+#setsInfo {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  font-size: 0.85em;
+}
+#setsInfo span { color: #7ecfff; }
+
+#timerDisplay {
+  font-size: 4em;
+  font-weight: bold;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+  padding: 10px 0;
+  min-height: 1.5em;
+}
+
+#repCounter {
+  font-size: 1.5em;
+  text-align: center;
+  color: #7ecfff;
+  min-height: 1.5em;
+}
+
+#phaseLabel {
+  font-size: 1.1em;
+  text-align: center;
+  padding: 8px;
+  border-radius: 10px;
+  min-height: 2em;
+  transition: all 0.3s;
+}
+.phase-warmup { background: #1a3320; color: #66ff99; }
+.phase-exercise { background: #332a1a; color: #ffd866; }
+.phase-rest { background: #1a2033; color: #66b3ff; }
+.phase-countdown { background: #2a1a20; color: #ff9966; }
+.phase-stretch { background: #2a1a33; color: #cc99ff; }
+.phase-done { background: #1a3320; color: #66ff99; }
+
+#tipsArea {
+  font-size: 0.82em;
+  color: #b0b0d0;
+  line-height: 1.5;
+  max-height: 5em;
+  overflow-y: auto;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 12px 0;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border: none;
+  border-radius: 12px;
+  padding: 14px 28px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.15s;
+  min-width: 100px;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:active { transform: scale(0.95); opacity: 0.8; }
+.btn-start { background: #2563eb; color: #fff; }
+.btn-pause { background: #d97706; color: #fff; }
+.btn-resume { background: #16a34a; color: #fff; }
+.btn-skip { background: #4b5563; color: #ddd; font-size: 0.9em; padding: 10px 20px; }
+
+#progressBar {
+  width: 100%;
+  height: 6px;
+  background: #1a1a2e;
+  border-radius: 3px;
+  overflow: hidden;
+}
+#progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #2563eb, #7ecfff);
+  width: 0%;
+  transition: width 0.5s;
+}
+
+#overallProgress {
+  font-size: 0.8em;
+  color: #666;
+  text-align: center;
+}
+
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<h1>💪 DAY A · 上肢日</h1>
+<div class="subtitle">胸 · 背 · 肩 · 手臂</div>
+
+<div id="mainArea">
+  <div class="card">
+    <div id="exerciseLabel">准备开始上肢训练<span id="exerciseNameEn"></span></div>
+    <div id="muscleLabel"></div>
+    <div id="setsInfo" class="hidden">
+      <span id="setProgress"></span>
+      <span id="repInfo"></span>
+      <span id="weightInfo"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div id="phaseLabel" class="phase-warmup">等待开始</div>
+    <div id="timerDisplay">--:--</div>
+    <div id="repCounter"></div>
+  </div>
+
+  <div id="progressBar"><div id="progressFill"></div></div>
+  <div id="overallProgress"></div>
+
+  <div class="card" id="tipsCard">
+    <div id="tipsArea">点击「开始训练」，跟随语音指导完成今天的上肢训练。请确保手机未静音。</div>
+  </div>
+
+  <div class="controls">
+    <button class="btn btn-start" id="startBtn" onclick="startWorkout()">开始训练</button>
+    <button class="btn btn-pause hidden" id="pauseBtn" onclick="pauseWorkout()">暂停</button>
+    <button class="btn btn-resume hidden" id="resumeBtn" onclick="resumeWorkout()">继续</button>
+    <button class="btn btn-skip hidden" id="skipBtn" onclick="skipCurrent()">跳过 ▶</button>
+  </div>
+</div>
+
+<script>
+// ===== Workout Data =====
+const exercises = [
+  {
+    name: "跑步机快走/小跑", nameEn: "Treadmill Walk / Jog",
+    muscle: "全身预热", phase: "warmup", type: "timed", durationSec: 5*60,
+    tips: "心率升至110-120 bpm，激活全身循环。",
+    intro: "热身动作一：跑步机快走或小跑。目标：全身预热。时长5分钟。心率升至110到120。"
+  },
+  {
+    name: "手臂绕环 + 扩胸", nameEn: "Arm Circles + Chest Opener",
+    muscle: "肩关节热身", phase: "warmup", type: "counted",
+    sets: 2, reps: 15, restSec: 0, repPauseSec: 2.0,
+    tips: "缓慢画大圈，充分活动肩关节，不要耸肩。",
+    intro: "热身动作二：手臂绕环加扩胸。目标：肩关节热身。2组，每组各15次。要点：缓慢画大圈，充分活动肩关节，不要耸肩。"
+  },
+  {
+    name: "坐姿推胸机", nameEn: "Chest Press Machine",
+    muscle: "胸大肌（主）· 三角肌前束 · 肱三头肌", phase: "exercise", type: "counted",
+    sets: 4, reps: 12, restSec: 60, repPauseSec: 3.0, weight: "8-10 kg",
+    tips: "背部贴靠座椅，双脚踩实地面，推出时不要完全锁死肘关节，下放时胸肌有拉伸感。呼气推出，吸气放回。",
+    intro: "动作一：坐姿推胸机。目标肌群：胸大肌为主，三角肌前束，肱三头肌。4组，每组12次，组间休息60秒。建议起始重量：8到10公斤。动作要点：背部贴靠座椅，双脚踩实地面，推出时不要完全锁死肘关节，下放时胸肌有拉伸感。呼气推出，吸气放回。"
+  },
+  {
+    name: "哑铃飞鸟（平凳）", nameEn: "Dumbbell Fly",
+    muscle: "胸大肌（主）· 三角肌前束", phase: "exercise", type: "counted",
+    sets: 3, reps: 12, restSec: 60, repPauseSec: 3.5, weight: "单手 4-5 kg",
+    tips: "躺在平凳上，肘关节微弯且固定不动，双臂弧线上合，顶点夹胸停1秒感受胸肌收缩。重量宁轻勿重。",
+    intro: "动作二：哑铃飞鸟，平凳卧姿。目标肌群：胸大肌为主，三角肌前束。3组，每组12到15次，组间休息60秒。建议起始重量：单手4到5公斤。动作要点：肘关节微弯且固定不动，双臂弧线上合，顶点夹胸停1秒。重量宁轻勿重。"
+  },
+  {
+    name: "坐姿高位下拉（宽握距）", nameEn: "Lat Pulldown",
+    muscle: "背阔肌（主）· 斜方肌中下部 · 大圆肌 · 肱二头肌", phase: "exercise", type: "counted",
+    sets: 4, reps: 12, restSec: 60, repPauseSec: 3.2, weight: "12-15 kg",
+    tips: "宽握距，上身微微后倾10-15度，下拉至胸口高度，肩胛骨主动下沉夹紧。感受背阔肌发力，而非手臂用力。",
+    intro: "动作三：坐姿高位下拉，宽握距。目标肌群：背阔肌为主，斜方肌中下部，大圆肌，肱二头肌协同。4组，每组12次，组间休息60秒。建议起始重量：12到15公斤。动作要点：宽握距，上身微微后倾10到15度，下拉至胸口高度，肩胛骨主动下沉夹紧。"
+  },
+  {
+    name: "坐姿划船", nameEn: "Seated Cable Row",
+    muscle: "背阔肌（主）· 斜方肌中部 · 菱形肌 · 肱二头肌", phase: "exercise", type: "counted",
+    sets: 3, reps: 12, restSec: 60, repPauseSec: 3.2, weight: "12-15 kg",
+    tips: "拉至腹部，手肘贴近身体两侧，夹背停留1秒后缓慢放回。上身不要大幅前后晃动借力。",
+    intro: "动作四：坐姿划船。目标肌群：背阔肌为主，斜方肌中部，菱形肌，肱二头肌协同。3组，每组12次，组间休息60秒。建议起始重量：12到15公斤。动作要点：拉至腹部，手肘贴近身体两侧，夹背停留1秒后缓慢放回。不要前后晃动借力。"
+  },
+  {
+    name: "哑铃侧平举（站姿）", nameEn: "Dumbbell Lateral Raise",
+    muscle: "三角肌中束（主）· 三角肌前/后束 · 斜方肌上部", phase: "exercise", type: "counted",
+    sets: 3, reps: 15, restSec: 45, repPauseSec: 2.5, weight: "单手 3-4 kg",
+    tips: "上身微微前倾，小拇指侧略高（如倒水姿势），手肘微弯，抬至与肩齐。不要耸肩借力。",
+    intro: "动作五：哑铃侧平举，站姿。目标肌群：三角肌中束为主。3组，每组15次，组间休息45秒。建议起始重量：单手3到4公斤。动作要点：小拇指侧略高如倒水姿势，手肘微弯，抬至与肩齐。不要耸肩借力。"
+  },
+  {
+    name: "哑铃二头弯举", nameEn: "Dumbbell Bicep Curl",
+    muscle: "肱二头肌（主）· 肱肌 · 前臂", phase: "exercise", type: "counted",
+    sets: 3, reps: 12, restSec: 45, repPauseSec: 3.2, weight: "单手 4-6 kg",
+    tips: "上臂紧贴身体不要晃动，旋腕弯举，顶点收缩1秒，缓慢放下（离心控制）。",
+    intro: "动作六：哑铃二头弯举。目标肌群：肱二头肌为主，肱肌，前臂。3组，每组12次，组间休息45秒。建议起始重量：单手4到6公斤。动作要点：上臂紧贴身体不要晃动，旋腕弯举，顶点收缩1秒，缓慢放下，注意离心控制。"
+  },
+  {
+    name: "绳索三头下压", nameEn: "Cable Tricep Pushdown",
+    muscle: "肱三头肌（主）· 前臂", phase: "exercise", type: "counted",
+    sets: 3, reps: 15, restSec: 45, repPauseSec: 2.5, weight: "8-10 kg",
+    tips: "上臂固定垂直于地面，只动前臂。下压到底夹紧三头肌，缓慢放回，手臂不超过90度。",
+    intro: "动作七：绳索三头下压。目标肌群：肱三头肌为主，前臂。3组，每组15次，组间休息45秒。建议起始重量：8到10公斤。动作要点：上臂固定垂直于地面，只动前臂。下压到底夹紧三头肌，缓慢放回不超过90度。"
+  },
+  {
+    name: "胸肌拉伸（扶墙转身）", muscle: "胸大肌", phase: "stretch",
+    type: "timed_sides", durationPerSideSec: 30, sets: 2,
+    tips: "扶墙，身体缓慢转开，感受胸肌拉伸。",
+    intro: "拉伸放松。胸肌拉伸，扶墙转身。每侧30秒，共2组。"
+  },
+  {
+    name: "背阔肌拉伸（悬挂/侧弯）", muscle: "背阔肌", phase: "stretch",
+    type: "timed_sides", durationPerSideSec: 30, sets: 2,
+    tips: "扶墙侧弯或悬挂拉伸，感受背部侧面伸展。",
+    intro: "背阔肌拉伸，悬挂或扶墙侧弯。每侧30秒，共2组。"
+  },
+  {
+    name: "肩部跨胸拉伸", muscle: "三角肌 · 肩部", phase: "stretch",
+    type: "timed_sides", durationPerSideSec: 30, sets: 2,
+    tips: "一只手横过胸前，另一只手按压肘部。",
+    intro: "肩部跨胸拉伸。每侧30秒，共2组。"
+  }
+];
+
+// ===== TTS Engine (prefer female voice, iOS compatible) =====
+let synth = window.speechSynthesis;
+let zhVoice = null;
+let ttsUnlocked = false; // iOS requires first utterance in user gesture
+
+function pickFemaleVoice() {
+  const voices = synth.getVoices();
+  const femaleKeywords = ['Tingting', 'Sinji', 'Meijia', 'Lili', 'female', 'Female', 'Xiaoxiao', 'Xiaoyi', 'Shanshan'];
+  const maleKeywords = ['Tiantian', 'male', 'Male', 'Yunxi', 'Yunyang', 'Daniel'];
+  const zhVoices = voices.filter(v => v.lang.startsWith('zh'));
+
+  for (const kw of femaleKeywords) {
+    const found = zhVoices.find(v => v.name.includes(kw));
+    if (found) return found;
+  }
+  const nonMale = zhVoices.filter(v => !maleKeywords.some(kw => v.name.includes(kw)));
+  if (nonMale.length > 0) return nonMale[0];
+  return zhVoices[0] || null;
+}
+
+function refreshVoice() {
+  zhVoice = pickFemaleVoice();
+  if (zhVoice) console.log('Selected voice:', zhVoice.name, zhVoice.lang);
+}
+synth.onvoiceschanged = refreshVoice;
+refreshVoice();
+// iOS: voices may load late, retry
+setTimeout(refreshVoice, 500);
+setTimeout(refreshVoice, 1500);
+
+// CRITICAL iOS FIX: call this SYNCHRONOUSLY inside the onclick handler
+// to "unlock" the speech engine with a user gesture
+function unlockTTS() {
+  if (ttsUnlocked) return;
+  synth.cancel();
+  const u = new SpeechSynthesisUtterance(' ');
+  u.lang = 'zh-CN';
+  u.volume = 0.01; // nearly silent unlock
+  if (zhVoice) u.voice = zhVoice;
+  synth.speak(u);
+  ttsUnlocked = true;
+  console.log('TTS unlocked for iOS');
+}
+
+function speak(text) {
+  return new Promise((resolve) => {
+    if (!text || text.trim() === '') { resolve(); return; }
+
+    // Cancel any previous speech
+    synth.cancel();
+
+    // Small delay after cancel to let iOS reset
+    setTimeout(() => {
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'zh-CN';
+      u.rate = 0.95;
+      u.pitch = 1.05;
+      if (zhVoice) u.voice = zhVoice;
+
+      let resolved = false;
+      const done = () => {
+        if (resolved) return;
+        resolved = true;
+        clearInterval(keepAlive);
+        resolve();
+      };
+
+      u.onend = done;
+      u.onerror = done;
+
+      synth.speak(u);
+
+      // iOS workaround: prevent speech from pausing after ~15s
+      const keepAlive = setInterval(() => {
+        if (!synth.speaking) { done(); return; }
+        synth.pause();
+        synth.resume();
+      }, 5000); // More frequent on iOS (every 5s instead of 10s)
+
+      // Safety timeout: if nothing happens in 30s, move on
+      setTimeout(() => { if (!resolved) done(); }, 30000);
+    }, 50);
+  });
+}
+
+// ===== State =====
+let isRunning = false;
+let isPaused = false;
+let skipRequested = false;
+let currentExIdx = 0;
+const BETWEEN_EXERCISE_REST = 120;
+
+// ===== UI =====
+function updateUI(opts) {
+  if (opts.exercise !== undefined) document.getElementById('exerciseLabel').childNodes[0].textContent = opts.exercise;
+  if (opts.exerciseEn !== undefined) document.getElementById('exerciseNameEn').textContent = opts.exerciseEn || '';
+  if (opts.muscle !== undefined) document.getElementById('muscleLabel').textContent = opts.muscle;
+  if (opts.phase !== undefined) {
+    const el = document.getElementById('phaseLabel');
+    el.className = 'phase-' + opts.phase;
+    if (opts.phaseText) el.textContent = opts.phaseText;
+  }
+  if (opts.phaseText !== undefined) document.getElementById('phaseLabel').textContent = opts.phaseText;
+  if (opts.timer !== undefined) document.getElementById('timerDisplay').textContent = opts.timer;
+  if (opts.rep !== undefined) document.getElementById('repCounter').textContent = opts.rep;
+  if (opts.tips !== undefined) document.getElementById('tipsArea').textContent = opts.tips;
+  if (opts.setProgress !== undefined) {
+    document.getElementById('setsInfo').classList.remove('hidden');
+    document.getElementById('setProgress').textContent = opts.setProgress;
+  }
+  if (opts.repInfo !== undefined) document.getElementById('repInfo').textContent = opts.repInfo;
+  if (opts.weightInfo !== undefined) document.getElementById('weightInfo').textContent = opts.weightInfo;
+  if (opts.hideSets) document.getElementById('setsInfo').classList.add('hidden');
+  if (opts.progress !== undefined) {
+    document.getElementById('progressFill').style.width = opts.progress + '%';
+    document.getElementById('overallProgress').textContent = `${currentExIdx + 1} / ${exercises.length} 个动作`;
+  }
+}
+
+function formatTime(sec) {
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+// ===== Pause-aware sleep =====
+function sleep(ms) {
+  return new Promise((resolve) => {
+    let elapsed = 0;
+    const step = 200;
+    const id = setInterval(() => {
+      if (skipRequested) { clearInterval(id); resolve(); return; }
+      if (!isPaused) elapsed += step;
+      if (elapsed >= ms) { clearInterval(id); resolve(); }
+    }, step);
+  });
+}
+
+async function countdownSleep(totalSec, label) {
+  let remaining = totalSec;
+  while (remaining > 0 && !skipRequested) {
+    if (!isPaused) {
+      updateUI({ timer: formatTime(remaining), phase: 'rest', phaseText: label });
+      remaining--;
+      await sleep(1000);
+    } else {
+      await sleep(100);
+    }
+  }
+}
+
+async function countdown5WithVoice() {
+  updateUI({ phase: 'countdown', phaseText: '⏳ 倒计时' });
+  await speak("准备。");
+  for (let c = 5; c >= 1; c--) {
+    if (skipRequested) break;
+    updateUI({ timer: String(c), phase: 'countdown', phaseText: '⏳ 倒计时' });
+    await speak(String(c));
+    if (c > 1) await sleep(600);
+  }
+}
+
+// ===== Exercise Runner =====
+async function runExercise(ex, idx) {
+  skipRequested = false;
+  currentExIdx = idx;
+  const progress = (idx / exercises.length) * 100;
+
+  updateUI({
+    exercise: ex.name, exerciseEn: ex.nameEn || '',
+    muscle: ex.muscle || '', tips: ex.tips || '',
+    progress, hideSets: true, rep: '', timer: '--:--'
+  });
+
+  const phaseMap = { warmup: '🔥 热身', exercise: '💪 训练中', stretch: '🧘 拉伸' };
+  updateUI({ phase: ex.phase, phaseText: phaseMap[ex.phase] || '' });
+  await speak(ex.intro);
+  if (skipRequested) return;
+
+  // === TIMED (treadmill etc) ===
+  if (ex.type === 'timed') {
+    updateUI({ phaseText: '⏱ 进行中', rep: '' });
+    await speak("开始。");
+    await countdownSleep(ex.durationSec, '⏱ 进行中');
+    if (!skipRequested) await speak("结束。");
+  }
+
+  // === TIMED SIDES (stretching) ===
+  else if (ex.type === 'timed_sides') {
+    for (let set = 1; set <= (ex.sets || 1); set++) {
+      if (skipRequested) return;
+      await speak(set > 1 ? `第${set}组。左侧，开始。` : "左侧，开始。");
+      updateUI({ rep: ex.sets > 1 ? `第${set}组` : '' });
+      await countdownSleep(ex.durationPerSideSec, `${ex.sets > 1 ? `第${set}组 · ` : ''}左侧`);
+      if (skipRequested) return;
+
+      await speak("换右侧，开始。");
+      await countdownSleep(ex.durationPerSideSec, `${ex.sets > 1 ? `第${set}组 · ` : ''}右侧`);
+      if (skipRequested) return;
+      if (set < ex.sets) await sleep(1500);
+    }
+    if (!skipRequested) await speak("拉伸结束。");
+  }
+
+  // === COUNTED REPS ===
+  else if (ex.type === 'counted') {
+    updateUI({
+      setProgress: `组: 0/${ex.sets}`,
+      repInfo: `次: ${ex.reps}`,
+      weightInfo: ex.weight ? `重量: ${ex.weight}` : ''
+    });
+
+    for (let set = 1; set <= ex.sets; set++) {
+      if (skipRequested) return;
+
+      updateUI({ setProgress: `组: ${set}/${ex.sets}`, phase: 'exercise', phaseText: `💪 第${set}组` });
+      await speak(`第${set}组，准备。`);
+      await sleep(2000);
+      if (skipRequested) return;
+      await speak("开始。");
+
+      for (let rep = 1; rep <= ex.reps; rep++) {
+        if (skipRequested) return;
+        updateUI({ rep: `${rep} / ${ex.reps}`, timer: `第${set}组` });
+        await sleep(ex.repPauseSec * 1000);
+        if (skipRequested) return;
+        await speak(String(rep));
+      }
+
+      if (set < ex.sets && ex.restSec > 0) {
+        updateUI({ rep: '', phase: 'rest', phaseText: '😮‍💨 组间休息' });
+        await speak(`第${set}组完成，休息${ex.restSec}秒。`);
+        await countdownSleep(ex.restSec - 6, '😮‍💨 组间休息');
+        if (!skipRequested) await countdown5WithVoice();
+      } else if (set === ex.sets) {
+        await speak(`第${set}组完成！${ex.name}全部完成。`);
+        updateUI({ rep: '✅ 完成' });
+      }
+    }
+  }
+}
+
+// ===== Main =====
+async function startWorkout() {
+  if (isRunning) return;
+
+  // CRITICAL: unlock TTS synchronously in the click handler (iOS requirement)
+  unlockTTS();
+  // Also refresh voice selection in case voices loaded late
+  refreshVoice();
+
+  isRunning = true;
+  isPaused = false;
+
+  document.getElementById('startBtn').classList.add('hidden');
+  document.getElementById('pauseBtn').classList.remove('hidden');
+  document.getElementById('skipBtn').classList.remove('hidden');
+
+  // Screen wake lock
+  let wakeLock = null;
+  try { if ('wakeLock' in navigator) wakeLock = await navigator.wakeLock.request('screen'); } catch(e) {}
+
+  // Short delay to let iOS process the unlock utterance
+  await new Promise(r => setTimeout(r, 300));
+
+  await speak("上肢训练日，开始！首先进行热身。");
+
+  for (let i = 0; i < exercises.length; i++) {
+    currentExIdx = i;
+    skipRequested = false;
+    await runExercise(exercises[i], i);
+
+    const isLast = (i === exercises.length - 1);
+    const curr = exercises[i];
+    const next = exercises[i + 1];
+
+    if (!isLast && curr.phase === 'exercise' && next && next.phase === 'exercise') {
+      skipRequested = false;
+      updateUI({
+        exercise: '动作间休息', exerciseEn: '',
+        muscle: `下一个: ${next.name}`,
+        phase: 'rest', phaseText: '😮‍💨 动作间休息',
+        rep: '', tips: next.tips || '', hideSets: true
+      });
+
+      await speak(`休息2分钟。下一个动作：${next.name}。`);
+      await countdownSleep(BETWEEN_EXERCISE_REST - 6, '😮‍💨 动作间休息');
+      if (!skipRequested) await countdown5WithVoice();
+    } else if (!isLast) {
+      await sleep(2000);
+    }
+  }
+
+  // Done
+  updateUI({
+    exercise: '🎉 训练完成！', exerciseEn: '',
+    muscle: '', phase: 'done', phaseText: '✅ 今日训练已完成',
+    timer: '👏', rep: '',
+    tips: '辛苦了！记得补充蛋白质和水分。好好休息！',
+    progress: 100, hideSets: true
+  });
+
+  await speak("今天的上肢训练全部完成，辛苦了！记得补充蛋白质和水分。好好休息！");
+
+  document.getElementById('pauseBtn').classList.add('hidden');
+  document.getElementById('skipBtn').classList.add('hidden');
+  document.getElementById('startBtn').classList.remove('hidden');
+  document.getElementById('startBtn').textContent = '重新开始';
+
+  if (wakeLock) try { await wakeLock.release(); } catch(e) {}
+  isRunning = false;
+}
+
+function pauseWorkout() {
+  isPaused = true;
+  synth.cancel();
+  document.getElementById('pauseBtn').classList.add('hidden');
+  document.getElementById('resumeBtn').classList.remove('hidden');
+  updateUI({ phaseText: '⏸ 已暂停' });
+}
+
+function resumeWorkout() {
+  // Re-unlock TTS on user gesture (iOS may re-lock after pause)
+  unlockTTS();
+  isPaused = false;
+  document.getElementById('resumeBtn').classList.add('hidden');
+  document.getElementById('pauseBtn').classList.remove('hidden');
+}
+
+function skipCurrent() {
+  skipRequested = true;
+  synth.cancel();
+}
+</script>
+</body>
+</html>
