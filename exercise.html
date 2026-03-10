@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>健身跟练 v6</title>
+<title>健身跟练 v7</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
@@ -123,7 +123,7 @@ h1{font-size:1.5em;font-weight:900;letter-spacing:-0.02em;margin-bottom:2px}
 </style>
 </head>
 <body>
-<h1 id="mainTitle">💪 健身跟练 v6</h1>
+<h1 id="mainTitle">💪 健身跟练 v7</h1>
 <div class="subtitle" id="mainSubtitle">选择今天的训练</div>
 
 <div id="menuScreen">
@@ -184,16 +184,16 @@ A: {
   exercises:[
     {name:"跑步机快走/小跑",nameEn:"Treadmill Walk / Jog",muscle:"全身预热",phase:"warmup",type:"timed",durationSec:300,tips:"心率升至110-120bpm，激活全身循环。",intro:"热身动作一：跑步机快走或小跑。时长5分钟。心率升至110到120。"},
     {name:"手臂绕环 + 扩胸",nameEn:"Arm Circles + Chest Opener",muscle:"肩关节热身",phase:"warmup",type:"counted",sets:2,reps:15,restSec:0,repPauseSec:2.0,tips:"缓慢画大圈，充分活动肩关节，不要耸肩。",intro:"热身动作二：手臂绕环加扩胸。2组，每组各15次。缓慢画大圈，不要耸肩。"},
-    {name:"坐姿推胸机",nameEn:"Chest Press Machine",muscle:"胸大肌（主）· 三角肌前束 · 肱三头肌",phase:"exercise",type:"counted",sets:4,reps:12,restSec:60,repPauseSec:3.0,weight:"8-10 kg",tips:"背部贴靠座椅，双脚踩实地面，推出时不要完全锁死肘关节，下放时胸肌有拉伸感。呼气推出，吸气放回。",intro:"动作一：坐姿推胸机。胸大肌为主。4组，每组12次，组间休息60秒。起始重量8到10公斤。背部贴靠座椅，推出时不锁死肘关节，呼气推出吸气放回。"},
-    {name:"哑铃飞鸟（平凳）",nameEn:"Dumbbell Fly",muscle:"胸大肌（主）· 三角肌前束",phase:"exercise",type:"counted",sets:3,reps:12,restSec:60,repPauseSec:3.5,weight:"单手 4-5 kg",tips:"躺在平凳上，肘关节微弯且固定不动，双臂弧线上合，顶点夹胸1秒感受胸肌收缩。重量宁轻勿重。",intro:"动作二：哑铃飞鸟。胸大肌为主。3组，每组12次，组间休息60秒。单手4到5公斤。肘关节微弯固定，双臂弧线上合，顶点夹胸停1秒。"},
-    {name:"坐姿高位下拉",nameEn:"Lat Pulldown",muscle:"背阔肌（主）· 斜方肌中下部 · 肱二头肌",phase:"exercise",type:"counted",sets:4,reps:12,restSec:60,repPauseSec:3.2,weight:"12-15 kg",tips:"宽握距，上身微微后倾10-15度，下拉至胸口高度，肩胛骨主动下沉夹紧。",intro:"动作三：坐姿高位下拉，宽握距。背阔肌为主。4组，每组12次，组间休息60秒。12到15公斤。上身微微后倾，下拉至胸口，肩胛骨下沉夹紧。"},
-    {name:"坐姿划船",nameEn:"Seated Cable Row",muscle:"背阔肌（主）· 斜方肌中部 · 菱形肌",phase:"exercise",type:"counted",sets:3,reps:12,restSec:60,repPauseSec:3.2,weight:"12-15 kg",tips:"拉至腹部，手肘贴近身体两侧，夹背停留1秒后缓慢放回。不要前后晃动借力。",intro:"动作四：坐姿划船。背阔肌为主。3组，每组12次，组间休息60秒。12到15公斤。拉至腹部，夹背停1秒，不要晃动借力。"},
-    {name:"哑铃侧平举",nameEn:"Dumbbell Lateral Raise",muscle:"三角肌中束（主）",phase:"exercise",type:"counted",sets:3,reps:15,restSec:45,repPauseSec:2.5,weight:"单手 3-4 kg",tips:"上身微微前倾，小拇指侧略高如倒水姿势，抬至与肩齐，不要耸肩借力。",intro:"动作五：哑铃侧平举。三角肌中束为主。3组，每组15次，组间休息45秒。单手3到4公斤。小拇指侧略高如倒水，抬至与肩齐，不要耸肩。"},
-    {name:"哑铃二头弯举",nameEn:"Dumbbell Bicep Curl",muscle:"肱二头肌（主）· 前臂",phase:"exercise",type:"counted",sets:3,reps:12,restSec:45,repPauseSec:3.2,weight:"单手 4-6 kg",tips:"上臂紧贴身体不要晃动，旋腕弯举，顶点收缩1秒，缓慢放下。",intro:"动作六：哑铃二头弯举。肱二头肌为主。3组，每组12次，组间休息45秒。单手4到6公斤。上臂紧贴身体，顶点收缩1秒，缓慢放下。"},
-    {name:"绳索三头下压",nameEn:"Cable Tricep Pushdown",muscle:"肱三头肌（主）· 前臂",phase:"exercise",type:"counted",sets:3,reps:15,restSec:45,repPauseSec:2.5,weight:"8-10 kg",tips:"上臂固定垂直于地面，只动前臂，下压到底夹紧三头肌。",intro:"动作七：绳索三头下压。肱三头肌为主。3组，每组15次，组间休息45秒。8到10公斤。上臂固定，只动前臂，下压到底夹紧三头。"},
-    {name:"平板支撑",nameEn:"Plank",muscle:"腹横肌 · 腹直肌 · 腹斜肌",phase:"exercise",type:"timed_sets",sets:3,holdSec:50,restSec:45,tips:"前臂撑地，肘在肩正下方，头到脚跟一条直线，臀部不塌不撅，核心收紧。",intro:"核心动作一：平板支撑。3组，每组40到60秒，组间休息45秒。肘在肩正下方，头到脚跟一条直线，核心收紧。"},
+    {name:"坐姿推胸机",nameEn:"Chest Press Machine",muscle:"胸大肌（主）· 三角肌前束 · 肱三头肌",phase:"exercise",type:"counted",sets:4,reps:12,restSec:60,repPauseSec:3.0,weight:"14 kg",tips:"背部贴靠座椅，双脚踩实地面，推出时不要完全锁死肘关节，下放时胸肌有拉伸感。呼气推出，吸气放回。",intro:"动作一：坐姿推胸机。胸大肌为主。4组，每组12次，组间休息60秒。14公斤。背部贴靠座椅，推出时不锁死肘关节，呼气推出吸气放回。"},
+    {name:"坐姿高位下拉",nameEn:"Lat Pulldown",muscle:"背阔肌（主）· 斜方肌中下部 · 肱二头肌",phase:"exercise",type:"counted",sets:4,reps:12,restSec:60,repPauseSec:3.2,weight:"14 kg",tips:"宽握距，上身微微后倾10-15度，下拉至胸口高度，肩胛骨主动下沉夹紧。",intro:"动作二：坐姿高位下拉，宽握距。背阔肌为主。4组，每组12次，组间休息60秒。14公斤。上身微微后倾，下拉至胸口，肩胛骨下沉夹紧。"},
+    {name:"坐姿划船",nameEn:"Seated Cable Row",muscle:"背阔肌（主）· 斜方肌中部 · 菱形肌",phase:"exercise",type:"counted",sets:3,reps:12,restSec:60,repPauseSec:3.2,weight:"12-15 kg",tips:"拉至腹部，手肘贴近身体两侧，夹背停留1秒后缓慢放回。不要前后晃动借力。",intro:"动作三：坐姿划船。背阔肌为主。3组，每组12次，组间休息60秒。12到15公斤。拉至腹部，夹背停1秒，不要晃动借力。"},
+    {name:"哑铃飞鸟（平凳）",nameEn:"Dumbbell Fly",muscle:"胸大肌（主）· 三角肌前束",phase:"exercise",type:"counted",sets:3,reps:12,restSec:60,repPauseSec:3.5,weight:"单手 2-3 kg",tips:"肘关节微弯且固定不动，想象抱一棵大树画弧线，顶点夹胸1秒。如动作不标准可换器械夹胸。",intro:"动作四：哑铃飞鸟。胸大肌为主。3组，每组12次，组间休息60秒。单手2到3公斤，先练动作模式。想象抱大树画弧线，肘角全程不变，顶点夹胸停1秒。"},
+    {name:"哑铃侧平举",nameEn:"Dumbbell Lateral Raise",muscle:"三角肌中束（主）",phase:"exercise",type:"counted",sets:3,reps:10,restSec:45,repPauseSec:2.5,weight:"单手 3 kg",tips:"上身微微前倾，小拇指侧略高如倒水姿势，抬至与肩齐，不要耸肩借力。",intro:"动作五：哑铃侧平举。三角肌中束为主。3组，每组10次，组间休息45秒。单手3公斤。小拇指侧略高如倒水，抬至与肩齐，不要耸肩。"},
+    {name:"哑铃二头弯举",nameEn:"Dumbbell Bicep Curl",muscle:"肱二头肌（主）· 前臂",phase:"exercise",type:"counted",sets:3,reps:12,restSec:45,repPauseSec:3.2,weight:"单手 4 kg",tips:"上臂紧贴身体不要晃动，顶点收缩1秒，缓慢放下。手腕保持中立，握哑铃像钩子不要死攥。",intro:"动作六：哑铃二头弯举。肱二头肌为主。3组，每组12次，组间休息45秒。单手4公斤。上臂紧贴身体，顶点收缩1秒，缓慢放下。手腕保持中立，握如钩子。"},
+    {name:"绳索三头下压",nameEn:"Cable Tricep Pushdown",muscle:"肱三头肌（主）· 前臂",phase:"exercise",type:"counted",sets:3,reps:15,restSec:45,repPauseSec:2.5,weight:"6 kg",tips:"上臂固定垂直于地面，只动前臂，下压到底夹紧三头肌。",intro:"动作七：绳索三头下压。肱三头肌为主。3组，每组15次，组间休息45秒。6公斤。上臂固定，只动前臂，下压到底夹紧三头。"},
+    {name:"帕洛夫推举",nameEn:"Pallof Press",muscle:"腹斜肌（主）· 核心抗旋转",phase:"exercise",type:"counted",sets:2,reps:10,restSec:45,repPauseSec:3.0,weight:"绳索 3-5 kg",tips:"侧对绳索机站立，双手握把推出至手臂伸直，保持躯干不旋转，缓慢收回。做完一侧10次后转身换另一侧。",intro:"核心动作三：帕洛夫推举。腹斜肌为主，抗旋转训练。2组，每侧10次，组间休息45秒。绳索3到5公斤。侧对绳索机，双手推出保持躯干不旋转。做完一侧转身换另一侧。"},
+    {name:"平板支撑",nameEn:"Plank",muscle:"腹横肌 · 腹直肌 · 腹斜肌",phase:"exercise",type:"timed_sets",sets:3,holdSec:75,restSec:45,tips:"前臂撑地，肘在肩正下方，头到脚跟一条直线，臀部不塌不撅，核心收紧。",intro:"核心动作一：平板支撑。3组，每组60到90秒，组间休息45秒。肘在肩正下方，头到脚跟一条直线，核心收紧。"},
     {name:"仰卧手触膝",nameEn:"Crunch with Knee Touch",muscle:"腹直肌上部（主）· 腹外斜肌",phase:"exercise",type:"counted",sets:3,reps:15,restSec:45,repPauseSec:2.2,tips:"双手沿大腿滑向膝盖方向，视线看天花板不要低头，用腹肌卷起肩胛而非脖子发力。",intro:"核心动作二：仰卧手触膝。3组，每组15次，组间休息45秒。双手沿大腿滑向膝盖，视线朝上不低头，用腹肌卷起。"},
-    {name:"帕洛夫推举",nameEn:"Pallof Press",muscle:"腹斜肌（主）· 核心抗旋转",phase:"exercise",type:"counted",sets:3,reps:10,restSec:45,repPauseSec:3.0,weight:"绳索 5-8 kg",tips:"侧对绳索机站立，双手握把推出至手臂伸直，保持躯干不旋转，缓慢收回。",intro:"核心动作三：帕洛夫推举。腹斜肌为主，抗旋转训练。3组，每侧10次，组间休息45秒。绳索5到8公斤。侧对绳索机，双手推出，保持躯干不旋转。"},
     {name:"有氧燃脂",nameEn:"Cardio",muscle:"心肺系统",phase:"exercise",type:"timed",durationSec:900,tips:"心率130-150bpm。椭圆机阻力5-8级（首选），跑步机7-9km/h坡度1-2度，或动感单车踏频70-90rpm。",intro:"有氧燃脂时间，15分钟。椭圆机、跑步机或动感单车任选，心率维持130到150。"},
     {name:"胸肌拉伸（扶墙转身）",muscle:"胸大肌",phase:"stretch",type:"timed_sides",durationPerSideSec:30,sets:2,tips:"扶墙，身体缓慢转开，感受胸肌拉伸。",intro:"拉伸放松。胸肌拉伸，扶墙转身。每侧30秒，共2组。"},
     {name:"背阔肌拉伸（侧弯）",muscle:"背阔肌",phase:"stretch",type:"timed_sides",durationPerSideSec:30,sets:2,tips:"扶墙侧弯，感受背部侧面伸展。",intro:"背阔肌拉伸，侧弯。每侧30秒，共2组。"},
@@ -208,10 +208,10 @@ B: {
     {name:"跑步机快走/小跑",nameEn:"Treadmill Walk / Jog",muscle:"全身预热",phase:"warmup",type:"timed",durationSec:300,tips:"心率提升，下肢充血预热。",intro:"热身动作一：跑步机快走或小跑。时长5分钟。"},
     {name:"徒手深蹲",nameEn:"Bodyweight Squat",muscle:"臀腿热身",phase:"warmup",type:"counted",sets:2,reps:15,restSec:0,repPauseSec:2.5,tips:"缓慢蹲下，激活臀腿肌群。",intro:"热身动作二：徒手深蹲。2组，每组15次。缓慢蹲下，激活臀腿。"},
     {name:"腿举机",nameEn:"Leg Press Machine",muscle:"股四头肌（主）· 臀大肌 · 腘绳肌",phase:"exercise",type:"counted",sets:4,reps:15,restSec:90,repPauseSec:2.8,weight:"30-40 kg",tips:"脚踩平台中上方，膝盖对准脚尖方向，下放时大腿不超过90度，推出不要锁死膝盖。",intro:"动作一：腿举机。股四头肌为主。4组，每组15次，组间休息90秒。30到40公斤。脚踩平台中上方，膝盖对准脚尖，推出不锁死膝盖。"},
-    {name:"哑铃深蹲（酒杯式）",nameEn:"Goblet Squat",muscle:"股四头肌（主）· 臀大肌 · 核心稳定",phase:"exercise",type:"counted",sets:4,reps:12,restSec:90,repPauseSec:3.5,weight:"8-10 kg（单只）",tips:"双手合捧哑铃于胸前，双脚与肩同宽，核心收紧，膝盖追脚尖方向。注意腰部感受，如有不适立即降重。",intro:"动作二：哑铃深蹲，酒杯式。股四头肌和臀大肌为主。4组，每组12次，组间休息90秒。单只哑铃8到10公斤。双手捧哑铃于胸前，核心收紧。注意腰部感受。"},
-    {name:"绳索拉力",nameEn:"Cable Pull-Through",muscle:"臀大肌（主）· 腘绳肌 · 核心稳定",phase:"exercise",type:"counted",sets:3,reps:12,restSec:75,repPauseSec:3.5,weight:"10-12 kg（绳索）",tips:"背对绳索机，双脚略宽于肩，绳索从胯下穿过。臀部向后推（想象屁股去碰身后的墙），膝盖微弯固定，感受腘绳肌拉伸后臀肌夹紧站起。",intro:"动作三：绳索拉力。臀大肌和腘绳肌为主。3组，每组12次，组间休息75秒。绳索10到12公斤。背对绳索机，臀部向后推，想象屁股去碰身后的墙，然后臀肌夹紧站起。"},
-    {name:"坐姿腿弯举",nameEn:"Seated Leg Curl",muscle:"腘绳肌（主）· 腓肠肌",phase:"exercise",type:"counted",sets:3,reps:12,restSec:60,repPauseSec:3.0,weight:"10-15 kg",tips:"全程控制速度，弯举到底停1秒，缓慢伸直，感受大腿后侧收缩。",intro:"动作四：坐姿腿弯举。腘绳肌为主。3组，每组12次，组间休息60秒。10到15公斤。弯举到底停1秒，缓慢伸直，感受后侧收缩。"},
-    {name:"坐姿髋外展机",nameEn:"Hip Abduction Machine",muscle:"臀中肌（主）· 臀小肌",phase:"exercise",type:"counted",sets:3,reps:15,restSec:60,repPauseSec:2.5,weight:"15-20 kg",tips:"上身微微前倾，双腿缓慢向外展开对抗阻力，展开到最大幅度时停1-2秒，缓慢合拢。不要用惯性甩腿。",intro:"动作五：坐姿髋外展机。臀中肌和臀小肌为主。3组，每组15次，组间休息60秒。15到20公斤。上身微微前倾，双腿缓慢外展，顶点停1到2秒，缓慢合拢。"},
+    {name:"坐姿腿弯举",nameEn:"Seated Leg Curl",muscle:"腘绳肌（主）· 腓肠肌",phase:"exercise",type:"counted",sets:3,reps:12,restSec:60,repPauseSec:3.0,weight:"10-15 kg",tips:"全程控制速度，弯举到底停1秒，缓慢伸直，感受大腿后侧收缩。",intro:"动作二：坐姿腿弯举。腘绳肌为主。3组，每组12次，组间休息60秒。10到15公斤。弯举到底停1秒，缓慢伸直，感受后侧收缩。"},
+    {name:"坐姿髋外展机",nameEn:"Hip Abduction Machine",muscle:"臀中肌（主）· 臀小肌",phase:"exercise",type:"counted",sets:3,reps:15,restSec:60,repPauseSec:2.5,weight:"15-20 kg",tips:"上身微微前倾，双腿缓慢向外展开对抗阻力，展开到最大幅度时停1-2秒，缓慢合拢。不要用惯性甩腿。",intro:"动作三：坐姿髋外展机。臀中肌和臀小肌为主。3组，每组15次，组间休息60秒。15到20公斤。上身微微前倾，双腿缓慢外展，顶点停1到2秒，缓慢合拢。"},
+    {name:"绳索拉力",nameEn:"Cable Pull-Through",muscle:"臀大肌（主）· 腘绳肌 · 核心稳定",phase:"exercise",type:"counted",sets:3,reps:12,restSec:75,repPauseSec:3.5,weight:"10-12 kg（绳索）",tips:"背对绳索机，双脚略宽于肩，绳索从胯下穿过。臀部向后推（想象屁股去碰身后的墙），膝盖微弯固定，感受腘绳肌拉伸后臀肌夹紧站起。",intro:"动作四：绳索拉力。臀大肌和腘绳肌为主。3组，每组12次，组间休息75秒。绳索10到12公斤。背对绳索机，臀部向后推，想象屁股去碰身后的墙，然后臀肌夹紧站起。"},
+    {name:"哑铃深蹲（酒杯式）",nameEn:"Goblet Squat",muscle:"股四头肌（主）· 臀大肌 · 核心稳定",phase:"exercise",type:"counted",sets:4,reps:12,restSec:90,repPauseSec:3.5,weight:"8-10 kg（单只）",tips:"双手合捧哑铃于胸前，双脚与肩同宽，核心收紧，膝盖追脚尖方向。注意腰部感受，如有不适立即降重。",intro:"动作五：哑铃深蹲，酒杯式。股四头肌和臀大肌为主。4组，每组12次，组间休息90秒。单只哑铃8到10公斤。双手捧哑铃于胸前，核心收紧。注意腰部感受。"},
     {name:"哑铃后弓步",nameEn:"Dumbbell Reverse Lunge",muscle:"臀大肌（主）· 股四头肌 · 腘绳肌",phase:"exercise",type:"counted",sets:3,reps:10,restSec:60,repPauseSec:3.5,weight:"双手各 6-7 kg",tips:"步子要大，后腿膝盖接近不触地，上身直立，感受臀肌发力。",intro:"动作六：哑铃后弓步。臀大肌为主。3组，每腿10次，组间休息60秒。双手各6到7公斤。步子要大，后腿膝盖接近不触地，上身直立。"},
     {name:"小腿提踵",nameEn:"Calf Raise",muscle:"腓肠肌（主）· 比目鱼肌",phase:"exercise",type:"counted",sets:3,reps:20,restSec:45,repPauseSec:2.0,weight:"15-20 kg 或徒手",tips:"踮起到最高点停2秒，下放时脚跟低于支撑台感受拉伸，动作缓慢不要弹跳。",intro:"动作七：小腿提踵。腓肠肌为主。3组，每组20次，组间休息45秒。15到20公斤或徒手。踮起最高点停2秒，下放充分拉伸。"},
     {name:"反向卷腹",nameEn:"Reverse Crunch",muscle:"腹直肌下部（主）· 腹横肌",phase:"exercise",type:"counted",sets:3,reps:15,restSec:45,repPauseSec:2.8,tips:"腿始终保持空中90度不放下，只用腹肌将骨盆微微卷起离地约5-10cm，缓慢放回。",intro:"核心动作一：反向卷腹。腹直肌下部为主。3组，每组15次，组间休息45秒。腿保持空中90度，用腹肌卷起骨盆，幅度5到10厘米。"},
@@ -237,18 +237,18 @@ function selectDay(day){
   document.getElementById('menuScreen').classList.add('hide');
   document.getElementById('workoutScreen').classList.add('active');
   document.getElementById('exerciseLabel').childNodes[0].textContent='准备开始训练';
-  document.getElementById('tipsArea').textContent='点击「开始训练」开始。请确保手机未静音。';
+  document.getElementById('tipsArea').textContent='点击「开始训练」开始。请确保手机未静音。⚠️ 训练时请勿锁屏，已启用防息屏。';
   buildExList();
 }
 
 function goBack(){
   if(isRunning){
     if(!confirm('训练正在进行中，确定要退出吗？'))return;
-    skipRequested=true; synth.cancel(); isRunning=false; isPaused=false; stopBgAudio();
+    skipRequested=true; synth.cancel(); isRunning=false; isPaused=false; stopNoSleep();
   }
   document.getElementById('menuScreen').classList.remove('hide');
   document.getElementById('workoutScreen').classList.remove('active');
-  document.getElementById('mainTitle').textContent='💪 健身跟练 v6';
+  document.getElementById('mainTitle').textContent='💪 健身跟练 v7';
   document.getElementById('mainSubtitle').textContent='选择今天的训练';
   document.getElementById('startBtn').classList.remove('hidden');
   document.getElementById('startBtn').textContent='开始训练';
@@ -313,28 +313,51 @@ function refreshVoice(){zhVoice=pickVoice();}
 synth.onvoiceschanged=refreshVoice;
 refreshVoice(); setTimeout(refreshVoice,500); setTimeout(refreshVoice,1500);
 
-// ===== iOS Background Audio (Web Audio API - survives lock screen) =====
-let audioCtx=null, bgGain=null;
-function startBgAudio(){
-  if(audioCtx)return;
+// ===== iOS NoSleep - Video approach (most reliable for iOS Chrome) =====
+let noSleepVideo=null;
+function startNoSleep(){
+  if(noSleepVideo)return;
   try{
-    audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-    // Create a silent oscillator to keep audio session alive
-    const osc=audioCtx.createOscillator();
-    bgGain=audioCtx.createGain();
-    bgGain.gain.value=0.001; // nearly silent
-    osc.connect(bgGain);bgGain.connect(audioCtx.destination);
-    osc.start();
-    // Also play a silent HTML5 audio for extra iOS compatibility
-    const silentWav='data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAABCxAgAEABAAZGF0YQAAAAA=';
-    const a=new Audio(silentWav);a.loop=true;a.volume=0.01;a.play().catch(()=>{});
-    window._bgAudioEl=a;
-  }catch(e){console.warn('BgAudio failed',e);}
+    // Tiny base64 mp4 video - plays inline silently to prevent iOS from sleeping
+    const mp4Base64='data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAAAChtZGF0AAAA'+
+    'FWIhAAr/4f/+AAAH0AAAnQAAAAwN//EAAAAAAP8AAABxbW9vdgAAAGxtdmhkAAAAANLEP5TSxD+UAAAD'+
+    'IAAAAAADAAEAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAQQAAB'+
+    'AAAAIAAAAAAAAcHRyYWsAAABcdGtoZAAAAAHSxD+U0sQ/lAAAAAEAAAAAAAADAAAAAAAAAAAAAAAAA'+
+    'AAAAQAAAAAAAAAAAAAAAAAAAAEAAAAAAEAAAAAgAAAAAAAkZWR0cwAAABxlbHN0AAAAAAAAAAEAAAMA'+
+    'AAEAAAAAAQ==';
+    noSleepVideo=document.createElement('video');
+    noSleepVideo.setAttribute('playsinline','');
+    noSleepVideo.setAttribute('muted','');
+    noSleepVideo.setAttribute('loop','');
+    noSleepVideo.style.cssText='position:fixed;top:-1px;left:-1px;width:1px;height:1px;opacity:0.01';
+    noSleepVideo.src=mp4Base64;
+    document.body.appendChild(noSleepVideo);
+    noSleepVideo.play().catch(()=>{});
+  }catch(e){console.warn('NoSleep failed',e);}
+  // Also keep Web Audio context alive as backup
+  try{
+    if(!window._audioCtx){
+      window._audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+      const osc=window._audioCtx.createOscillator();
+      const g=window._audioCtx.createGain();g.gain.value=0.001;
+      osc.connect(g);g.connect(window._audioCtx.destination);osc.start();
+    }
+  }catch(e){}
 }
-function stopBgAudio(){
-  if(audioCtx){try{audioCtx.close();}catch(e){}audioCtx=null;}
-  if(window._bgAudioEl){window._bgAudioEl.pause();window._bgAudioEl=null;}
+function stopNoSleep(){
+  if(noSleepVideo){noSleepVideo.pause();noSleepVideo.remove();noSleepVideo=null;}
+  if(window._audioCtx){try{window._audioCtx.close();}catch(e){}window._audioCtx=null;}
 }
+// Auto-resume when returning from background
+document.addEventListener('visibilitychange',()=>{
+  if(document.visibilityState==='visible'&&isRunning){
+    // Re-activate audio/video
+    if(noSleepVideo)noSleepVideo.play().catch(()=>{});
+    if(window._audioCtx&&window._audioCtx.state==='suspended')window._audioCtx.resume();
+    // Re-unlock TTS
+    refreshVoice();
+  }
+});
 
 function unlockTTS(){
   if(ttsUnlocked)return;
@@ -342,7 +365,7 @@ function unlockTTS(){
   const u=new SpeechSynthesisUtterance(' ');
   u.lang='zh-CN';u.volume=0.01;if(zhVoice)u.voice=zhVoice;
   synth.speak(u);
-  startBgAudio();
+  startNoSleep();
   ttsUnlocked=true;
 }
 
@@ -607,7 +630,7 @@ async function startWorkout(){
 
   document.removeEventListener('visibilitychange',reacquireWL);
   if(wakeLock)try{await wakeLock.release();}catch(e){}
-  stopBgAudio();
+  stopNoSleep();
   isRunning=false;
 }
 
