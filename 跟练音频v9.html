@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>健身跟练 v9</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#07080f;--card:#111827;--card2:#1a2236;--border:#1e293b;
+  --text:#e2e8f0;--muted:#94a3b8;--dim:#475569;
+  --gold:#f59e0b;--gold-dim:#92400e;--blue:#3b82f6;--blue-glow:#60a5fa;
+  --green:#22c55e;--red:#ef4444;--purple:#a78bfa;
+}
+body{
+  font-family:'Noto Sans SC',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--text);
+  min-height:100vh;min-height:100dvh;
+  display:flex;flex-direction:column;align-items:center;
+  padding:16px;padding-top:max(16px,env(safe-area-inset-top));
+  padding-bottom:max(16px,env(safe-area-inset-bottom));
+  -webkit-user-select:none;user-select:none;
+}
+h1{font-size:1.5em;font-weight:900;letter-spacing:-0.02em;margin-bottom:2px}
+.subtitle{font-size:0.82em;color:var(--muted);margin-bottom:16px}
+#menuScreen{width:100%;max-width:440px;display:flex;flex-direction:column;gap:14px;padding-top:12px}
+.menu-card{background:var(--card);border-radius:16px;padding:20px 22px;border:1px solid var(--border);cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent;position:relative;overflow:hidden;}
+.menu-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.menu-card:active{transform:scale(.97);border-color:var(--blue)}
+.menu-card h2{font-size:1.15em;font-weight:700;margin-bottom:5px}
+.menu-card .desc{font-size:.85em;color:var(--muted)}
+.menu-card .dur{font-size:.75em;color:var(--dim);margin-top:6px}
+.menu-a h2{color:var(--gold)}.menu-a::before{background:linear-gradient(90deg,var(--gold),transparent)}
+.menu-b h2{color:var(--green)}.menu-b::before{background:linear-gradient(90deg,var(--green),transparent)}
+#workoutScreen{display:none;width:100%;max-width:440px;flex:1;flex-direction:column;gap:10px}
+#workoutScreen.active{display:flex}
+#menuScreen.hide{display:none}
+.card{background:var(--card);border-radius:14px;padding:14px 16px;border:1px solid var(--border)}
+#exerciseLabel{font-size:1.25em;font-weight:700;color:var(--gold);text-align:center;min-height:2.4em;display:flex;align-items:center;justify-content:center;flex-direction:column;line-height:1.3}
+#exerciseNameEn{font-size:.6em;color:var(--dim);font-weight:400;margin-top:2px}
+#muscleLabel{font-size:.85em;color:var(--muted);text-align:center;margin-top:3px}
+#setsInfo{display:flex;justify-content:space-around;margin-top:8px;font-size:.82em}
+#setsInfo span{color:var(--blue-glow);font-weight:600}
+#timerDisplay{font-size:3.8em;font-weight:900;text-align:center;font-variant-numeric:tabular-nums;color:#fff;padding:6px 0;min-height:1.4em;letter-spacing:-.02em}
+#repCounter{font-size:1.4em;text-align:center;color:var(--blue-glow);min-height:1.4em;font-weight:600}
+#phaseLabel{font-size:1em;text-align:center;padding:7px 12px;border-radius:10px;min-height:1.8em;font-weight:600;transition:all .2s}
+.phase-warmup{background:#14532d40;color:#4ade80}
+.phase-exercise{background:#92400e40;color:#fbbf24}
+.phase-rest{background:#1e3a5f40;color:#60a5fa}
+.phase-countdown{background:#7f1d1d40;color:#f87171}
+.phase-stretch{background:#4c1d9540;color:#c084fc}
+.phase-done{background:#14532d40;color:#4ade80}
+#tipsArea{font-size:.8em;color:var(--muted);line-height:1.55;max-height:4.5em;overflow-y:auto}
+.controls{display:flex;gap:8px;justify-content:center;padding:10px 0;flex-wrap:wrap}
+.btn{border:none;border-radius:12px;padding:13px 22px;font-size:1em;font-weight:700;cursor:pointer;transition:all .12s;min-width:80px;-webkit-tap-highlight-color:transparent;font-family:inherit;}
+.btn:active{transform:scale(.94);opacity:.85}
+.btn-start{background:var(--blue);color:#fff;padding:14px 32px;font-size:1.1em}
+.btn-pause{background:#b45309;color:#fff}
+.btn-resume{background:#15803d;color:#fff}
+.btn-back{background:#1e293b;color:var(--muted);font-size:.88em;padding:10px 16px}
+.nav-controls{display:flex;gap:8px;justify-content:center;align-items:center;padding:4px 0}
+.btn-nav{background:#1e293b;color:var(--muted);border-radius:10px;padding:10px 16px;font-size:.85em;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;font-family:inherit;transition:all .12s;border:none;}
+.btn-nav:active{transform:scale(.94);background:#334155}
+.btn-nav:disabled{opacity:.3;pointer-events:none}
+#navLabel{color:var(--dim);font-size:.78em;min-width:60px;text-align:center}
+#exListToggle{background:none;border:1px solid var(--border);border-radius:8px;color:var(--muted);padding:6px 14px;font-size:.78em;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent;display:block;margin:0 auto;}
+#exListToggle:active{background:#1e293b}
+#exListPanel{display:none;background:var(--card);border:1px solid var(--border);border-radius:12px;max-height:240px;overflow-y:auto;padding:6px;margin-top:4px;}
+#exListPanel.open{display:block}
+.ex-item{padding:9px 12px;border-radius:8px;font-size:.82em;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--muted);-webkit-tap-highlight-color:transparent;transition:background .1s;}
+.ex-item:active{background:#334155}
+.ex-item.current{background:#1e3a5f60;color:var(--blue-glow);font-weight:600}
+.ex-item.done{color:var(--dim)}
+.ex-item .ex-idx{font-size:.72em;color:var(--dim);min-width:20px}
+#progressBar{width:100%;height:5px;background:#1e293b;border-radius:3px;overflow:hidden}
+#progressFill{height:100%;background:linear-gradient(90deg,var(--blue),var(--blue-glow));width:0%;transition:width .4s}
+#overallProgress{font-size:.75em;color:var(--dim);text-align:center;margin-top:2px}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<h1 id="mainTitle">💪 健身跟练 v9</h1>
+<div class="subtitle" id="mainSubtitle">选择今天的训练</div>
+<div id="menuScreen">
+  <div class="menu-card menu-a" onclick="selectDay('A')">
+    <h2>🦾 DAY A · 上肢 + 核心</h2>
+    <div class="desc">背×4 · 胸 · 肩 · 手臂 · 核心 · 有氧</div>
+    <div class="dur">~55-75 分钟 · 4必做 + 3建议 + 1选做 + 核心 + 有氧</div>
+  </div>
+  <div class="menu-card menu-b" onclick="selectDay('B')">
+    <h2>🦵 DAY B · 下肢 + 核心</h2>
+    <div class="desc">臀×2 · 腿 · 小腿 · 核心 · 有氧</div>
+    <div class="dur">~55-75 分钟 · 5必做 + 2建议 + 1选做 + 核心 + 有氧</div>
+  </div>
+</div>
+<div id="workoutScreen">
+  <div class="card">
+    <div id="exerciseLabel">准备开始<span id="exerciseNameEn"></span></div>
+    <div id="muscleLabel"></div>
+    <div id="setsInfo" class="hidden"><span id="setProgress"></span><span id="repInfo"></span><span id="weightInfo"></span></div>
+  </div>
+  <div class="card">
+    <div id="phaseLabel" class="phase-warmup">等待开始</div>
+    <div id="timerDisplay">--:--</div>
+    <div id="repCounter"></div>
+  </div>
+  <div id="progressBar"><div id="progressFill"></div></div>
+  <div id="overallProgress"></div>
+  <div class="nav-controls hidden" id="navBar">
+    <button class="btn-nav" id="prevBtn" onclick="navExercise(-1)">◀ 上一个</button>
+    <span id="navLabel"></span>
+    <button class="btn-nav" id="nextBtn" onclick="navExercise(1)">下一个 ▶</button>
+  </div>
+  <button id="exListToggle" class="hidden" onclick="toggleExList()">📋 动作列表</button>
+  <div id="exListPanel"></div>
+  <div class="card"><div id="tipsArea">点击「开始训练」开始。请确保手机未静音。</div></div>
+  <div class="controls">
+    <button class="btn btn-back" id="backBtn" onclick="goBack()">← 返回</button>
+    <button class="btn btn-start" id="startBtn" onclick="startWorkout()">开始训练</button>
+    <button class="btn btn-pause hidden" id="pauseBtn" onclick="pauseWorkout()">暂停</button>
+    <button class="btn btn-resume hidden" id="resumeBtn" onclick="resumeWorkout()">继续</button>
+  </div>
+</div>
+<script>
+const WORKOUTS={
+A:{
+  title:"💪 DAY A · 上肢 + 核心",subtitle:"背×4 · 胸 · 肩 · 手臂 · 核心 · 有氧",
+  openSpeech:"上肢加核心训练日，开始！首先进行热身。",
+  endSpeech:"今天的上肢加核心训练全部完成，辛苦了！记得补充蛋白质和水分。好好休息！",
+  exercises:[
+    {name:"跑步机快走/小跑",nameEn:"Treadmill Walk / Jog",muscle:"全身预热",phase:"warmup",type:"timed",durationSec:300,tips:"心率升至110-120bpm。",intro:"热身动作一：跑步机快走或小跑。时长5分钟。"},
+    {name:"手臂绕环 + 扩胸",nameEn:"Arm Circles + Chest Opener",muscle:"肩关节热身",phase:"warmup",type:"counted",sets:2,reps:15,restSec:0,repPauseSec:2.0,tips:"缓慢画大圈，不要耸肩。",intro:"热身动作二：手臂绕环加扩胸。2组，每组各15次。"},
+    {name:"坐姿推胸机",nameEn:"Chest Press Machine",muscle:"胸大肌（主）",phase:"exercise",type:"counted",sets:3,reps:12,restSec:60,repPauseSec:3.0,weight:"11 kg",tips:"背部贴靠座椅，推出不锁死肘关节，呼气推出吸气放回。",intro:"器械区，动作一：坐姿推胸机。3组12次，60秒休息。11公斤。"},
+    {name:"坐姿高位下拉",nameEn:"Lat Pulldown",muscle:"背阔肌（主）",phase:"exercise",type:"counted",sets:3,reps:12,restSec:60,repPauseSec:3.2,weight:"14 kg",tips:"宽握距，上身后倾10-15度，下拉至胸口，肩胛骨下沉夹紧。",intro:"动作二：坐姿高位下拉。3组12次，60秒休息。14公斤。肩胛骨下沉夹紧。"},
+    {name:"辅助引体向上",nameEn:"Assisted Pull-up",muscle:"背阔肌（主）· 大圆肌",phase:"exercise",type:"counted",sets:3,reps:7,restSec:75,repPauseSec:3.5,weight:"辅助 -20~-25 kg",tips:"肩胛骨先下沉，再发力拉起。不要摇晃借力，感受背阔肌收缩。做不了可直接跳过。",intro:"动作三：辅助引体向上，新增练背动作。3组6到8次，75秒休息。调辅助重量至能标准完成为止。肩胛先下沉再拉，感受背阔肌。"},
+    {name:"坐姿划船",nameEn:"Seated Cable Row",muscle:"背阔肌（主）· 菱形肌",phase:"exercise",type:"counted",sets:3,reps:12,restSec:60,repPauseSec:3.2,weight:"12-15 kg",tips:"拉至腹部，夹背停1秒，不要晃动借力。",intro:"动作四：坐姿划船。3组12次，60秒休息。12到15公斤。拉至腹部夹背停1秒。"},
+    {name:"哑铃侧平举",nameEn:"Dumbbell Lateral Raise",muscle:"三角肌中束（主）",phase:"exercise",type:"counted",sets:3,reps:10,restSec:45,repPauseSec:2.5,weight:"单手 3 kg",tips:"小拇指侧略高如倒水，抬至与肩齐，不耸肩。",intro:"哑铃区，动作五：哑铃侧平举。3组10次，45秒休息。单手3公斤。如倒水姿势抬至肩齐。"},
+    {name:"绳索面拉",nameEn:"Face Pull",muscle:"三角肌后束（主）· 上背",phase:"exercise",type:"counted",sets:3,reps:15,restSec:45,repPauseSec:2.5,weight:"5-8 kg",tips:"绳索调至头部高度，向脸两侧拉，终点做外旋如投降姿势，夹紧肩胛骨。",intro:"绳索区，动作六：绳索面拉。改善体态的关键动作。3组15次，45秒休息。5到8公斤。向脸两侧拉，终点做外旋，夹紧肩胛骨。"},
+    {name:"绳索三头下压",nameEn:"Cable Tricep Pushdown",muscle:"肱三头肌（主）",phase:"exercise",type:"counted",sets:2,reps:15,restSec:45,repPauseSec:2.5,weight:"6 kg",tips:"上臂固定，只动前臂，下压到底夹紧三头。",intro:"动作七：绳索三头下压。2组15次，45秒休息。6公斤。上臂固定，只动前臂。"},
+    {name:"器械夹胸",nameEn:"Pec Deck",muscle:"胸大肌（主）",phase:"exercise",type:"counted",sets:2,reps:12,restSec:45,repPauseSec:2.8,weight:"5-8 kg",tips:"比哑铃飞鸟更容易找胸肌发力感。双臂合拢夹胸，顶点停1秒再缓慢放开。",intro:"选做动作：器械夹胸，Pec Deck。2组12次，45秒休息。5到8公斤。合拢夹胸停1秒，感受胸肌发力。"},
+    {name:"平板支撑",nameEn:"Plank",muscle:"核心",phase:"exercise",type:"timed_sets",sets:3,holdSec:75,restSec:45,tips:"头到脚跟一条直线，核心收紧。",intro:"核心动作一：平板支撑。3组，每组60到90秒。"},
+    {name:"仰卧手触膝",nameEn:"Crunch with Knee Touch",muscle:"腹直肌",phase:"exercise",type:"counted",sets:3,reps:15,restSec:45,repPauseSec:2.2,tips:"视线朝上不低头，用腹肌卷起。",intro:"核心动作二：仰卧手触膝。3组15次。视线朝上，用腹肌卷起。"},
+    {name:"有氧燃脂",nameEn:"Cardio",muscle:"心肺系统",phase:"exercise",type:"timed",durationSec:900,tips:"心率130-150bpm。椭圆机、跑步机或动感单车。",intro:"有氧燃脂，15分钟。心率维持130到150。"},
+    {name:"胸肌拉伸",muscle:"胸大肌",phase:"stretch",type:"timed_sides",durationPerSideSec:30,sets:2,tips:"扶墙转身，感受胸肌拉伸。",intro:"拉伸。胸肌拉伸，扶墙转身。每侧30秒，2组。"},
+    {name:"背阔肌拉伸",muscle:"背阔肌",phase:"stretch",type:"timed_sides",durationPerSideSec:30,sets:2,tips:"扶墙侧弯。",intro:"背阔肌拉伸。每侧30秒，2组。"},
+    {name:"肩部跨胸拉伸",muscle:"肩部",phase:"stretch",type:"timed_sides",durationPerSideSec:30,sets:2,tips:"一手横过胸前。",intro:"肩部跨胸拉伸。每侧30秒，2组。"}
+  ]},
+B:{
+  title:"🦵 DAY B · 下肢 + 核心",subtitle:"臀×2 · 腿 · 小腿 · 核心 · 有氧",
+  openSpeech:"下肢加核心训练日，开始！首先进行热身。",
+  endSpeech:"今天的下肢加核心训练全部完成，辛苦了！记得补充蛋白质和水分。训练后一定要拉伸小腿，防止小腿变粗。好好休息！",
+  exercises:[
+    {name:"跑步机快走/小跑",nameEn:"Treadmill Walk / Jog",muscle:"全身预热",phase:"warmup",type:"timed",durationSec:300,tips:"心率提升，下肢充血。",intro:"热身动作一：跑步机快走或小跑。时长5分钟。"},
+    {name:"徒手深蹲",nameEn:"Bodyweight Squat",muscle:"臀腿热身",phase:"warmup",type:"counted",sets:2,reps:15,restSec:0,repPauseSec:2.5,tips:"缓慢蹲下，激活臀腿。",intro:"热身动作二：徒手深蹲。2组15次。"},
+    {name:"腿举机",nameEn:"Leg Press Machine",muscle:"股四头肌（主）· 臀大肌",phase:"exercise",type:"counted",sets:4,reps:15,restSec:90,repPauseSec:2.8,weight:"39 kg",tips:"脚踩平台中上方，膝盖对准脚尖，推出不锁死膝盖。",intro:"器械区，动作一：腿举机。4组15次，90秒休息。39公斤。"},
+    {name:"坐姿髋外展机",nameEn:"Hip Abduction Machine",muscle:"臀中肌（主）· 臀小肌",phase:"exercise",type:"counted",sets:3,reps:15,restSec:60,repPauseSec:2.5,weight:"18 kg",tips:"上身微微前倾，双腿缓慢外展，顶点停1-2秒。",intro:"动作二：坐姿髋外展机。3组15次，60秒休息。18公斤。上身前倾，顶点停1到2秒。"},
+    {name:"坐姿腿弯举",nameEn:"Seated Leg Curl",muscle:"腘绳肌（主）",phase:"exercise",type:"counted",sets:3,reps:12,restSec:60,repPauseSec:3.0,weight:"18 kg",tips:"弯举到底停1秒，缓慢伸直，感受后侧收缩。",intro:"动作三：坐姿腿弯举。3组12次，60秒休息。18公斤。弯举到底停1秒。"},
+    {name:"绳索单腿后踢",nameEn:"Cable Kickback",muscle:"臀大肌（主）",phase:"exercise",type:"counted",sets:3,reps:12,restSec:60,repPauseSec:3.0,weight:"5-8 kg",tips:"脚踝套绳索，面对绳索机，上身略前倾扶稳，臀肌发力向正后方踢腿，顶点停1秒夹紧臀。膝盖微弯，不要用腰借力。",intro:"绳索区，动作四：绳索单腿后踢，Cable Kickback。脚踝套绳索，面对绳索机扶稳，臀肌发力向后踢，顶点停1秒夹紧。3组每腿12次，60秒休息。5到8公斤。"},
+    {name:"哑铃深蹲（酒杯式）",nameEn:"Goblet Squat",muscle:"股四头肌（主）· 臀大肌",phase:"exercise",type:"counted",sets:3,reps:12,restSec:90,repPauseSec:3.5,weight:"10 kg",tips:"双手捧哑铃于胸前，核心收紧。注意腰部感受。",intro:"哑铃区，动作五：哑铃深蹲。3组12次，90秒休息。10公斤。核心收紧，注意腰部。"},
+    {name:"哑铃后弓步",nameEn:"Dumbbell Reverse Lunge",muscle:"臀大肌（主）· 股四头肌",phase:"exercise",type:"counted",sets:3,reps:10,restSec:60,repPauseSec:3.5,weight:"双手各 6 kg",tips:"步子要大，后腿膝盖接近不触地，上身直立。",intro:"动作六：哑铃后弓步。3组每腿10次，60秒休息。双手各6公斤。步子要大，上身直立。"},
+    {name:"小腿提踵",nameEn:"Calf Raise",muscle:"腓肠肌（主）",phase:"exercise",type:"counted",sets:2,reps:15,restSec:45,repPauseSec:2.2,weight:"12-15 kg",tips:"踮起最高点停2秒，下放充分拉伸。重量减轻，注重拉伸感。",intro:"动作七：小腿提踵。2组15次，45秒休息。12到15公斤。踮起停2秒，下放要充分。"},
+    {name:"反向卷腹",nameEn:"Reverse Crunch",muscle:"腹直肌下部",phase:"exercise",type:"counted",sets:3,reps:15,restSec:45,repPauseSec:2.8,tips:"腿保持空中90度，腹肌卷起骨盆。",intro:"核心动作一：反向卷腹。3组15次。腿空中90度，腹肌卷起骨盆。"},
+    {name:"侧卧举腿",nameEn:"Side-lying Leg Raise",muscle:"腹斜肌 · 臀中肌",phase:"exercise",type:"counted",sets:2,reps:15,restSec:30,repPauseSec:2.0,tips:"腿向上抬不是向前。2组保持双侧对称。",intro:"核心动作二：侧卧举腿。2组每侧15次。腿向上抬不是向前。注意是2组保持对称。"},
+    {name:"死虫式（降难度版）",nameEn:"Dead Bug",muscle:"核心深层稳定",phase:"exercise",type:"counted",sets:3,reps:8,restSec:45,repPauseSec:4.0,tips:"腰椎必须紧贴地面！对侧手脚缓慢伸出，不要让腰拱起来。这是核心稳定动作，不是拉伸。",intro:"核心动作三：死虫式，降难度版。3组每侧8次，45秒休息。腰椎紧贴地面是关键，对侧手脚缓慢伸出，腰不能拱起。"},
+    {name:"有氧燃脂",nameEn:"Cardio",muscle:"心肺系统",phase:"exercise",type:"timed",durationSec:900,tips:"心率130-150bpm。",intro:"有氧燃脂，15分钟。心率维持130到150。"},
+    {name:"股四头肌拉伸",muscle:"股四头肌",phase:"stretch",type:"timed_sides",durationPerSideSec:30,sets:2,tips:"站立，脚后勾拉伸大腿前侧。",intro:"拉伸。股四头肌拉伸。每侧30秒，2组。"},
+    {name:"臀部拉伸（4字拉伸）",muscle:"臀部",phase:"stretch",type:"timed_sides",durationPerSideSec:40,sets:2,tips:"一脚踝放另一膝上。",intro:"臀部拉伸，4字拉伸。每侧40秒，2组。"},
+    {name:"腘绳肌拉伸",muscle:"腘绳肌",phase:"stretch",type:"timed_sides",durationPerSideSec:30,sets:2,tips:"前屈拉伸后侧。",intro:"腘绳肌拉伸。每侧30秒，2组。"},
+    {name:"小腿拉伸 ⚠️必做",nameEn:"Calf Stretch",muscle:"腓肠肌 · 比目鱼肌",phase:"stretch",type:"timed_sides",durationPerSideSec:40,sets:2,tips:"脚尖抵墙或台阶边缘，脚跟踩地，感受小腿后侧拉伸。有氧后必须做！防止小腿筋膜僵硬变粗。",intro:"小腿拉伸，今天必做！每侧40秒，2组。脚尖抵墙，脚跟踩地，感受小腿后侧拉伸。有氧后不拉伸小腿是小腿变粗的主要原因，每次都要做。"}
+  ]}
+};
+
+let currentDay=null,exercises=[],isRunning=false,isPaused=false;
+let skipRequested=false,navTarget=-1,currentExIdx=0;
+const BETWEEN_REST=120;
+
+function selectDay(day){
+  currentDay=WORKOUTS[day];exercises=currentDay.exercises;
+  document.getElementById('mainTitle').textContent=currentDay.title;
+  document.getElementById('mainSubtitle').textContent=currentDay.subtitle;
+  document.getElementById('menuScreen').classList.add('hide');
+  document.getElementById('workoutScreen').classList.add('active');
+  document.getElementById('exerciseLabel').childNodes[0].textContent='准备开始训练';
+  document.getElementById('tipsArea').textContent='点击「开始训练」开始。请确保手机未静音。⚠️ 训练时请勿锁屏，已启用防息屏。';
+  buildExList();
+}
+function goBack(){
+  if(isRunning){if(!confirm('训练正在进行中，确定要退出吗？'))return;skipRequested=true;synth.cancel();isRunning=false;isPaused=false;stopNoSleep();}
+  document.getElementById('menuScreen').classList.remove('hide');
+  document.getElementById('workoutScreen').classList.remove('active');
+  document.getElementById('mainTitle').textContent='💪 健身跟练 v9';
+  document.getElementById('mainSubtitle').textContent='选择今天的训练';
+  document.getElementById('startBtn').classList.remove('hidden');
+  document.getElementById('startBtn').textContent='开始训练';
+  document.getElementById('backBtn').classList.remove('hidden');
+  document.getElementById('pauseBtn').classList.add('hidden');
+  document.getElementById('resumeBtn').classList.add('hidden');
+  document.getElementById('navBar').classList.add('hidden');
+  document.getElementById('exListToggle').classList.add('hidden');
+  document.getElementById('exListPanel').classList.remove('open');
+}
+function buildExList(){
+  const panel=document.getElementById('exListPanel');
+  panel.innerHTML=exercises.map((e,i)=>{
+    const icon=e.phase==='warmup'?'🔥':e.phase==='stretch'?'🧘':'💪';
+    return `<div class="ex-item" id="exItem${i}" onclick="jumpToExercise(${i})"><span class="ex-idx">${i+1}</span>${icon} ${e.name}</div>`;
+  }).join('');
+}
+function updateExList(){
+  exercises.forEach((_,i)=>{
+    const el=document.getElementById('exItem'+i);if(!el)return;
+    el.classList.remove('current','done');
+    if(i===currentExIdx)el.classList.add('current');
+    else if(i<currentExIdx)el.classList.add('done');
+  });
+}
+function toggleExList(){document.getElementById('exListPanel').classList.toggle('open');}
+function jumpToExercise(idx){if(!isRunning)return;navTarget=idx;skipRequested=true;synth.cancel();document.getElementById('exListPanel').classList.remove('open');}
+function navExercise(dir){const t=currentExIdx+dir;if(t<0||t>=exercises.length)return;jumpToExercise(t);}
+function updateNav(){
+  document.getElementById('navLabel').textContent=`${currentExIdx+1}/${exercises.length}`;
+  document.getElementById('prevBtn').disabled=(currentExIdx<=0);
+  document.getElementById('nextBtn').disabled=(currentExIdx>=exercises.length-1);
+}
+
+const synth=window.speechSynthesis;
+let zhVoice=null,ttsUnlocked=false;
+function pickVoice(){
+  const voices=synth.getVoices();
+  const fem=['Tingting','Sinji','Meijia','Lili','Xiaoxiao','Xiaoyi','Shanshan'];
+  const mal=['Tiantian','male','Male','Yunxi','Yunyang','Daniel'];
+  const zh=voices.filter(v=>v.lang.startsWith('zh'));
+  for(const k of fem){const f=zh.find(v=>v.name.includes(k));if(f)return f;}
+  const nm=zh.filter(v=>!mal.some(k=>v.name.includes(k)));
+  return nm[0]||zh[0]||null;
+}
+function refreshVoice(){zhVoice=pickVoice();}
+synth.onvoiceschanged=refreshVoice;refreshVoice();setTimeout(refreshVoice,500);setTimeout(refreshVoice,1500);
+
+let noSleepVideo=null;
+function startNoSleep(){
+  if(noSleepVideo)return;
+  try{
+    const src='data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAAAChtZGF0AAAAFWIhAAr/4f/+AAAH0AAAnQAAAAwN//EAAAAAAP8AAABxbW9vdgAAAGxtdmhkAAAAANLEP5TSxD+UAAADIAAAAAADAAEAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAQQAABAAAAIAAAAAAAB4dHJhawAAAFx0a2hkAAAAAQLSxD+U0sQ/lAAAAAEAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAgAAAAIAAAAAAAAkZWR0cwAAABxlbHN0AAAAAAAAAAEAAAMAAAEAAAAAAQAAAAABIm1kaWEAAAAgbWRoZAAAAADSxD+U0sQ/lAAAADIAAAAAAAAAAAAAAAAAAAAVaGRscgAAAAAAAAAAc291bgAAAAAAAAAAAAAAAAAAAA8nbWluZgAAAAQc21oZAAAAAAAAAAAAAAAJGRpbmYAAAAcZHJlZgAAAAAAAAABAAAADHVybCAAAAABAAAAx3N0YmwAAABXc3RzZAAAAAAAAAABAAAAR21wNGEAAAAAAAAAAAAAAAAAAAAAAAACABAAAAAAAAAAAAAQAAAAAAAAAAAAEAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAD4c3RzegAAAAAAAAAAAAAAAS5zdGNvAAAAAAAAAAEAAAAsAAAAYXVkdGEAAABZbWV0YQAAAAAAAAAhaGRscgAAAAAAAAAAZGF0YQAAAABtZGF0AAAAAP8=';
+    noSleepVideo=document.createElement('video');
+    noSleepVideo.setAttribute('playsinline','');noSleepVideo.setAttribute('muted','');noSleepVideo.setAttribute('loop','');
+    noSleepVideo.style.cssText='position:fixed;top:-1px;left:-1px;width:1px;height:1px;opacity:0.01';
+    noSleepVideo.src=src;document.body.appendChild(noSleepVideo);noSleepVideo.play().catch(()=>{});
+  }catch(e){}
+  try{
+    if(!window._audioCtx){
+      window._audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+      const osc=window._audioCtx.createOscillator();
+      const g=window._audioCtx.createGain();g.gain.value=0.001;
+      osc.connect(g);g.connect(window._audioCtx.destination);osc.start();
+    }
+  }catch(e){}
+}
+function stopNoSleep(){
+  if(noSleepVideo){noSleepVideo.pause();noSleepVideo.remove();noSleepVideo=null;}
+  if(window._audioCtx){try{window._audioCtx.close();}catch(e){}window._audioCtx=null;}
+}
+document.addEventListener('visibilitychange',()=>{
+  if(document.visibilityState==='visible'&&isRunning){
+    if(noSleepVideo)noSleepVideo.play().catch(()=>{});
+    if(window._audioCtx&&window._audioCtx.state==='suspended')window._audioCtx.resume();
+    refreshVoice();
+  }
+  if(!isRunning)stopNoSleep();
+});
+window.addEventListener('pagehide',stopNoSleep);
+window.addEventListener('beforeunload',stopNoSleep);
+
+function unlockTTS(){
+  if(ttsUnlocked)return;synth.cancel();
+  const u=new SpeechSynthesisUtterance(' ');
+  u.lang='zh-CN';u.volume=0.01;if(zhVoice)u.voice=zhVoice;
+  synth.speak(u);startNoSleep();ttsUnlocked=true;
+}
+function speak(text){
+  return new Promise(resolve=>{
+    if(!text||!text.trim()){resolve();return;}
+    synth.cancel();
+    setTimeout(()=>{
+      const u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN';u.rate=0.95;u.pitch=1.05;if(zhVoice)u.voice=zhVoice;
+      let done=false;
+      const finish=()=>{if(done)return;done=true;clearInterval(ka);resolve();};
+      u.onend=finish;u.onerror=finish;synth.speak(u);
+      const ka=setInterval(()=>{if(!synth.speaking){finish();return;}synth.pause();synth.resume();},5000);
+      setTimeout(()=>{if(!done)finish();},30000);
+    },30);
+  });
+}
+function sleep(ms){
+  return new Promise(resolve=>{
+    const start=Date.now();
+    const check=()=>{
+      if(skipRequested){resolve();return;}
+      if(isPaused){requestAnimationFrame(check);return;}
+      if(Date.now()-start>=ms){resolve();return;}
+      setTimeout(check,Math.min(200,ms-(Date.now()-start)));
+    };
+    check();
+  });
+}
+async function countdownSleep(totalSec,label){
+  const start=Date.now();let pausedTotal=0,pausedAt=0;
+  while(true){
+    if(skipRequested)return;
+    if(isPaused){if(!pausedAt)pausedAt=Date.now();await new Promise(r=>setTimeout(r,100));continue;}
+    if(pausedAt){pausedTotal+=Date.now()-pausedAt;pausedAt=0;}
+    const remaining=totalSec-Math.floor((Date.now()-start-pausedTotal)/1000);
+    if(remaining<=0)break;
+    updateUI({timer:formatTime(remaining),phaseText:label});
+    await new Promise(r=>setTimeout(r,250));
+  }
+  updateUI({timer:'00:00'});
+}
+async function countdown5WithVoice(){
+  updateUI({phase:'countdown',phaseText:'⏳ 倒计时'});
+  for(let c=5;c>=1;c--){
+    if(skipRequested)break;
+    updateUI({timer:String(c),phase:'countdown',phaseText:'⏳ 倒计时'});
+    await speak(String(c));
+  }
+}
+function updateUI(o){
+  if(o.exercise!==undefined)document.getElementById('exerciseLabel').childNodes[0].textContent=o.exercise;
+  if(o.exerciseEn!==undefined)document.getElementById('exerciseNameEn').textContent=o.exerciseEn||'';
+  if(o.muscle!==undefined)document.getElementById('muscleLabel').textContent=o.muscle;
+  if(o.phase!==undefined){const el=document.getElementById('phaseLabel');el.className='phase-'+o.phase;if(o.phaseText)el.textContent=o.phaseText;}
+  if(o.phaseText!==undefined)document.getElementById('phaseLabel').textContent=o.phaseText;
+  if(o.timer!==undefined)document.getElementById('timerDisplay').textContent=o.timer;
+  if(o.rep!==undefined)document.getElementById('repCounter').textContent=o.rep;
+  if(o.tips!==undefined)document.getElementById('tipsArea').textContent=o.tips;
+  if(o.setProgress!==undefined){document.getElementById('setsInfo').classList.remove('hidden');document.getElementById('setProgress').textContent=o.setProgress;}
+  if(o.repInfo!==undefined)document.getElementById('repInfo').textContent=o.repInfo;
+  if(o.weightInfo!==undefined)document.getElementById('weightInfo').textContent=o.weightInfo;
+  if(o.hideSets)document.getElementById('setsInfo').classList.add('hidden');
+  if(o.progress!==undefined){document.getElementById('progressFill').style.width=o.progress+'%';document.getElementById('overallProgress').textContent=`${currentExIdx+1} / ${exercises.length}`;}
+}
+function formatTime(s){return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;}
+
+async function runExercise(ex,idx){
+  skipRequested=false;navTarget=-1;currentExIdx=idx;
+  updateNav();updateExList();
+  updateUI({exercise:ex.name,exerciseEn:ex.nameEn||'',muscle:ex.muscle||'',tips:ex.tips||'',progress:(idx/exercises.length)*100,hideSets:true,rep:'',timer:'--:--'});
+  updateUI({phase:ex.phase,phaseText:{warmup:'🔥 热身',exercise:'💪 训练中',stretch:'🧘 拉伸'}[ex.phase]||''});
+  await speak(ex.intro);if(skipRequested)return;
+  if(ex.type==='timed'){
+    updateUI({phaseText:'⏱ 进行中',rep:''});await speak("开始。");
+    await countdownSleep(ex.durationSec,'⏱ 进行中');
+    if(!skipRequested)await speak("结束。");
+  }else if(ex.type==='timed_sets'){
+    for(let set=1;set<=ex.sets;set++){
+      if(skipRequested)return;
+      updateUI({setProgress:`组: ${set}/${ex.sets}`,phase:'exercise',phaseText:`💪 第${set}组`});
+      await speak(`第${set}组，开始。`);
+      await countdownSleep(ex.holdSec,`⏱ 坚持中 · 第${set}组`);if(skipRequested)return;
+      await speak("结束。");
+      if(set<ex.sets){
+        updateUI({rep:'',phase:'rest',phaseText:'😮‍💨 组间休息'});await speak(`休息${ex.restSec}秒。`);
+        await countdownSleep(ex.restSec-6,'😮‍💨 组间休息');if(!skipRequested)await countdown5WithVoice();
+      }else{await speak(`${ex.name}全部完成。`);updateUI({rep:'✅ 完成'});}
+    }
+  }else if(ex.type==='timed_sides'){
+    for(let set=1;set<=(ex.sets||1);set++){
+      if(skipRequested)return;
+      await speak(set>1?`第${set}组。左侧，开始。`:"左侧，开始。");updateUI({rep:ex.sets>1?`第${set}组`:''});
+      await countdownSleep(ex.durationPerSideSec,`${ex.sets>1?`第${set}组 · `:''}左侧`);if(skipRequested)return;
+      await speak("换右侧，开始。");
+      await countdownSleep(ex.durationPerSideSec,`${ex.sets>1?`第${set}组 · `:''}右侧`);if(skipRequested)return;
+      if(set<ex.sets)await sleep(1000);
+    }
+    if(!skipRequested)await speak("拉伸结束。");
+  }else if(ex.type==='counted'){
+    updateUI({setProgress:`组: 0/${ex.sets}`,repInfo:`次: ${ex.reps}`,weightInfo:ex.weight?`重量: ${ex.weight}`:''});
+    for(let set=1;set<=ex.sets;set++){
+      if(skipRequested)return;
+      updateUI({setProgress:`组: ${set}/${ex.sets}`,phase:'exercise',phaseText:`💪 第${set}组`});
+      await speak(`第${set}组，开始。`);
+      for(let rep=1;rep<=ex.reps;rep++){
+        if(skipRequested)return;
+        updateUI({rep:`${rep} / ${ex.reps}`,timer:`第${set}组`});
+        await sleep(ex.repPauseSec*1000);if(skipRequested)return;
+        await speak(String(rep));
+      }
+      if(set<ex.sets&&ex.restSec>0){
+        updateUI({rep:'',phase:'rest',phaseText:'😮‍💨 组间休息'});await speak(`休息${ex.restSec}秒。`);
+        await countdownSleep(ex.restSec-6,'😮‍💨 组间休息');if(!skipRequested)await countdown5WithVoice();
+      }else if(set===ex.sets){await speak(`${ex.name}全部完成。`);updateUI({rep:'✅ 完成'});}
+    }
+  }
+}
+
+async function startWorkout(){
+  if(isRunning||!currentDay)return;
+  unlockTTS();refreshVoice();isRunning=true;isPaused=false;
+  document.getElementById('startBtn').classList.add('hidden');
+  document.getElementById('backBtn').classList.add('hidden');
+  document.getElementById('pauseBtn').classList.remove('hidden');
+  document.getElementById('navBar').classList.remove('hidden');
+  document.getElementById('exListToggle').classList.remove('hidden');
+  let wakeLock=null;
+  try{if('wakeLock' in navigator)wakeLock=await navigator.wakeLock.request('screen');}catch(e){}
+  const reacquireWL=async()=>{if(document.visibilityState==='visible'&&isRunning)try{wakeLock=await navigator.wakeLock.request('screen');}catch(e){}};
+  document.addEventListener('visibilitychange',reacquireWL);
+  await sleep(200);await speak(currentDay.openSpeech);
+  let i=0;
+  while(i<exercises.length){
+    currentExIdx=i;skipRequested=false;navTarget=-1;
+    await runExercise(exercises[i],i);
+    if(navTarget>=0){i=navTarget;navTarget=-1;continue;}
+    const isLast=(i===exercises.length-1);
+    const curr=exercises[i],next=exercises[i+1];
+    if(!isLast&&curr.phase==='exercise'&&next&&next.phase==='exercise'){
+      skipRequested=false;navTarget=-1;
+      updateUI({exercise:'动作间休息',exerciseEn:'',muscle:`下一个: ${next.name}`,phase:'rest',phaseText:'😮‍💨 动作间休息',rep:'',tips:next.tips||'',hideSets:true});
+      await speak(`休息2分钟。下一个：${next.name}。`);
+      await countdownSleep(BETWEEN_REST-6,'😮‍💨 动作间休息');
+      if(navTarget>=0){i=navTarget;navTarget=-1;continue;}
+      if(!skipRequested)await countdown5WithVoice();
+      if(navTarget>=0){i=navTarget;navTarget=-1;continue;}
+    }else if(!isLast){await sleep(1500);}
+    i++;
+  }
+  updateUI({exercise:'🎉 训练完成！',exerciseEn:'',muscle:'',phase:'done',phaseText:'✅ 今日训练已完成',timer:'👏',rep:'',tips:'辛苦了！记得补充蛋白质和水分。好好休息！',progress:100,hideSets:true});
+  await speak(currentDay.endSpeech);
+  document.getElementById('pauseBtn').classList.add('hidden');
+  document.getElementById('navBar').classList.add('hidden');
+  document.getElementById('exListToggle').classList.add('hidden');
+  document.getElementById('exListPanel').classList.remove('open');
+  document.getElementById('startBtn').classList.remove('hidden');
+  document.getElementById('startBtn').textContent='重新开始';
+  document.getElementById('backBtn').classList.remove('hidden');
+  document.removeEventListener('visibilitychange',reacquireWL);
+  if(wakeLock)try{await wakeLock.release();}catch(e){}
+  stopNoSleep();isRunning=false;
+}
+function pauseWorkout(){isPaused=true;synth.cancel();document.getElementById('pauseBtn').classList.add('hidden');document.getElementById('resumeBtn').classList.remove('hidden');updateUI({phaseText:'⏸ 已暂停'});}
+function resumeWorkout(){unlockTTS();isPaused=false;document.getElementById('resumeBtn').classList.add('hidden');document.getElementById('pauseBtn').classList.remove('hidden');}
+</script>
+</body>
+</html>
