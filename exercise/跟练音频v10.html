@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>健身跟练 v9</title>
+<title>健身跟练 v10</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
@@ -82,18 +82,18 @@ h1{font-size:1.5em;font-weight:900;letter-spacing:-0.02em;margin-bottom:2px}
 </style>
 </head>
 <body>
-<h1 id="mainTitle">💪 健身跟练 v9</h1>
+<h1 id="mainTitle">💪 健身跟练 v10</h1>
 <div class="subtitle" id="mainSubtitle">选择今天的训练</div>
 <div id="menuScreen">
   <div class="menu-card menu-a" onclick="selectDay('A')">
     <h2>🦾 DAY A · 上肢 + 核心</h2>
-    <div class="desc">背×4 · 胸 · 肩 · 手臂 · 核心 · 有氧</div>
-    <div class="dur">~55-75 分钟 · 4必做 + 3建议 + 1选做 + 核心 + 有氧</div>
+    <div class="desc">背×3 · 胸 · 肩 · 手臂 · 核心 · 有氧</div>
+    <div class="dur">~55-75 分钟 · 3必做 + 2建议 + 2选做 + 核心 + 有氧</div>
   </div>
   <div class="menu-card menu-b" onclick="selectDay('B')">
     <h2>🦵 DAY B · 下肢 + 核心</h2>
-    <div class="desc">臀×2 · 腿 · 小腿 · 核心 · 有氧</div>
-    <div class="dur">~55-75 分钟 · 5必做 + 2建议 + 1选做 + 核心 + 有氧</div>
+    <div class="desc">臀 · 腿 · 核心 · 有氧 · 小腿拉伸</div>
+    <div class="dur">~55-75 分钟 · 5必做 + 1建议 + 核心 + 有氧</div>
   </div>
 </div>
 <div id="workoutScreen">
@@ -127,51 +127,51 @@ h1{font-size:1.5em;font-weight:900;letter-spacing:-0.02em;margin-bottom:2px}
 <script>
 const WORKOUTS={
 A:{
-  title:"💪 DAY A · 上肢 + 核心",subtitle:"背×4 · 胸 · 肩 · 手臂 · 核心 · 有氧",
+  title:"💪 DAY A · 上肢 + 核心",subtitle:"背×3 · 胸 · 肩 · 手臂 · 核心 · 有氧",
   openSpeech:"上肢加核心训练日，开始！首先进行热身。",
   endSpeech:"今天的上肢加核心训练全部完成，辛苦了！记得补充蛋白质和水分。好好休息！",
   exercises:[
     {name:"跑步机快走/小跑",nameEn:"Treadmill Walk / Jog",muscle:"全身预热",phase:"warmup",type:"timed",durationSec:300,tips:"心率升至110-120bpm。",intro:"热身动作一：跑步机快走或小跑。时长5分钟。"},
     {name:"手臂绕环 + 扩胸",nameEn:"Arm Circles + Chest Opener",muscle:"肩关节热身",phase:"warmup",type:"counted",sets:2,reps:15,restSec:0,repPauseSec:2.0,tips:"缓慢画大圈，不要耸肩。",intro:"热身动作二：手臂绕环加扩胸。2组，每组各15次。"},
-    {name:"坐姿推胸机",nameEn:"Chest Press Machine",muscle:"胸大肌（主）",phase:"exercise",type:"counted",sets:3,reps:12,restSec:60,repPauseSec:3.0,weight:"11 kg",tips:"背部贴靠座椅，推出不锁死肘关节，呼气推出吸气放回。",intro:"器械区，动作一：坐姿推胸机。3组12次，60秒休息。11公斤。"},
-    {name:"坐姿高位下拉",nameEn:"Lat Pulldown",muscle:"背阔肌（主）",phase:"exercise",type:"counted",sets:3,reps:12,restSec:60,repPauseSec:3.2,weight:"14 kg",tips:"宽握距，上身后倾10-15度，下拉至胸口，肩胛骨下沉夹紧。",intro:"动作二：坐姿高位下拉。3组12次，60秒休息。14公斤。肩胛骨下沉夹紧。"},
-    {name:"辅助引体向上",nameEn:"Assisted Pull-up",muscle:"背阔肌（主）· 大圆肌",phase:"exercise",type:"counted",sets:3,reps:7,restSec:75,repPauseSec:3.5,weight:"辅助 -20~-25 kg",tips:"肩胛骨先下沉，再发力拉起。不要摇晃借力，感受背阔肌收缩。做不了可直接跳过。",intro:"动作三：辅助引体向上，新增练背动作。3组6到8次，75秒休息。调辅助重量至能标准完成为止。肩胛先下沉再拉，感受背阔肌。"},
-    {name:"坐姿划船",nameEn:"Seated Cable Row",muscle:"背阔肌（主）· 菱形肌",phase:"exercise",type:"counted",sets:3,reps:12,restSec:60,repPauseSec:3.2,weight:"12-15 kg",tips:"拉至腹部，夹背停1秒，不要晃动借力。",intro:"动作四：坐姿划船。3组12次，60秒休息。12到15公斤。拉至腹部夹背停1秒。"},
-    {name:"哑铃侧平举",nameEn:"Dumbbell Lateral Raise",muscle:"三角肌中束（主）",phase:"exercise",type:"counted",sets:3,reps:10,restSec:45,repPauseSec:2.5,weight:"单手 3 kg",tips:"小拇指侧略高如倒水，抬至与肩齐，不耸肩。",intro:"哑铃区，动作五：哑铃侧平举。3组10次，45秒休息。单手3公斤。如倒水姿势抬至肩齐。"},
-    {name:"绳索面拉",nameEn:"Face Pull",muscle:"三角肌后束（主）· 上背",phase:"exercise",type:"counted",sets:3,reps:15,restSec:45,repPauseSec:2.5,weight:"5-8 kg",tips:"绳索调至头部高度，向脸两侧拉，终点做外旋如投降姿势，夹紧肩胛骨。",intro:"绳索区，动作六：绳索面拉。改善体态的关键动作。3组15次，45秒休息。5到8公斤。向脸两侧拉，终点做外旋，夹紧肩胛骨。"},
-    {name:"绳索三头下压",nameEn:"Cable Tricep Pushdown",muscle:"肱三头肌（主）",phase:"exercise",type:"counted",sets:2,reps:15,restSec:45,repPauseSec:2.5,weight:"6 kg",tips:"上臂固定，只动前臂，下压到底夹紧三头。",intro:"动作七：绳索三头下压。2组15次，45秒休息。6公斤。上臂固定，只动前臂。"},
-    {name:"器械夹胸",nameEn:"Pec Deck",muscle:"胸大肌（主）",phase:"exercise",type:"counted",sets:2,reps:12,restSec:45,repPauseSec:2.8,weight:"5-8 kg",tips:"比哑铃飞鸟更容易找胸肌发力感。双臂合拢夹胸，顶点停1秒再缓慢放开。",intro:"选做动作：器械夹胸，Pec Deck。2组12次，45秒休息。5到8公斤。合拢夹胸停1秒，感受胸肌发力。"},
-    {name:"平板支撑",nameEn:"Plank",muscle:"核心",phase:"exercise",type:"timed_sets",sets:3,holdSec:75,restSec:45,tips:"头到脚跟一条直线，核心收紧。",intro:"核心动作一：平板支撑。3组，每组60到90秒。"},
+    {name:"坐姿推胸机",nameEn:"Chest Press Machine",muscle:"胸大肌（主）",phase:"exercise",type:"counted",sets:3,reps:12,restSec:60,repPauseSec:3.0,weight:"13 kg",tips:"背部贴靠座椅，推出不锁死肘关节，呼气推出吸气放回。",intro:"器械区，动作一：坐姿推胸机。3组12次，60秒休息。13公斤。"},
+    {name:"坐姿高位下拉",nameEn:"Lat Pulldown",muscle:"背阔肌（主）",phase:"exercise",type:"counted",sets:3,reps:12,restSec:60,repPauseSec:3.2,weight:"20 kg",tips:"宽握距，上身后倾10-15度，下拉至胸口，肩胛骨下沉夹紧。",intro:"动作二：坐姿高位下拉。3组12次，60秒休息。20公斤。肩胛骨下沉夹紧。"},
+    {name:"坐姿划船",nameEn:"Seated Cable Row",muscle:"背阔肌（主）· 菱形肌",phase:"exercise",type:"counted",sets:3,reps:10,restSec:60,repPauseSec:3.2,weight:"18 kg",tips:"拉至腹部，夹背停1秒。动作标准优先，做满8次即可，10次为目标。",intro:"动作三：坐姿划船。3组8到10次，60秒休息。18公斤。动作标准优先，拉至腹部夹背停1秒。"},
+    {name:"器械夹胸",nameEn:"Pec Deck",muscle:"胸大肌（主）",phase:"exercise",type:"counted",sets:2,reps:12,restSec:45,repPauseSec:2.8,weight:"11 kg",tips:"双臂合拢夹胸，顶点停1秒再缓慢放开。",intro:"选做动作：器械夹胸。2组12次，45秒休息。11公斤。合拢夹胸停1秒。"},
+    {name:"哑铃侧平举",nameEn:"Dumbbell Lateral Raise",muscle:"三角肌中束（主）",phase:"exercise",type:"counted",sets:3,reps:10,restSec:45,repPauseSec:2.5,weight:"单手 4 kg",tips:"小拇指侧略高如倒水，抬至与肩齐，不耸肩。",intro:"哑铃区，动作四：哑铃侧平举。3组10次，45秒休息。单手4公斤。如倒水姿势抬至肩齐。"},
+    {name:"绳索面拉",nameEn:"Face Pull",muscle:"三角肌后束（主）· 上背",phase:"exercise",type:"counted",sets:3,reps:12,restSec:45,repPauseSec:2.5,weight:"14 kg",tips:"弓步站位增加稳定性。绳索调至头部高度，向脸两侧拉，终点做外旋如投降姿势，夹紧肩胛骨。",intro:"绳索区，动作五：绳索面拉。3组10到12次，45秒休息。14公斤。弓步站位防止后倾，向脸两侧拉，终点外旋夹紧肩胛骨。"},
+    {name:"绳索三头下压",nameEn:"Cable Tricep Pushdown",muscle:"肱三头肌（主）",phase:"exercise",type:"counted",sets:2,reps:15,restSec:45,repPauseSec:2.5,weight:"9 kg",tips:"上臂固定，只动前臂，下压到底夹紧三头。",intro:"动作六：绳索三头下压。2组15次，45秒休息。9公斤。上臂固定，只动前臂。"},
+    {name:"平板支撑",nameEn:"Plank",muscle:"核心",phase:"exercise",type:"timed_sets",sets:3,holdSec:90,restSec:45,tips:"头到脚跟一条直线，核心收紧。",intro:"核心动作一：平板支撑。3组，每组90秒。坚持住！"},
     {name:"仰卧手触膝",nameEn:"Crunch with Knee Touch",muscle:"腹直肌",phase:"exercise",type:"counted",sets:3,reps:15,restSec:45,repPauseSec:2.2,tips:"视线朝上不低头，用腹肌卷起。",intro:"核心动作二：仰卧手触膝。3组15次。视线朝上，用腹肌卷起。"},
+    {name:"帕洛夫推举",nameEn:"Pallof Press",muscle:"核心抗旋转",phase:"exercise",type:"counted_sides",sets:2,repsPerSide:10,restSec:45,repPauseSec:3.0,weight:"3-5 kg",tips:"双手握绳索手柄于胸前，向前推出伸直手臂，停顿1秒，收回。全程躯干不旋转。",intro:"核心动作三：帕洛夫推举。回到绳索区，2组每侧10次，45秒休息。绳索调到胸口高度，侧身站立，双手握住手柄。向前推出手臂，保持身体不旋转，这是核心抗旋转的关键动作。"},
     {name:"有氧燃脂",nameEn:"Cardio",muscle:"心肺系统",phase:"exercise",type:"timed",durationSec:900,tips:"心率130-150bpm。椭圆机、跑步机或动感单车。",intro:"有氧燃脂，15分钟。心率维持130到150。"},
     {name:"胸肌拉伸",muscle:"胸大肌",phase:"stretch",type:"timed_sides",durationPerSideSec:30,sets:2,tips:"扶墙转身，感受胸肌拉伸。",intro:"拉伸。胸肌拉伸，扶墙转身。每侧30秒，2组。"},
     {name:"背阔肌拉伸",muscle:"背阔肌",phase:"stretch",type:"timed_sides",durationPerSideSec:30,sets:2,tips:"扶墙侧弯。",intro:"背阔肌拉伸。每侧30秒，2组。"},
     {name:"肩部跨胸拉伸",muscle:"肩部",phase:"stretch",type:"timed_sides",durationPerSideSec:30,sets:2,tips:"一手横过胸前。",intro:"肩部跨胸拉伸。每侧30秒，2组。"}
   ]},
 B:{
-  title:"🦵 DAY B · 下肢 + 核心",subtitle:"臀×2 · 腿 · 小腿 · 核心 · 有氧",
+  title:"🦵 DAY B · 下肢 + 核心",subtitle:"臀 · 腿 · 核心 · 有氧 · 小腿拉伸",
   openSpeech:"下肢加核心训练日，开始！首先进行热身。",
   endSpeech:"今天的下肢加核心训练全部完成，辛苦了！记得补充蛋白质和水分。训练后一定要拉伸小腿，防止小腿变粗。好好休息！",
   exercises:[
     {name:"跑步机快走/小跑",nameEn:"Treadmill Walk / Jog",muscle:"全身预热",phase:"warmup",type:"timed",durationSec:300,tips:"心率提升，下肢充血。",intro:"热身动作一：跑步机快走或小跑。时长5分钟。"},
     {name:"徒手深蹲",nameEn:"Bodyweight Squat",muscle:"臀腿热身",phase:"warmup",type:"counted",sets:2,reps:15,restSec:0,repPauseSec:2.5,tips:"缓慢蹲下，激活臀腿。",intro:"热身动作二：徒手深蹲。2组15次。"},
-    {name:"腿举机",nameEn:"Leg Press Machine",muscle:"股四头肌（主）· 臀大肌",phase:"exercise",type:"counted",sets:4,reps:15,restSec:90,repPauseSec:2.8,weight:"39 kg",tips:"脚踩平台中上方，膝盖对准脚尖，推出不锁死膝盖。",intro:"器械区，动作一：腿举机。4组15次，90秒休息。39公斤。"},
-    {name:"坐姿髋外展机",nameEn:"Hip Abduction Machine",muscle:"臀中肌（主）· 臀小肌",phase:"exercise",type:"counted",sets:3,reps:15,restSec:60,repPauseSec:2.5,weight:"18 kg",tips:"上身微微前倾，双腿缓慢外展，顶点停1-2秒。",intro:"动作二：坐姿髋外展机。3组15次，60秒休息。18公斤。上身前倾，顶点停1到2秒。"},
-    {name:"坐姿腿弯举",nameEn:"Seated Leg Curl",muscle:"腘绳肌（主）",phase:"exercise",type:"counted",sets:3,reps:12,restSec:60,repPauseSec:3.0,weight:"18 kg",tips:"弯举到底停1秒，缓慢伸直，感受后侧收缩。",intro:"动作三：坐姿腿弯举。3组12次，60秒休息。18公斤。弯举到底停1秒。"},
-    {name:"绳索单腿后踢",nameEn:"Cable Kickback",muscle:"臀大肌（主）",phase:"exercise",type:"counted",sets:3,reps:12,restSec:60,repPauseSec:3.0,weight:"5-8 kg",tips:"脚踝套绳索，面对绳索机，上身略前倾扶稳，臀肌发力向正后方踢腿，顶点停1秒夹紧臀。膝盖微弯，不要用腰借力。",intro:"绳索区，动作四：绳索单腿后踢，Cable Kickback。脚踝套绳索，面对绳索机扶稳，臀肌发力向后踢，顶点停1秒夹紧。3组每腿12次，60秒休息。5到8公斤。"},
-    {name:"哑铃深蹲（酒杯式）",nameEn:"Goblet Squat",muscle:"股四头肌（主）· 臀大肌",phase:"exercise",type:"counted",sets:3,reps:12,restSec:90,repPauseSec:3.5,weight:"10 kg",tips:"双手捧哑铃于胸前，核心收紧。注意腰部感受。",intro:"哑铃区，动作五：哑铃深蹲。3组12次，90秒休息。10公斤。核心收紧，注意腰部。"},
-    {name:"哑铃后弓步",nameEn:"Dumbbell Reverse Lunge",muscle:"臀大肌（主）· 股四头肌",phase:"exercise",type:"counted",sets:3,reps:10,restSec:60,repPauseSec:3.5,weight:"双手各 6 kg",tips:"步子要大，后腿膝盖接近不触地，上身直立。",intro:"动作六：哑铃后弓步。3组每腿10次，60秒休息。双手各6公斤。步子要大，上身直立。"},
-    {name:"小腿提踵",nameEn:"Calf Raise",muscle:"腓肠肌（主）",phase:"exercise",type:"counted",sets:2,reps:15,restSec:45,repPauseSec:2.2,weight:"12-15 kg",tips:"踮起最高点停2秒，下放充分拉伸。重量减轻，注重拉伸感。",intro:"动作七：小腿提踵。2组15次，45秒休息。12到15公斤。踮起停2秒，下放要充分。"},
-    {name:"反向卷腹",nameEn:"Reverse Crunch",muscle:"腹直肌下部",phase:"exercise",type:"counted",sets:3,reps:15,restSec:45,repPauseSec:2.8,tips:"腿保持空中90度，腹肌卷起骨盆。",intro:"核心动作一：反向卷腹。3组15次。腿空中90度，腹肌卷起骨盆。"},
-    {name:"侧卧举腿",nameEn:"Side-lying Leg Raise",muscle:"腹斜肌 · 臀中肌",phase:"exercise",type:"counted",sets:2,reps:15,restSec:30,repPauseSec:2.0,tips:"腿向上抬不是向前。2组保持双侧对称。",intro:"核心动作二：侧卧举腿。2组每侧15次。腿向上抬不是向前。注意是2组保持对称。"},
-    {name:"死虫式（降难度版）",nameEn:"Dead Bug",muscle:"核心深层稳定",phase:"exercise",type:"counted",sets:3,reps:8,restSec:45,repPauseSec:4.0,tips:"腰椎必须紧贴地面！对侧手脚缓慢伸出，不要让腰拱起来。这是核心稳定动作，不是拉伸。",intro:"核心动作三：死虫式，降难度版。3组每侧8次，45秒休息。腰椎紧贴地面是关键，对侧手脚缓慢伸出，腰不能拱起。"},
-    {name:"有氧燃脂",nameEn:"Cardio",muscle:"心肺系统",phase:"exercise",type:"timed",durationSec:900,tips:"心率130-150bpm。",intro:"有氧燃脂，15分钟。心率维持130到150。"},
+    {name:"腿举机",nameEn:"Leg Press Machine",muscle:"股四头肌（主）· 臀大肌",phase:"exercise",type:"counted",sets:4,reps:15,restSec:90,repPauseSec:2.8,weight:"41 kg",tips:"脚踩平台中上方，膝盖对准脚尖，推出不锁死膝盖。",intro:"器械区，动作一：腿举机。4组15次，90秒休息。41公斤。"},
+    {name:"坐姿髋外展机",nameEn:"Hip Abduction Machine",muscle:"臀中肌（主）· 臀小肌",phase:"exercise",type:"counted",sets:3,reps:15,restSec:60,repPauseSec:2.8,weight:"18 kg",tips:"上身微微前倾，双腿缓慢外展，顶点停1-2秒。",intro:"动作二：坐姿髋外展机。3组15次，60秒休息。18公斤。上身前倾，顶点停1到2秒。"},
+    {name:"坐姿腿弯举",nameEn:"Seated Leg Curl",muscle:"腘绳肌（主）",phase:"exercise",type:"counted",sets:3,reps:12,restSec:60,repPauseSec:3.0,weight:"20 kg",tips:"弯举到底停1秒，缓慢伸直，感受后侧收缩。做满10次即可，12次为目标。",intro:"动作三：坐姿腿弯举。3组10到12次，60秒休息。20公斤。弯举到底停1秒。"},
+    {name:"绳索单腿后踢",nameEn:"Cable Kickback",muscle:"臀大肌（主）",phase:"exercise",type:"counted_sides",sets:3,repsPerSide:12,restSec:60,repPauseSec:3.0,weight:"最轻重量",tips:"脚踝套绳索，面对绳索机，上身前倾30到45度扶稳。膝盖微弯，用臀部发力向后上方推腿，想象用脚跟踩天花板。顶点夹臀停1秒。",intro:"绳索区，动作四：绳索单腿后踢。先用最轻重量学动作。3组每腿12次，60秒休息。脚踝套绳索，面对器械扶稳，身体前倾30到45度，膝盖微弯，用臀部发力向后上方推腿，顶点停1秒夹紧臀。"},
+    {name:"哑铃深蹲（慢速离心）",nameEn:"Goblet Squat - Slow Eccentric",muscle:"股四头肌（主）· 臀大肌",phase:"exercise",type:"counted",sets:3,reps:12,restSec:60,repPauseSec:5.0,weight:"10 kg",tips:"双手捧哑铃于胸前。慢速下蹲3秒：三、二、一蹲到底，然后正常速度站起。注意腰部感受。",intro:"哑铃区，动作五：哑铃深蹲，慢速离心版。3组12次，60秒休息。10公斤。每次下蹲数三、二、一，用3秒慢慢蹲下，然后正常速度站起。核心收紧，注意腰部。"},
+    {name:"哑铃后弓步",nameEn:"Dumbbell Reverse Lunge",muscle:"臀大肌（主）· 股四头肌",phase:"exercise",type:"counted",sets:3,reps:10,restSec:45,repPauseSec:3.5,weight:"双手各 7 kg",tips:"步子要大，后腿膝盖接近不触地，上身直立。",intro:"动作六：哑铃后弓步。3组每腿10次，45秒休息。双手各7公斤。步子要大，上身直立。"},
+    {name:"反向卷腹",nameEn:"Reverse Crunch",muscle:"腹直肌下部",phase:"exercise",type:"counted",sets:3,reps:15,restSec:45,repPauseSec:2.2,tips:"腿保持空中90度，腹肌卷起骨盆。",intro:"核心动作一：反向卷腹。3组15次。腿空中90度，腹肌卷起骨盆。"},
+    {name:"侧卧举腿",nameEn:"Side-lying Leg Raise",muscle:"腹斜肌 · 臀中肌",phase:"exercise",type:"counted_sides_multi",sets:2,repsPerSide:15,restSec:30,repPauseSec:2.0,tips:"腿向上抬不是向前。每侧2组保证双侧对称。",intro:"核心动作二：侧卧举腿。每侧2组，每组15次，共4组。顺序是右侧、左侧、右侧、左侧。腿向上抬不是向前。"},
+    {name:"死虫式（降难度版）",nameEn:"Dead Bug",muscle:"核心深层稳定",phase:"exercise",type:"counted",sets:3,reps:8,restSec:45,repPauseSec:4.0,tips:"腰椎必须紧贴地面！对侧手脚缓慢伸出，不要让腰拱起来。",intro:"核心动作三：死虫式，降难度版。3组每侧8次，45秒休息。腰椎紧贴地面是关键，对侧手脚缓慢伸出，腰不能拱起。"},
+    {name:"有氧燃脂",nameEn:"Cardio",muscle:"心肺系统",phase:"exercise",type:"timed",durationSec:900,tips:"心率130-150bpm。有氧后必须拉伸小腿！",intro:"有氧燃脂，15分钟。心率维持130到150。有氧结束后一定要做小腿拉伸。"},
     {name:"股四头肌拉伸",muscle:"股四头肌",phase:"stretch",type:"timed_sides",durationPerSideSec:30,sets:2,tips:"站立，脚后勾拉伸大腿前侧。",intro:"拉伸。股四头肌拉伸。每侧30秒，2组。"},
     {name:"臀部拉伸（4字拉伸）",muscle:"臀部",phase:"stretch",type:"timed_sides",durationPerSideSec:40,sets:2,tips:"一脚踝放另一膝上。",intro:"臀部拉伸，4字拉伸。每侧40秒，2组。"},
     {name:"腘绳肌拉伸",muscle:"腘绳肌",phase:"stretch",type:"timed_sides",durationPerSideSec:30,sets:2,tips:"前屈拉伸后侧。",intro:"腘绳肌拉伸。每侧30秒，2组。"},
-    {name:"小腿拉伸 ⚠️必做",nameEn:"Calf Stretch",muscle:"腓肠肌 · 比目鱼肌",phase:"stretch",type:"timed_sides",durationPerSideSec:40,sets:2,tips:"脚尖抵墙或台阶边缘，脚跟踩地，感受小腿后侧拉伸。有氧后必须做！防止小腿筋膜僵硬变粗。",intro:"小腿拉伸，今天必做！每侧40秒，2组。脚尖抵墙，脚跟踩地，感受小腿后侧拉伸。有氧后不拉伸小腿是小腿变粗的主要原因，每次都要做。"}
+    {name:"小腿拉伸 ⚠️必做",nameEn:"Calf Stretch",muscle:"腓肠肌 · 比目鱼肌",phase:"stretch",type:"timed_sides",durationPerSideSec:40,sets:2,tips:"脚尖抵墙或台阶边缘，脚跟踩地，感受小腿后侧拉伸。有氧后必须做！",intro:"小腿拉伸，今天必做！每侧40秒，2组。脚尖抵墙，脚跟踩地，感受小腿后侧拉伸。每次都要做。"}
   ]}
 };
+
 
 let currentDay=null,exercises=[],isRunning=false,isPaused=false;
 let skipRequested=false,navTarget=-1,currentExIdx=0;
@@ -191,7 +191,7 @@ function goBack(){
   if(isRunning){if(!confirm('训练正在进行中，确定要退出吗？'))return;skipRequested=true;synth.cancel();isRunning=false;isPaused=false;stopNoSleep();}
   document.getElementById('menuScreen').classList.remove('hide');
   document.getElementById('workoutScreen').classList.remove('active');
-  document.getElementById('mainTitle').textContent='💪 健身跟练 v9';
+  document.getElementById('mainTitle').textContent='💪 健身跟练 v10';
   document.getElementById('mainSubtitle').textContent='选择今天的训练';
   document.getElementById('startBtn').classList.remove('hidden');
   document.getElementById('startBtn').textContent='开始训练';
@@ -377,7 +377,69 @@ async function runExercise(ex,idx){
       if(set<ex.sets)await sleep(1000);
     }
     if(!skipRequested)await speak("拉伸结束。");
-  }else if(ex.type==='counted'){
+  }else if(ex.type==='counted_sides'){
+    updateUI({setProgress:`组: 0/${ex.sets}`,repInfo:`次: 每侧${ex.repsPerSide}`,weightInfo:ex.weight?`重量: ${ex.weight}`:''});
+    for(let set=1;set<=ex.sets;set++){
+      if(skipRequested)return;
+      updateUI({setProgress:`组: ${set}/${ex.sets}`,phase:'exercise',phaseText:`💪 第${set}组 · 右侧`});
+      await speak(`第${set}组。右侧，开始。`);
+      for(let rep=1;rep<=ex.repsPerSide;rep++){
+        if(skipRequested)return;
+        updateUI({rep:`右 ${rep}/${ex.repsPerSide}`,timer:`第${set}组 · 右`});
+        await sleep(ex.repPauseSec*1000);if(skipRequested)return;
+        await speak(String(rep));
+      }
+      if(skipRequested)return;
+      updateUI({phase:'rest',phaseText:'🔄 换边'});
+      await speak("换左侧。");await sleep(2000);if(skipRequested)return;
+      updateUI({phase:'exercise',phaseText:`💪 第${set}组 · 左侧`});
+      await speak("左侧，开始。");
+      for(let rep=1;rep<=ex.repsPerSide;rep++){
+        if(skipRequested)return;
+        updateUI({rep:`左 ${rep}/${ex.repsPerSide}`,timer:`第${set}组 · 左`});
+        await sleep(ex.repPauseSec*1000);if(skipRequested)return;
+        await speak(String(rep));
+      }
+      if(set<ex.sets&&ex.restSec>0){
+        updateUI({rep:'',phase:'rest',phaseText:'😮‍💨 组间休息'});await speak(`休息${ex.restSec}秒。`);
+        await countdownSleep(ex.restSec-6,'😮‍💨 组间休息');if(!skipRequested)await countdown5WithVoice();
+      }else if(set===ex.sets){await speak(`${ex.name}全部完成。`);updateUI({rep:'✅ 完成'});}
+    }
+  }else if(ex.type==='counted_sides_multi'){
+    const totalRounds=ex.sets;
+    updateUI({setProgress:`总共 ${totalRounds*2} 组`,repInfo:`次: 每侧${ex.repsPerSide}`,weightInfo:''});
+    let groupNum=0;
+    for(let round=1;round<=totalRounds;round++){
+      if(skipRequested)return;
+      groupNum++;
+      updateUI({setProgress:`第${groupNum}组/${totalRounds*2}组`,phase:'exercise',phaseText:`💪 右侧 · 第${round}轮`});
+      await speak(`右侧第${round}组，开始。`);
+      for(let rep=1;rep<=ex.repsPerSide;rep++){
+        if(skipRequested)return;
+        updateUI({rep:`右 ${rep}/${ex.repsPerSide}`,timer:`右侧第${round}组`});
+        await sleep(ex.repPauseSec*1000);if(skipRequested)return;
+        await speak(String(rep));
+      }
+      if(skipRequested)return;
+      updateUI({rep:'',phase:'rest',phaseText:'🔄 换边'});await speak(`休息${ex.restSec}秒，换左侧。`);
+      await countdownSleep(ex.restSec-4,'🔄 换边');if(!skipRequested)await speak("开始。");
+      if(skipRequested)return;
+      groupNum++;
+      updateUI({setProgress:`第${groupNum}组/${totalRounds*2}组`,phase:'exercise',phaseText:`💪 左侧 · 第${round}轮`});
+      for(let rep=1;rep<=ex.repsPerSide;rep++){
+        if(skipRequested)return;
+        updateUI({rep:`左 ${rep}/${ex.repsPerSide}`,timer:`左侧第${round}组`});
+        await sleep(ex.repPauseSec*1000);if(skipRequested)return;
+        await speak(String(rep));
+      }
+      if(round<totalRounds){
+        updateUI({rep:'',phase:'rest',phaseText:'😮‍💨 组间休息'});await speak(`休息${ex.restSec}秒。`);
+        await countdownSleep(ex.restSec-4,'😮‍💨 组间休息');if(!skipRequested)await speak("开始。");
+      }else{await speak(`${ex.name}全部完成。`);updateUI({rep:'✅ 完成'});}
+    }
+  HANDLERSEOF
+
+node /home/claude/patch_v10b.js}else if(ex.type==='counted'){
     updateUI({setProgress:`组: 0/${ex.sets}`,repInfo:`次: ${ex.reps}`,weightInfo:ex.weight?`重量: ${ex.weight}`:''});
     for(let set=1;set<=ex.sets;set++){
       if(skipRequested)return;
