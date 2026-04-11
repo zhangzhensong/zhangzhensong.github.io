@@ -1,212 +1,892 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
 <head>
-<meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<link rel="stylesheet" href="jemdoc.css" type="text/css" />
-<link rel="stylesheet" href="jemdoc.css" type="text/css" />
-<title></title>
-<!-- MathJax -->
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-	  TeX: { equationNumbers: { autoNumber: "AMS" } }
-});
-</script>
-<!-- End MathJax -->
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Zhensong Zhang</title>
+<style>
+:root {
+  --bg:   #ffffff; --ink:  #111111; --mut: #878787;
+  --rule: #e5e5e5; --hov:  #f6f6f6; --lk:  #0057ff;
+  --tag:  #f0f0f0;
+  --conf: #0057ff;  /* conference: blue  */
+  --jour: #059669;  /* journal:    green */
+  --pre:  #b45309;  /* preprint:   amber */
+  --alt:  #f8f6ef;  /* pub alt row: warm white */
+  --nav-h: 44px; --w: 800px;
+  --f: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+[data-theme="dark"] {
+  --bg:#0d0d0d; --ink:#e8e8e8; --mut:#5e5e5e;
+  --rule:#282828; --hov:#161616; --lk:#4f8eff;
+  --tag:#1e1e1e;
+  --conf:#4f8eff; --jour:#34d399; --pre:#fbbf24;
+  --alt:#151208;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--f); font-size:16px; line-height:1.72;
+  background:var(--bg); color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  transition:background .28s,color .28s;
+}
+a{color:var(--lk);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ─── progress ─────────────────────────────────── */
+#prog{position:fixed;top:0;left:0;height:2px;width:0;background:var(--lk);z-index:400;transition:width .08s linear}
+
+/* ─── nav ───────────────────────────────────────── */
+nav{
+  position:fixed;inset:0 0 auto;height:var(--nav-h);z-index:200;
+  background:color-mix(in srgb,var(--bg) 84%,transparent);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:center;padding:0 24px;
+  transition:background .28s,border-color .28s;
+}
+.nw{width:100%;max-width:var(--w);display:flex;align-items:center;justify-content:center;position:relative}
+.nl{display:flex;gap:26px;list-style:none}
+.nl a{
+  font-size:11px;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;
+  color:var(--mut);text-decoration:none;padding-bottom:2px;position:relative;
+  transition:color .18s,transform .18s ease-out;
+  display:inline-block;
+}
+.nl a::after{content:'';position:absolute;bottom:0;left:0;right:100%;height:1px;background:var(--lk);transition:right .22s}
+.nl a:hover,.nl a.active{color:var(--ink)}
+.nl a:hover::after,.nl a.active::after{right:0}
+.tm{
+  position:absolute;right:0;background:none;border:none;cursor:pointer;
+  padding:4px 6px;color:var(--mut);font-size:16px;line-height:1;
+  transition:color .18s,transform .3s;
+}
+.tm:hover{color:var(--ink);transform:rotate(22deg)}
+
+/* ─── main ──────────────────────────────────────── */
+main{max-width:var(--w);margin:0 auto;padding:0 24px 110px}
+
+/* ─── animations ────────────────────────────────── */
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fu{opacity:0;animation:up .5s cubic-bezier(.4,0,.2,1) both}
+.d1{animation-delay:.04s}.d2{animation-delay:.12s}
+.d3{animation-delay:.2s}.d4{animation-delay:.28s}.d5{animation-delay:.36s}
+
+.reveal{opacity:0;transform:translateY(12px);transition:opacity .48s,transform .48s}
+.reveal.on{opacity:1;transform:none}
+
+/* ─── hero ──────────────────────────────────────── */
+.hero{
+  padding-top:calc(var(--nav-h) + 28px);
+  padding-bottom:12px;
+  display:flex;align-items:center;gap:32px;
+}
+.ph-wrap{
+  flex-shrink:0;order:2;
+  padding:18px;cursor:pointer; /* larger hover area around the circle */
+}
+.ph{
+  width:120px;height:120px;border-radius:50%;overflow:hidden;
+  /* single ring directly on the edge + subtle glow */
+  box-shadow:0 0 0 3px var(--lk),0 0 18px 5px color-mix(in srgb,var(--lk) 20%,transparent);
+  transition:transform .32s,box-shadow .32s;
+}
+.ph-wrap:hover .ph{
+  box-shadow:0 0 0 3px var(--lk),0 0 28px 10px color-mix(in srgb,var(--lk) 32%,transparent);
+}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.hi{order:1;flex:1}
+.hi h1{
+  font-size:clamp(1.5rem,3.2vw,2rem);font-weight:700;
+  letter-spacing:-.03em;line-height:1.1;margin-bottom:6px;
+}
+.deg{font-size:.88rem;color:var(--mut);margin-bottom:16px;display:flex;flex-wrap:wrap}
+.deg span{padding-right:12px}
+.deg span::after{content:'·';padding-left:12px;opacity:.4}
+.deg span:last-child::after{content:''}
+.lks{display:flex;gap:7px;flex-wrap:wrap}
+.lk-btn{
+  font-size:12px;font-weight:500;color:var(--lk);
+  background:var(--tag);padding:6px 14px;border-radius:3px;
+  text-decoration:none;display:inline-flex;align-items:center;gap:5px;
+  transition:background .18s,color .18s,transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .18s;
+}
+.lk-btn:hover{
+  background:var(--lk);color:var(--bg);
+  transform:translateY(-3px);
+  box-shadow:0 4px 12px color-mix(in srgb,var(--lk) 25%,transparent);
+  text-decoration:none;
+}
+.lk-btn:active{transform:translateY(0);box-shadow:none;transition-duration:.08s}
+@keyframes nudge{0%,100%{transform:translateY(0)}25%{transform:translateY(-2px)}75%{transform:translateY(1px)}}
+.lk-btn.wiggle{animation:nudge .4s ease}
+.lk-btn svg{width:12px;height:12px;fill:currentColor;flex-shrink:0}
+
+/* ─── section ───────────────────────────────────── */
+section{padding-top:36px}
+section+section{padding-top:52px}
+.sh{
+  display:flex;align-items:center;gap:8px;
+  font-size:10.5px;font-weight:600;letter-spacing:2.2px;text-transform:uppercase;
+  color:var(--mut);margin-bottom:20px;
+  padding-bottom:10px;border-bottom:1px solid var(--rule);
+}
+.sh svg{width:14px;height:14px;fill:var(--mut);flex-shrink:0}
+.sh::after{
+  content:'';display:inline-block;width:1.5px;height:12px;
+  background:transparent;margin-left:4px;vertical-align:middle;
+  transition:background .15s;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.sh:hover::after{background:var(--lk);animation:blink .8s step-end infinite}
+
+/* ─── bio ───────────────────────────────────────── */
+.bio-txt{font-size:1rem;line-height:1.82;margin-bottom:16px}
+.bio-txt a{border-bottom:1px solid var(--rule);transition:border-color .15s}
+.bio-txt a:hover{border-color:var(--lk);text-decoration:none}
+.hire{
+  background:var(--tag);border-radius:5px;
+  padding:12px 15px;font-size:.9rem;line-height:1.65;
+  display:flex;align-items:flex-start;gap:10px;
+  transform-style:preserve-3d;transition:transform .15s ease-out,box-shadow .15s;
+}
+.hire:hover{box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.hire svg{width:16px;height:16px;fill:var(--lk);flex-shrink:0;margin-top:3px}
+.hire strong{font-weight:600}
+
+/* ─── news ──────────────────────────────────────── */
+.ns{max-height:280px;overflow-y:auto;padding-right:2px}
+.ns::-webkit-scrollbar{width:2px}
+.ns::-webkit-scrollbar-thumb{background:var(--rule)}
+.nr{
+  display:grid;grid-template-columns:72px 1fr;gap:18px;
+  align-items:baseline;padding:10px 6px;
+  font-size:.9rem;border-radius:4px;transition:background .14s;
+}
+.ns .nr:nth-child(even){background:var(--alt)}
+.nr:hover{background:var(--hov)}
+.nd{color:var(--mut);font-size:.78rem;font-weight:500;white-space:nowrap}
+.nt a{color:var(--lk)}
+
+/* ─── pubs ──────────────────────────────────────── */
+.pub{
+  display:grid;grid-template-columns:58px 1fr;gap:16px;
+  align-items:baseline;padding:16px 8px 16px 0;
+  border-radius:5px;position:relative;
+  transition:background .16s,padding-left .16s;
+}
+.pub::before{
+  content:'';position:absolute;left:0;top:22%;bottom:22%;
+  width:2px;border-radius:2px;
+  transform:scaleY(0);transition:transform .18s;transform-origin:center;
+}
+.pub:hover{background:var(--hov);padding-left:12px}
+.pub:hover::before{transform:scaleY(1)}
+/* conference = blue bar */
+.pub.conf::before{background:var(--conf)}
+/* journal   = green bar */
+.pub.jour::before{background:var(--jour)}
+/* preprint  = amber bar */
+.pub.pre::before{background:var(--pre)}
+
+.pub-sep{height:1px;background:transparent;transition:background .15s}
+.pub:hover+.pub-sep{background:var(--rule)}
+/* alternating warm/white rows — .sh is child 1, pubs start at child 2 (even positions) */
+/* pubs at 4n+2 = 2,6,10,14… = 1st,3rd,5th pub; pubs at 4n+4 = 4,8,12… = 2nd,4th,6th pub */
+#pubs .pub:nth-child(4n+2){background:var(--alt)}
+#pubs .pub:nth-child(4n+2):hover{background:var(--hov)}
+
+.vt{
+  font-size:11.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+  padding-top:2px;white-space:nowrap;
+}
+.pub.conf .vt{color:var(--conf)}
+.pub.jour .vt{color:var(--jour)}
+.pub.pre  .vt{color:var(--pre)}
+
+.pt{font-size:.9rem;font-weight:500;line-height:1.5;margin-bottom:5px}
+.pt a{
+  color:var(--ink);border-bottom:1px solid var(--rule);
+  transition:color .14s,border-color .14s;
+}
+.pt a:hover{color:var(--lk);border-color:var(--lk);text-decoration:none}
+.pa{font-size:.8rem;color:var(--mut);line-height:1.5;margin-bottom:3px}
+.pa strong{color:var(--ink);font-weight:500}
+.pm{font-size:.78rem;color:var(--mut);display:flex;gap:10px;flex-wrap:wrap;font-style:italic}
+.pm a{font-style:normal;color:var(--lk);text-decoration:underline;text-underline-offset:2px}
+
+/* ─── awards ────────────────────────────────────── */
+.al{display:flex;flex-direction:column;gap:4px;list-style:none}
+.ai{
+  font-size:.9rem;line-height:1.65;
+  padding:9px 10px 9px 22px;
+  position:relative;border-radius:5px;
+  opacity:0;transform:translateX(-10px);
+  transition:opacity .4s,transform .4s,background .15s;
+}
+.ai.on{opacity:1;transform:none}
+.ai:hover{background:var(--hov)}
+.ai:hover::before{background:var(--lk)}
+.ai::before{
+  content:'';position:absolute;left:8px;top:50%;
+  transform:translate(var(--dot-dx,0px),calc(-50% + var(--dot-dy,0px)));
+  width:4px;height:4px;border-radius:50%;
+  background:var(--mut);transition:background .15s,transform .12s ease-out;
+}
+.ai a{color:var(--lk)}
+
+/* ─── footer ─────────────────────────────────────  */
+footer{margin-top:40px;padding:22px 0;border-top:1px solid var(--rule);font-size:11px;color:var(--mut);text-align:center}
+footer a{color:var(--mut)}
+footer a:hover{color:var(--ink);text-decoration:none}
+
+/* ─── copy tooltip ─────────────────────────────  */
+.copy-tip{
+  position:fixed;pointer-events:none;z-index:300;
+  font-size:11px;font-weight:600;color:var(--bg);background:var(--lk);
+  padding:4px 10px;border-radius:4px;white-space:nowrap;
+  animation:tipUp .7s ease-out both;
+}
+@keyframes tipUp{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-20px)}}
+
+/* ─── footer wave ──────────────────────────────  */
+@keyframes wave{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+footer .wl{display:inline-block;animation:wave .5s ease both}
+
+/* ─── konami rainbow ────────────────────────────  */
+@keyframes rainbow{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(360deg)}}
+.rainbow{animation:rainbow 1s linear 3;color:var(--lk)!important}
+/* ─── theme flash ──────────────────────────────  */
+.theme-flash{
+  position:fixed;inset:0;z-index:999;pointer-events:none;
+  background:var(--lk);opacity:0;
+  animation:flash .35s ease-out both;
+}
+@keyframes flash{0%{opacity:.12}100%{opacity:0}}
+
+@media(max-width:580px){
+  .hero{flex-direction:column;align-items:flex-start;gap:18px}
+  .ph-wrap{order:-1}
+  .pub{grid-template-columns:1fr}.pub:hover{padding-left:12px}
+  .vt{margin-bottom:2px}
+  .nr{grid-template-columns:1fr;gap:3px}
+}
+</style>
 </head>
 <body>
-<div id="layout-content">
-<p><br /></p>
-<p><img src="ZhangZhensong.png" width=180 align="right"  style="position:relative;left:0px;top:-10px;padding-right:100px;"/> </p>
-<h1><b>Zhensong Zhang</b> （张镇嵩）</h1>
-<p>PhD (CUHK), MS (UCAS), BEng (Xidian)<br /></p>
-<p>Senior researcher<br />
-Huawei Noah's Ark Lab<br />
-<b>Email:</b> zhensongzhang[at]hotmail[dot]com
-<br /></p>
-<h2>Biography </h2>
-<p>I joined Huawei Noah's Ark Lab after I obtained my Ph.D. degree from <a href="http://www.cuhk.edu.hk/">The Chinese University of Hong Kong</a> in 2018. Before that, I received a BEng. degree and a M.S. degree from <a href="http://en.xidian.edu.cn/">Xidian University</a> and <a href="http://english.ucas.ac.cn/">University of Chinese Academy of Sciences</a> in 2011 and 2014, respectively. I am currently working on Visual Language Model/3DGS/GenAI. </p>
-<p><b>We are looking for self-motivated interns and full times</b>, if you are insterested in doing cool VLM/AIGC projects, welcome to join us, please drop me an email.</p>
-<h2>News</h2>
-<div style="max-height: 250px; overflow-y: auto; background-color: #FFFDF2; border: none; padding: 15px; border-radius: 8px; line-height: 1.6; color: #333;">
-<ul>
-<li><p>[02/2026] Four papers (ColorTrigger, Charge, Off The Grid, FRAM) and 2 Findings papers (GRVS, Map2Thought) are accepted to CVPR 2026, congrats to all coauthors!</p>
-</li>
-<li><p>[01/2026] Our CHROMA paper is accepted to ICLR 2026, congrats to all coauthors!</p>
-</li>
-<li><p>[12/2025] Our iCo3D paper is accepted to IJCV, congrats to all coauthors!</p>
-</li>
-<li><p>[11/2025] Our egocentric intent disambiguation paper is accepted to AAAI 2026, congrats to all coauthors!</p>
-</li>
-<li><p>[11/2025] Our SCENIC paper is accepted to 3DV 2026, congrats to all coauthors!</p>
-</li>
-<li><p>[09/2025] Our ViDAR paper is accepted to NeurIPS 2025, congrats to all coauthors!</p>
-</li>
-<li><p>[07/2025] Our survey paper on Human Motion Video Generation is accepted to TPAMI, congrats to all coauthors!</p>
-</li>
-<li><p>[07/2025] One paper is accepted to ICCV 2025, congrats to all coauthors!</p>
-</li>
-<li><p>[06/2025] We won the second place award in <a href="https://egovis.github.io/cvpr25/#challenges/">HD-EPIC VQA Challenges 2025</a>, congrats to all coauthors!</p>
-</li>
-<li><p>[04/2025] Our paper on Video Human Motion In-betweening is accepted to IJCAI 2025, congrats to all coauthors!</p>
-</li>
-<li><p>[03/2025] Our CaricatureBooth is accepted to CVPR 2025, congrats to all coauthors!</p>
-</li>
-<li><p>[01/2025] One paper is accepted to ICASSP 2025, congrats to all coauthors!</p>
-</li>
-<li><p>[09/2024] One paper is accepted to NeurIPS 2024, congrats to all coauthors!</p>
-</li>
-<li><p>[02/2024] Three papers are accepted to CVPR 2024, congrats to all coauthors!</p>
-</li>
-<li><p>[12/2023] One paper is accepted to ICASSP 2024.</p>
-</li>
-<li><p>[10/2023] We won the <a href="./imgs/genea2023_award.jpg">Reproducibility Award</a> in <a href="https://genea-workshop.github.io/2023/challenge/">GENEA Challenge 2023</a>.</p>
-</li>
-<li><p>[09/2023] Our work on robust monocular depth estimation is accepted to IJCV.</p>
-</li>
-<li><p>[07/2023] Our UnifiedGesture is accepted to ACM MM 2023.</p>
-</li>
-<li><p>[05/2023] Our DiffuseStyleGesture is accepted to IJCAI 2023.</p>
-</li>
-<li><p>[05/2023] Our QPGesture is accepted to CVPR 2023 as a highlight.</p>
-</li>
-<li><p>[11/2022] Our <a href="https://mos-vod-drcn.dbankcdn.cn/P_VT/video_injection/E1ADD9367ACCE5A6FBC57C925A3E1588E57B0D8E834DE49A6160E705F684E6DF1348CB5/v3/M1572381442145518336/MP4Mix_H.264_1920x1080_6000_HEAAC1_PVC_NoCut.mp4?accountinfo=0N4yN1mj5VdH9HFql04pf1UW9GXsQ%2Bw3IF6mQdp8pUqt8GGIGk0BuSVttns0Ka2SXFwtFzQcniSTMCtJCDmqLg%3D%3D%3A20221109033001%3AUTC%2C%2C%2C20221109033001%2C%2C%2C-1%2C1%2C0%2C%2C%2C1%2C%2C%2C%2C1%2C%2C0%2C%2C%2C%2C%2C1%2CEND&amp;GuardEncType=2&amp;contentCode=M202211091161572381437364011778&amp;spVolumeId=MP202211091161572381437020078848&amp;server=mosplay-drcn.himovie.dbankcloud.cn&amp;protocolType=1&amp;formatPriority=504*%2C204*%2C2">sign language avatar</a> appears on <a href="https://developer.huawei.com/consumer/cn/hdc/hdc2022/review/index.html">HDC 2022</a> / <a href="https://www.huawei.com/cn/events/huaweiconnect/shenzhen#livestream">HC 2022</a> and helps translate Chinese keynotes into CSL, <a href="https://mp.weixin.qq.com/s/392jho7iqBca27gNQKTqqA">量子位</a>, <a href="https://xinsheng.huawei.com/next/#/detail?tid=7165161">华为人</a>, <a href="https://mp.weixin.qq.com/s/bIU7r3W88Z03Pg-n0wTTsA">华为开发者联盟服务</a>.</p>
-</li>
-<li><p>[10/2022] Our joint team  Megatron_RVC won <a href="http://www.robustvision.net/leaderboard.php?benchmark=depth">the RVC 2022 single image depth prediction challenge</a>, <a href="https://dianzi.nwpu.edu.cn/info/1454/14285.htm">news</a></p>
-</li>
-<li><p>[8/2022] Our human pose and shape estimation paper CLIFF is accepted to ECCV as oral presentation, <a href="https://mp.weixin.qq.com/s/h7sL8ClkknBfGEnfOg8rmg">news</a></p>
-</li>
-</ul>
+<div id="prog"></div>
+
+<nav>
+  <div class="nw">
+    <ul class="nl">
+      <li><a href="#bio">Bio</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#pubs">Publications</a></li>
+      <li><a href="#awards">Awards</a></li>
+    </ul>
+    <button class="tm" id="tm" aria-label="Toggle dark mode">☾</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ── hero ── -->
+<div class="hero">
+  <div class="ph-wrap">
+    <div class="ph fu d1">
+      <img src="ZhangZhensong.png" alt="Zhensong Zhang"/>
+    </div>
+  </div>
+  <div class="hi">
+    <h1 class="fu d2">Zhensong Zhang</h1>
+    <p class="deg fu d3">
+      <span>PhD (CUHK)</span><span>MS (UCAS)</span><span>BEng (Xidian)</span>
+    </p>
+    <div class="lks fu d4">
+      <a class="lk-btn" href="mailto:zhensongzhang@hotmail.com">
+        <svg viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+        Email
+      </a>
+      <a class="lk-btn" href="http://dblp.uni-trier.de/pers/hd/z/Zhang:Zhensong">
+        <svg viewBox="0 0 20 20"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/></svg>
+        dblp
+      </a>
+      <a class="lk-btn" href="https://scholar.google.com/citations?user=fs8HQxQAAAAJ&amp;hl=zh-CN">
+        <svg viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.166l4-1a1 1 0 11.496 1.937l-3.333.833L3 9.195V13a1 1 0 00.555.894l4 2a1 1 0 00.9 0l4-2A1 1 0 0013 13v-3.844l3-1.286V12a1 1 0 102 0V7a1 1 0 00-.606-.92l-7-3z"/></svg>
+        Scholar
+      </a>
+    </div>
+  </div>
 </div>
-<h2>Recent Publications （<a href="http://dblp.uni-trier.de/pers/hd/z/Zhang:Zhensong">dblp</a>, <a href="https://scholar.google.com/citations?user=fs8HQxQAAAAJ&amp;hl=zh-CN">Google Scholar</a>）</h2>
-<ul>
-<li><p>[<b>Preprint</b>] <a href="https://arxiv.org/pdf/2503.09342?">GASPACHO: Gaussian Splatting for Controllable Humans and Objects</a> <br />
-Aymen Mir, Arthur Moreau, Helisa Dhamo, <b>Zhensong Zhang</b>, Eduardo Pérez-Pellitero<br /></p>
-</li>
-</ul>
-<ul>
-<li><p>[<b>Preprint</b>] <a href="https://arxiv.org/pdf/2503.09293?">Better Together: Unified Motion Capture and 3D Avatar Reconstruction</a> <br />
-Arthur Moreau, Mohammed Brahimi, Richard Shaw, Athanasios Papaioannou, Thomas Tanay, <b>Zhensong Zhang</b>, Eduardo Pérez-Pellitero<br /></p>
-</li>
-</ul>
-<ul>
-<li><p>[<b>CVPR Findings</b>] <a href="https://arxiv.org/pdf/2603.29734">GRVS: a Generalizable and Recurrent Approach to Monocular Dynamic View Synthesis</a> <br />
-Thomas Tanay, Mohammed Brahimi, Michal Nazarczuk, Qingwen Zhang, Sibi Catley-Chandar, Arthur Moreau, <b>Zhensong Zhang</b>, Eduardo Pérez-Pellitero<br />
-In <i>CVPR</i> 2026.<br />
-[<a href="https://thomas-tanay.github.io/grvs">Website</a>]</p>
-</li>
-</ul>
-<ul>
-<li><p>[<b>CVPR Findings</b>] <a href="https://arxiv.org/abs/2601.11442?">Map2Thought: Explicit 3D Spatial Reasoning via Metric Cognitive Maps</a> <br />
-Xiangjun Gao, <b>Zhensong Zhang</b>, Dave Zhenyu Chen, Songcen Xu, Long Quan, Eduardo Pérez-Pellitero, Youngkyoon Jang<br />
-In <i>CVPR</i> 2026.<br /></p>
-</li>
-</ul>
-<ul>
-<li><p>[<b>CVPR</b>] <a href="https://arxiv.org/pdf/2503.09293?">Diffusion-Based Makeup Transfer with Facial Region-Aware Makeup Features</a> <br />
-Zheng Gao, Debin Meng, Yunqi Miao, <b>Zhensong Zhang</b>, Songcen Xu, Ioannis Patras, Jifei Song<br />
-In <i>CVPR</i> 2026.<br /></p>
-</li>
-</ul>
-<ul>
-<li><p>[<b>CVPR</b>] <a href="https://arxiv.org/pdf/2503.09293?">Color When It Counts: Grayscale-Guided Online Triggering for Always-On Streaming Video Sensing</a> <br />
-Weitong Cai, Hang Zhang, Yukai Huang, Shitong Sun, Jiankang Deng, Songcen Xu, Jifei Song, <b>Zhensong Zhang</b><br />
-In <i>CVPR</i> 2026.<br /></p>
-</li>
-</ul>
-<ul>
-<li><p>[<b>CVPR</b>] <a href="https://arxiv.org/abs/2512.13639">Charge: A Comprehensive Novel View Synthesis Benchmark and Dataset to Bind Them All</a> <br />
-Michal Nazarczuk, Thomas Tanay, Arthur Moreau, <b>Zhensong Zhang</b>, Eduardo Pérez-Pellitero<br />
-In <i>CVPR</i> 2026.<br /></p>
-</li>
-</ul>
-<ul>
-<li><p>[<b>CVPR</b>] <a href="https://arxiv.org/abs/2512.15508">Off The Grid: Detection of Primitives for Feed-Forward 3D Gaussian Splatting</a> <br />
-Arthur Moreau, Richard Shaw, Michal Nazarczuk, Jisu Shin, Thomas Tanay, <b>Zhensong Zhang</b>, Songcen Xu, Eduardo Pérez-Pellitero<br />
-In <i>CVPR</i> 2026.<br />
-[<a href="https://arthurmoreau.github.io/OffTheGrid/">Website</a>]</p>
-</li>
-</ul>
-<ul>
-<li><p>[<b>ICLR</b>] <a href="https://arxiv.org/abs/2507.15748">CHROMA: Consistent Harmonization of Multi-View Appearance via Bilateral Grid Prediction</a> <br />
-Jisu Shin, Richard Shaw, Seunghyun Shin, <b>Zhensong Zhang</b>, Hae-Gon Jeon, Eduardo Perez-Pellitero<br />
-In <i>ICLR</i> 2026.<br /></p>
-</li>
-</ul>
-<ul>
-<li><p>[<b>IJCV</b>] <a href="https://arxiv.org/abs/2601.13148">ICo3D: An Interactive Conversational 3D Virtual Human</a> <br />
-Richard Shaw, Youngkyoon Jang, Athanasios Papaioannou, Arthur Moreau, Helisa Dhamo, <b>Zhensong Zhang</b>, Eduardo Pérez-Pellitero<br />
-In <i>IJCV</i>.<br />
-[<a href="https://ico3d.github.io/">Website</a>]</p>
-</li>
-</ul>
-<ul>
-<li><p>[<b>AAAI</b>] <a href="https://arxiv.org/abs/2511.08971">Plug-and-Play Clarifier: A Zero-Shot Multimodal Framework for Egocentric Intent Disambiguation</a> <br />
-Sicheng Yang, Yukai Huang, Weitong Cai, Shitong Sun, You He, Jiankang Deng, Hang Zhang, Jifei Song, <b>Zhensong Zhang</b><br />
-In <i>AAAI</i> 2026.<br /></p>
-</li>
-</ul>
-<ul>
-<li><p>[<b>3DV</b>] <a href="https://arxiv.org/abs/2412.15664">SCENIC: Scene-aware Semantic Navigation with Instruction-guided Control</a> <br />
-Xiaohan Zhang, Sebastian Starke, Vladimir Guzov, <b>Zhensong Zhang</b>, Eduardo Pérez Pellitero, Gerard Pons-Moll<br />
-In <i>3DV</i> 2026.<br /></p>
-</li>
-</ul>
-<ul>
-<li><p>[<b>NeurIPS</b>] <a href="https://arxiv.org/abs/2506.18792">ViDAR: Video Diffusion-Aware 4D Reconstruction From Monocular Inputs</a> <br />
-Michal Nazarczuk, Sibi Catley-Chandar, Thomas Tanay, <b>Zhensong Zhang</b>, Gregory Slabaugh, Eduardo Pérez-Pellitero<br />
-In <i>NeurIPS</i> 2025.<br /></p>
-</li>
-</ul>
-<ul>
-<li><p>[<b>TPAMI</b>] <a href="https://arxiv.org/abs/2509.03883">Human Motion Video Generation: A Survey</a> <br />
-Haiwei Xue, Xiangyang Luo, Zhanghao Hu, Xin Zhang, Xunzhi Xiang, Yuqin Dai, Jianzhuang Liu, <b>Zhensong Zhang</b>, Minglei Li, Jian Yang, Fei Ma, Zhiyong Wu, Changpeng Yang, Zonghong Dai, Fei Richard Yu<br />
-In <i>IEEE Transactions on Pattern Analysis and Machine Intelligence</i>, 2025. <br />
-[<a href="https://github.com/Winn1y/Awesome-Human-Motion-Video-Generation">Website</a>]</p>
-</li>
-</ul>
-<ul>
-<li><p>[<b>ICCV</b>] <a href="https://cvpr.thecvf.com/virtual/2025/poster/32990">Frequency-Guided Diffusion for Training-Free Text-Driven Image Translation</a> <br />
-Zheng Gao, Jifei Song, <b>Zhensong Zhang</b>, Jiankang Deng, Ioannis Patras <br />
-In <i>ICCV</i> 2025.<br /></p>
-</li>
-</ul>
-<ul>
-<li><p>[<b>CVPR</b>] <a href="https://cvpr.thecvf.com/virtual/2025/poster/32990">CaricatureBooth: Data-Free Interactive Caricature Generation in a Photo Booth</a> <br />
-Zhiyu Qu, Yunqi Miao, <b>Zhensong Zhang</b>, Jifei Song, Jiankang Deng, Yi-Zhe Song <br />
-In <i>CVPR</i> 2025.<br /></p>
-</li>
-</ul>
-<ul>
-<li><p>[<b>IJCAI</b>] <a href="https://cvpr.thecvf.com/virtual/2025/poster/32990">VideoHumanMIB: Unlocking Appearance Decoupling for Video Human Motion In-betweening</a> <br />
-Haiwei Xue, <b>Zhensong Zhang</b>, Minglei Li, Zonghong Dai, Fei Yu, Fei Ma, Zhiyong Wu <br />
-In <i>IJCAI</i> 2025.<br /></p>
-</li>
-</ul>
-<ul>
-<li><p>[<b>ICASSP</b>] <a href="https://cvpr.thecvf.com/virtual/2025/poster/32990">Identity-Preserving Audio-Driven Holistic Human Motion Video Generation</a> <br />
-Haiwei Xue, <b>Zhensong Zhang</b>, Minglei Li, Zonghong Dai<br />
-In <i>ICASSP</i> 2025.<br /></p>
-</li>
-</ul>
-<h2>Honors &amp; Awards</h2>
-<ul>
-<li><p>Winner, ECCV 2022 RVC monoculer depth estimation prediction challenge <br /></p>
-</li>
-<li><p>Second place award in <a href="https://egovis.github.io/cvpr25/#challenges/">HD-EPIC VQA Challenges 2025</a></p>
-</li>
-<li><p><a href="./imgs/genea2023_award.jpg">Reproducibility Award</a> in <a href="https://genea-workshop.github.io/2023/challenge/">GENEA Challenge 2023</a></p>
-</li>
-</ul>
-<h2>Miscellanies</h2>
-<ul>
-<li><p><b>Paper Lists</b> <br />
-<a href="http://kesen.realtimerendering.com/">Computer Graphics Papers</a>,  <a href="https://www.ecva.net/papers.php">ECCV Papers</a>, <a href="https://openaccess.thecvf.com/menu">CVPR/ICCV Papers</a>, <a href="https://papers.nips.cc/">NeurIPS Papers</a></p>
-</li>
-</ul>
-</div>
+
+<!-- ── bio ── -->
+<section id="bio" class="reveal">
+  <p class="sh">
+    <svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg>
+    Biography
+  </p>
+  <p class="bio-txt">I joined Huawei Noah's Ark Lab after obtaining my Ph.D. from <a href="http://www.cuhk.edu.hk/">The Chinese University of Hong Kong</a> in 2018. Before that, I received a BEng. degree and a M.S. degree from <a href="http://en.xidian.edu.cn/">Xidian University</a> and <a href="http://english.ucas.ac.cn/">the University of Chinese Academy of Sciences</a> in 2011 and 2014, respectively. I am currently working on Visual Language Models, 3D Gaussian Splatting, and Generative AI.</p>
+  <div class="hire">
+    <svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"/><path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/></svg>
+    <span><strong>We are hiring</strong> — looking for self-motivated interns &amp; full-time researchers in VLM / AIGC. Feel free to drop me an email.</span>
+  </div>
+</section>
+
+<!-- ── news ── -->
+<section id="news" class="reveal">
+  <p class="sh">
+    <svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd"/><path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"/></svg>
+    News
+  </p>
+  <div class="ns">
+    <div class="nr"><span class="nd">02/2026</span><span class="nt">Four papers (ColorTrigger, Charge, Off The Grid, FRAM) and 2 Findings papers (GRVS, Map2Thought) accepted to CVPR 2026.</span></div>
+    <div class="nr"><span class="nd">01/2026</span><span class="nt">CHROMA accepted to ICLR 2026.</span></div>
+    <div class="nr"><span class="nd">12/2025</span><span class="nt">iCo3D accepted to IJCV.</span></div>
+    <div class="nr"><span class="nd">11/2025</span><span class="nt">Egocentric intent disambiguation paper accepted to AAAI 2026.</span></div>
+    <div class="nr"><span class="nd">11/2025</span><span class="nt">SCENIC accepted to 3DV 2026.</span></div>
+    <div class="nr"><span class="nd">09/2025</span><span class="nt">ViDAR accepted to NeurIPS 2025.</span></div>
+    <div class="nr"><span class="nd">07/2025</span><span class="nt">Survey on Human Motion Video Generation accepted to TPAMI.</span></div>
+    <div class="nr"><span class="nd">07/2025</span><span class="nt">One paper accepted to ICCV 2025.</span></div>
+    <div class="nr"><span class="nd">06/2025</span><span class="nt">Second place in <a href="https://egovis.github.io/cvpr25/#challenges/">HD-EPIC VQA Challenges 2025</a>.</span></div>
+    <div class="nr"><span class="nd">04/2025</span><span class="nt">Video Human Motion In-betweening paper accepted to IJCAI 2025.</span></div>
+    <div class="nr"><span class="nd">03/2025</span><span class="nt">CaricatureBooth accepted to CVPR 2025.</span></div>
+    <div class="nr"><span class="nd">01/2025</span><span class="nt">One paper accepted to ICASSP 2025.</span></div>
+  </div>
+</section>
+
+<!-- ── publications ── -->
+<section id="pubs" class="reveal">
+  <p class="sh">
+    <svg viewBox="0 0 20 20"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/></svg>
+    Recent Publications
+  </p>
+
+  <div class="pub pre"><p class="vt">Preprint</p><div><p class="pt"><a href="https://arxiv.org/pdf/2503.09342">GASPACHO: Gaussian Splatting for Controllable Humans and Objects</a></p><p class="pa">Aymen Mir, Arthur Moreau, Helisa Dhamo, <strong>Zhensong Zhang</strong>, Eduardo Pérez-Pellitero</p></div></div><div class="pub-sep"></div>
+
+  <div class="pub pre"><p class="vt">Preprint</p><div><p class="pt"><a href="https://arxiv.org/pdf/2503.09293">Better Together: Unified Motion Capture and 3D Avatar Reconstruction</a></p><p class="pa">Arthur Moreau, Mohammed Brahimi, Richard Shaw, Athanasios Papaioannou, Thomas Tanay, <strong>Zhensong Zhang</strong>, Eduardo Pérez-Pellitero</p></div></div><div class="pub-sep"></div>
+
+  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://arxiv.org/pdf/2603.29734">GRVS: a Generalizable and Recurrent Approach to Monocular Dynamic View Synthesis</a></p><p class="pa">Thomas Tanay, Mohammed Brahimi, Michal Nazarczuk, Qingwen Zhang, Sibi Catley-Chandar, Arthur Moreau, <strong>Zhensong Zhang</strong>, Eduardo Pérez-Pellitero</p><p class="pm"><em>CVPR Findings 2026</em> <a href="https://thomas-tanay.github.io/grvs">Website</a></p></div></div><div class="pub-sep"></div>
+
+  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://arxiv.org/abs/2601.11442">Map2Thought: Explicit 3D Spatial Reasoning via Metric Cognitive Maps</a></p><p class="pa">Xiangjun Gao, <strong>Zhensong Zhang</strong>, Dave Zhenyu Chen, Songcen Xu, Long Quan, Eduardo Pérez-Pellitero, Youngkyoon Jang</p><p class="pm"><em>CVPR Findings 2026</em></p></div></div><div class="pub-sep"></div>
+
+  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://arxiv.org/pdf/2503.09293">Diffusion-Based Makeup Transfer with Facial Region-Aware Makeup Features</a></p><p class="pa">Zheng Gao, Debin Meng, Yunqi Miao, <strong>Zhensong Zhang</strong>, Songcen Xu, Ioannis Patras, Jifei Song</p><p class="pm"><em>CVPR 2026</em></p></div></div><div class="pub-sep"></div>
+
+  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://arxiv.org/pdf/2503.09293">Color When It Counts: Grayscale-Guided Online Triggering for Always-On Streaming Video Sensing</a></p><p class="pa">Weitong Cai, Hang Zhang, Yukai Huang, Shitong Sun, Jiankang Deng, Songcen Xu, Jifei Song, <strong>Zhensong Zhang</strong></p><p class="pm"><em>CVPR 2026</em></p></div></div><div class="pub-sep"></div>
+
+  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://arxiv.org/abs/2512.13639">Charge: A Comprehensive Novel View Synthesis Benchmark and Dataset to Bind Them All</a></p><p class="pa">Michal Nazarczuk, Thomas Tanay, Arthur Moreau, <strong>Zhensong Zhang</strong>, Eduardo Pérez-Pellitero</p><p class="pm"><em>CVPR 2026</em></p></div></div><div class="pub-sep"></div>
+
+  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://arxiv.org/abs/2512.15508">Off The Grid: Detection of Primitives for Feed-Forward 3D Gaussian Splatting</a></p><p class="pa">Arthur Moreau, Richard Shaw, Michal Nazarczuk, Jisu Shin, Thomas Tanay, <strong>Zhensong Zhang</strong>, Songcen Xu, Eduardo Pérez-Pellitero</p><p class="pm"><em>CVPR 2026</em> <a href="https://arthurmoreau.github.io/OffTheGrid/">Website</a></p></div></div><div class="pub-sep"></div>
+
+  <div class="pub conf"><p class="vt">ICLR</p><div><p class="pt"><a href="https://arxiv.org/abs/2507.15748">CHROMA: Consistent Harmonization of Multi-View Appearance via Bilateral Grid Prediction</a></p><p class="pa">Jisu Shin, Richard Shaw, Seunghyun Shin, <strong>Zhensong Zhang</strong>, Hae-Gon Jeon, Eduardo Perez-Pellitero</p><p class="pm"><em>ICLR 2026</em></p></div></div><div class="pub-sep"></div>
+
+  <div class="pub jour"><p class="vt">IJCV</p><div><p class="pt"><a href="https://arxiv.org/abs/2601.13148">ICo3D: An Interactive Conversational 3D Virtual Human</a></p><p class="pa">Richard Shaw, Youngkyoon Jang, Athanasios Papaioannou, Arthur Moreau, Helisa Dhamo, <strong>Zhensong Zhang</strong>, Eduardo Pérez-Pellitero</p><p class="pm"><em>IJCV</em> <a href="https://ico3d.github.io/">Website</a></p></div></div><div class="pub-sep"></div>
+
+  <div class="pub conf"><p class="vt">AAAI</p><div><p class="pt"><a href="https://arxiv.org/abs/2511.08971">Plug-and-Play Clarifier: A Zero-Shot Multimodal Framework for Egocentric Intent Disambiguation</a></p><p class="pa">Sicheng Yang, Yukai Huang, Weitong Cai, Shitong Sun, You He, Jiankang Deng, Hang Zhang, Jifei Song, <strong>Zhensong Zhang</strong></p><p class="pm"><em>AAAI 2026</em></p></div></div><div class="pub-sep"></div>
+
+  <div class="pub conf"><p class="vt">3DV</p><div><p class="pt"><a href="https://arxiv.org/abs/2412.15664">SCENIC: Scene-aware Semantic Navigation with Instruction-guided Control</a></p><p class="pa">Xiaohan Zhang, Sebastian Starke, Vladimir Guzov, <strong>Zhensong Zhang</strong>, Eduardo Pérez Pellitero, Gerard Pons-Moll</p><p class="pm"><em>3DV 2026</em></p></div></div><div class="pub-sep"></div>
+
+  <div class="pub conf"><p class="vt">NeurIPS</p><div><p class="pt"><a href="https://arxiv.org/abs/2506.18792">ViDAR: Video Diffusion-Aware 4D Reconstruction From Monocular Inputs</a></p><p class="pa">Michal Nazarczuk, Sibi Catley-Chandar, Thomas Tanay, <strong>Zhensong Zhang</strong>, Gregory Slabaugh, Eduardo Pérez-Pellitero</p><p class="pm"><em>NeurIPS 2025</em></p></div></div><div class="pub-sep"></div>
+
+  <div class="pub jour"><p class="vt">TPAMI</p><div><p class="pt"><a href="https://arxiv.org/abs/2509.03883">Human Motion Video Generation: A Survey</a></p><p class="pa">Haiwei Xue, Xiangyang Luo, Zhanghao Hu, Xin Zhang, Xunzhi Xiang, Yuqin Dai, Jianzhuang Liu, <strong>Zhensong Zhang</strong>, Minglei Li, Jian Yang, Fei Ma, Zhiyong Wu, Changpeng Yang, Zonghong Dai, Fei Richard Yu</p><p class="pm"><em>IEEE Trans. PAMI, 2025</em> <a href="https://github.com/Winn1y/Awesome-Human-Motion-Video-Generation">Website</a></p></div></div><div class="pub-sep"></div>
+
+  <div class="pub conf"><p class="vt">ICCV</p><div><p class="pt"><a href="https://cvpr.thecvf.com/virtual/2025/poster/32990">Frequency-Guided Diffusion for Training-Free Text-Driven Image Translation</a></p><p class="pa">Zheng Gao, Jifei Song, <strong>Zhensong Zhang</strong>, Jiankang Deng, Ioannis Patras</p><p class="pm"><em>ICCV 2025</em></p></div></div><div class="pub-sep"></div>
+
+  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://cvpr.thecvf.com/virtual/2025/poster/32990">CaricatureBooth: Data-Free Interactive Caricature Generation in a Photo Booth</a></p><p class="pa">Zhiyu Qu, Yunqi Miao, <strong>Zhensong Zhang</strong>, Jifei Song, Jiankang Deng, Yi-Zhe Song</p><p class="pm"><em>CVPR 2025</em></p></div></div><div class="pub-sep"></div>
+
+  <div class="pub conf"><p class="vt">IJCAI</p><div><p class="pt"><a href="https://cvpr.thecvf.com/virtual/2025/poster/32990">VideoHumanMIB: Unlocking Appearance Decoupling for Video Human Motion In-betweening</a></p><p class="pa">Haiwei Xue, <strong>Zhensong Zhang</strong>, Minglei Li, Zonghong Dai, Fei Yu, Fei Ma, Zhiyong Wu</p><p class="pm"><em>IJCAI 2025</em></p></div></div><div class="pub-sep"></div>
+
+  <div class="pub conf"><p class="vt">ICASSP</p><div><p class="pt"><a href="https://cvpr.thecvf.com/virtual/2025/poster/32990">Identity-Preserving Audio-Driven Holistic Human Motion Video Generation</a></p><p class="pa">Haiwei Xue, <strong>Zhensong Zhang</strong>, Minglei Li, Zonghong Dai</p><p class="pm"><em>ICASSP 2025</em></p></div></div>
+
+</section>
+
+<!-- ── awards ── -->
+<section id="awards" class="reveal">
+  <p class="sh">
+    <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+    Honors &amp; Awards
+  </p>
+  <ul class="al">
+    <li class="ai">Winner, ECCV 2022 RVC monocular depth estimation prediction challenge</li>
+    <li class="ai">Second place, <a href="https://egovis.github.io/cvpr25/#challenges/">HD-EPIC VQA Challenges 2025</a></li>
+    <li class="ai"><a href="./imgs/genea2023_award.jpg">Reproducibility Award</a>, <a href="https://genea-workshop.github.io/2023/challenge/">GENEA Challenge 2023</a></li>
+  </ul>
+</section>
+
+<footer>Zhensong Zhang · <a href="mailto:zhensongzhang@hotmail.com">zhensongzhang@hotmail.com</a></footer>
+
+</main>
+<script>
+(function(){
+  /* theme */
+  var h=document.documentElement,btn=document.getElementById('tm');
+  var t=localStorage.getItem('zt')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+  set(t);
+  btn.onclick=function(){set(h.dataset.theme==='dark'?'light':'dark')};
+  function set(v){h.dataset.theme=v;localStorage.setItem('zt',v);btn.textContent=v==='dark'?'○':'☾'}
+
+  /* scroll progress */
+  var bar=document.getElementById('prog');
+  window.addEventListener('scroll',function(){
+    var s=document.documentElement;
+    bar.style.width=(s.scrollTop/(s.scrollHeight-s.clientHeight)*100)+'%';
+  },{passive:true});
+
+  /* nav active */
+  var secs=document.querySelectorAll('section[id]');
+  var links=document.querySelectorAll('.nl a');
+  new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(l){l.classList.remove('active')});
+        var a=document.querySelector('.nl a[href="#'+e.target.id+'"]');
+        if(a)a.classList.add('active');
+      }
+    });
+  },{rootMargin:'-38% 0px -56% 0px'}).observe&&secs.forEach(function(s){
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){
+          links.forEach(function(l){l.classList.remove('active')});
+          var a=document.querySelector('.nl a[href="#'+e.target.id+'"]');
+          if(a)a.classList.add('active');
+        }
+      });
+    },{rootMargin:'-38% 0px -56% 0px'}).observe(s);
+  });
+
+  /* scroll reveal */
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}});
+  },{threshold:.07});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+
+  /* awards stagger */
+  var aio=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){
+        var items=e.target.querySelectorAll('.ai');
+        items.forEach(function(item,i){
+          setTimeout(function(){item.classList.add('on')},i*90);
+        });
+        aio.unobserve(e.target);
+      }
+    });
+  },{threshold:.15});
+  var al=document.querySelector('.al');
+  if(al)aio.observe(al);
+
+  /* ─── avatar runaway ─────────────────────────── */
+  (function(){
+    var wrap=document.querySelector('.ph-wrap');
+    var ph=document.querySelector('.ph');
+    if(!wrap||!ph)return;
+    var hero=document.querySelector('.hero');
+    var running=false;
+    var returnTimer=null;
+    var curX=0,curY=0;
+
+    wrap.addEventListener('mouseenter',function(){
+      if(running)return;
+      running=true;
+      if(returnTimer){clearTimeout(returnTimer);returnTimer=null;}
+
+      /* ── shake phase (animate the whole wrapper) ── */
+      var count=0;
+      wrap.style.transition='none';
+      var iv=setInterval(function(){
+        var sx=(Math.random()-.5)*12;
+        var sy=(Math.random()-.5)*8;
+        var sr=(Math.random()-.5)*10;
+        wrap.style.transform='translate('+(curX+sx)+'px,'+(curY+sy)+'px) rotate('+sr+'deg)';
+        count++;
+        if(count>7){
+          clearInterval(iv);
+          /* ── run away phase ── */
+          var heroW=hero.offsetWidth;
+          var wrapW=wrap.offsetWidth;
+          /* pick a new position far from current */
+          var newX,newY,attempts=0;
+          do{
+            newX=(Math.random()-.5)*(heroW-wrapW-20);
+            newY=(Math.random()-.5)*50;
+            attempts++;
+          }while(Math.abs(newX-curX)<100&&attempts<10);
+          curX=newX;curY=newY;
+          wrap.style.transition='transform .55s cubic-bezier(.34,1.56,.64,1)';
+          wrap.style.transform='translate('+curX+'px,'+curY+'px) scale(1.05)';
+          setTimeout(function(){
+            wrap.style.transform='translate('+curX+'px,'+curY+'px)';
+            running=false;
+            /* re-trigger only on next mouse move (= user is chasing) */
+            function onChase(){
+              wrap.removeEventListener('mousemove',onChase);
+              if(!running)wrap.dispatchEvent(new MouseEvent('mouseenter'));
+            }
+            wrap.addEventListener('mousemove',onChase);
+            /* clean up listener if mouse leaves */
+            wrap.addEventListener('mouseleave',function leave(){
+              wrap.removeEventListener('mousemove',onChase);
+              wrap.removeEventListener('mouseleave',leave);
+            });
+            /* auto return after 2s of no hover */
+            returnTimer=setTimeout(function(){
+              curX=0;curY=0;
+              wrap.style.transition='transform .8s cubic-bezier(.25,1,.5,1)';
+              wrap.style.transform='translate(0,0)';
+            },2000);
+          },600);
+        }
+      },45);
+    });
+  })();
+
+  /* ─── mouse particles ─────────────────────────── */
+  var cvs=document.createElement('canvas');
+  cvs.style.cssText='position:fixed;inset:0;z-index:-1;pointer-events:none';
+  document.body.appendChild(cvs);
+  var ctx=cvs.getContext('2d');
+  var W,H;
+  function resize(){W=cvs.width=innerWidth;H=cvs.height=innerHeight}
+  resize();
+  addEventListener('resize',resize);
+
+  var particles=[];
+  var ripples=[];
+  var mx=0,my=0,frame=0;
+  var idle=0; /* frames since last mouse move */
+  var mouseIn=false;
+
+  function accent(){
+    return h.dataset.theme==='dark'?[79,142,255]:[0,87,255];
+  }
+
+  /* spawn trail particles on mouse move */
+  addEventListener('mousemove',function(e){
+    mx=e.clientX;my=e.clientY;
+    idle=0;mouseIn=true;
+    var c=accent();
+    for(var k=0;k<2;k++){
+      particles.push({
+        x:mx+(Math.random()-.5)*6,
+        y:my+(Math.random()-.5)*6,
+        vx:(Math.random()-.5)*1.6,
+        vy:(Math.random()-.5)*1.6 - .5,
+        r:Math.random()*2.8+.8,
+        life:1,
+        decay:.01+Math.random()*.008,
+        c:c
+      });
+    }
+  },{passive:true});
+  addEventListener('mouseenter',function(){mouseIn=true});
+  addEventListener('mouseleave',function(){mouseIn=false});
+
+  /* spawn ripple on click */
+  addEventListener('click',function(e){
+    /* skip if clicking interactive elements */
+    if(e.target.closest('a,button,input,textarea,select'))return;
+    var c=accent();
+    ripples.push({x:e.clientX,y:e.clientY,r:0,maxR:120+Math.random()*60,life:1,c:c});
+    /* burst of particles */
+    for(var i=0;i<12;i++){
+      var angle=Math.PI*2*i/12;
+      var speed=1.5+Math.random()*2;
+      particles.push({
+        x:e.clientX,y:e.clientY,
+        vx:Math.cos(angle)*speed,
+        vy:Math.sin(angle)*speed,
+        r:Math.random()*3+1.5,
+        life:1,
+        decay:.015+Math.random()*.01,
+        c:c
+      });
+    }
+  });
+
+  function draw(){
+    frame++;
+    idle++;
+    ctx.clearRect(0,0,W,H);
+
+    /* ── idle effects: breathing halo + ambient bubbles ── */
+    if(mouseIn&&idle>60){
+      var ac=accent();
+      /* breathing pulse ring */
+      var t=frame*.025;
+      var breathR=28+Math.sin(t)*14;
+      var breathAlpha=.06+Math.sin(t)*.03;
+      ctx.beginPath();
+      ctx.arc(mx,my,breathR,0,Math.PI*2);
+      ctx.strokeStyle='rgba('+ac[0]+','+ac[1]+','+ac[2]+','+breathAlpha+')';
+      ctx.lineWidth=1.5;
+      ctx.stroke();
+      /* second ring offset */
+      var breathR2=48+Math.cos(t*.7)*18;
+      var breathAlpha2=.035+Math.cos(t*.7)*.02;
+      ctx.beginPath();
+      ctx.arc(mx,my,breathR2,0,Math.PI*2);
+      ctx.strokeStyle='rgba('+ac[0]+','+ac[1]+','+ac[2]+','+breathAlpha2+')';
+      ctx.lineWidth=1;
+      ctx.stroke();
+      /* ambient bubbles every ~25 frames */
+      if(frame%25===0){
+        var angle=Math.random()*Math.PI*2;
+        var dist=Math.random()*20;
+        particles.push({
+          x:mx+Math.cos(angle)*dist,
+          y:my+Math.sin(angle)*dist,
+          vx:(Math.random()-.5)*.6,
+          vy:-.3-Math.random()*.5,
+          r:Math.random()*2+1,
+          life:1,
+          decay:.006+Math.random()*.005,
+          c:ac
+        });
+      }
+      /* soft idle glow (larger than move glow) */
+      var ig=ctx.createRadialGradient(mx,my,0,mx,my,100);
+      ig.addColorStop(0,'rgba('+ac[0]+','+ac[1]+','+ac[2]+','+(.03+Math.sin(t)*.015)+')');
+      ig.addColorStop(1,'rgba('+ac[0]+','+ac[1]+','+ac[2]+',0)');
+      ctx.fillStyle=ig;
+      ctx.fillRect(mx-100,my-100,200,200);
+    }
+
+    /* ── particles ── */
+    for(var i=particles.length-1;i>=0;i--){
+      var p=particles[i];
+      p.x+=p.vx;
+      p.y+=p.vy;
+      p.vy-=.01;
+      p.life-=p.decay;
+      if(p.life<=0){particles.splice(i,1);continue;}
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r*p.life,0,Math.PI*2);
+      ctx.fillStyle='rgba('+p.c[0]+','+p.c[1]+','+p.c[2]+','+(p.life*.35)+')';
+      ctx.fill();
+    }
+
+    /* ── ripples ── */
+    for(var j=ripples.length-1;j>=0;j--){
+      var rp=ripples[j];
+      rp.r+=(rp.maxR-rp.r)*.06;
+      rp.life-=.018;
+      if(rp.life<=0){ripples.splice(j,1);continue;}
+      ctx.beginPath();
+      ctx.arc(rp.x,rp.y,rp.r,0,Math.PI*2);
+      ctx.strokeStyle='rgba('+rp.c[0]+','+rp.c[1]+','+rp.c[2]+','+(rp.life*.18)+')';
+      ctx.lineWidth=1.5;
+      ctx.stroke();
+    }
+
+    /* ── soft glow at cursor (while moving) ── */
+    if(idle<=60&&particles.length>0){
+      var g=ctx.createRadialGradient(mx,my,0,mx,my,80);
+      var mc=accent();
+      g.addColorStop(0,'rgba('+mc[0]+','+mc[1]+','+mc[2]+',0.04)');
+      g.addColorStop(1,'rgba('+mc[0]+','+mc[1]+','+mc[2]+',0)');
+      ctx.fillStyle=g;
+      ctx.fillRect(mx-80,my-80,160,160);
+    }
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  /* ─── 1. konami code easter egg ────────────────── */
+  var konamiSeq=[38,38,40,40,37,39,37,39,66,65],konamiIdx=0;
+  addEventListener('keydown',function(e){
+    if(e.keyCode===konamiSeq[konamiIdx]){
+      konamiIdx++;
+      if(konamiIdx===konamiSeq.length){
+        konamiIdx=0;
+        /* confetti burst — 80 colorful particles */
+        var colors=[[255,50,50],[50,200,50],[50,100,255],[255,200,0],[255,100,200],[0,220,220]];
+        for(var i=0;i<80;i++){
+          var a=Math.random()*Math.PI*2;
+          var sp=2+Math.random()*5;
+          var cl=colors[Math.floor(Math.random()*colors.length)];
+          particles.push({
+            x:W/2+((Math.random()-.5)*W*.6),
+            y:H/2+((Math.random()-.5)*H*.4),
+            vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-2,
+            r:Math.random()*4+2,life:1,decay:.005+Math.random()*.008,c:cl
+          });
+        }
+        /* rainbow text for 3s */
+        document.body.classList.add('rainbow');
+        setTimeout(function(){document.body.classList.remove('rainbow')},3000);
+      }
+    }else{konamiIdx=0;}
+  });
+
+  /* ─── 2. theme toggle fireworks ────────────────── */
+  btn.onclick=function(){
+    var rect=btn.getBoundingClientRect();
+    var bx=rect.left+rect.width/2;
+    var by=rect.top+rect.height/2;
+    var newTheme=h.dataset.theme==='dark'?'light':'dark';
+    /* bright multicolor sparks — visible on any background */
+    var sparks=newTheme==='dark'
+      ?[[255,220,80],[80,200,255],[255,120,200],[120,255,160],[200,160,255]]   /* warm→cool for entering dark */
+      :[[255,180,0],[0,160,255],[255,80,120],[0,200,140],[160,100,255]];       /* vivid for entering light */
+    set(newTheme);
+    for(var i=0;i<32;i++){
+      var a=Math.PI*2*i/32;
+      var sp=2.5+Math.random()*4;
+      var sc=sparks[Math.floor(Math.random()*sparks.length)];
+      particles.push({
+        x:bx,y:by,
+        vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-1,
+        r:Math.random()*3.5+1.5,life:1,
+        decay:.01+Math.random()*.008,
+        c:sc
+      });
+    }
+      /* flash overlay */
+      var fl=document.createElement('div');
+      fl.className='theme-flash';
+      document.body.appendChild(fl);
+      setTimeout(function(){fl.remove()},400);
+    };
+
+  /* ─── 3. magnetic nav links ────────────────────── */
+  (function(){
+    var navEl=document.querySelector('nav');
+    var navLinks=document.querySelectorAll('.nl a');
+    var magDist=40;
+    navEl.addEventListener('mousemove',function(e){
+      navLinks.forEach(function(link){
+        var r=link.getBoundingClientRect();
+        var cx=r.left+r.width/2;
+        var cy=r.top+r.height/2;
+        var dx=e.clientX-cx;
+        var dy=e.clientY-cy;
+        var dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<magDist){
+          var pull=(1-dist/magDist)*.35;
+          link.style.transform='translate('+dx*pull+'px,'+dy*pull+'px)';
+        }else{
+          link.style.transform='';
+        }
+      });
+    });
+    navEl.addEventListener('mouseleave',function(){
+      navLinks.forEach(function(link){link.style.transform='';});
+    });
+  })();
+
+  /* ─── 4. hire box 3D tilt ──────────────────────── */
+  (function(){
+    var hire=document.querySelector('.hire');
+    if(!hire)return;
+    hire.addEventListener('mousemove',function(e){
+      var r=hire.getBoundingClientRect();
+      var x=(e.clientX-r.left)/r.width-.5;  /* -0.5 ~ 0.5 */
+      var y=(e.clientY-r.top)/r.height-.5;
+      hire.style.transform='perspective(600px) rotateX('+(-y*10)+'deg) rotateY('+(x*10)+'deg) scale(1.015)';
+    });
+    hire.addEventListener('mouseleave',function(){
+      hire.style.transform='';
+    });
+  })();
+
+  /* ─── 5. link buttons periodic wiggle ──────────── */
+  (function(){
+    var btns=document.querySelectorAll('.lk-btn');
+    if(!btns.length)return;
+    function wiggleRandom(){
+      var idx=Math.floor(Math.random()*btns.length);
+      btns[idx].classList.add('wiggle');
+      btns[idx].addEventListener('animationend',function(){
+        btns[idx].classList.remove('wiggle');
+      },{once:true});
+    }
+    setInterval(wiggleRandom,3500);
+  })();
+
+  /* ─── 6. awards dots repel from mouse ──────────── */
+  (function(){
+    var items=document.querySelectorAll('.ai');
+    if(!items.length)return;
+    document.addEventListener('mousemove',function(e){
+      items.forEach(function(item){
+        var dot=item.querySelector(':before');
+        /* ::before isn't directly accessible, use item's transform instead */
+        var r=item.getBoundingClientRect();
+        var dotX=r.left+10; /* ~left:8px + 2px center */
+        var dotY=r.top+r.height/2;
+        var dx=e.clientX-dotX;
+        var dy=e.clientY-dotY;
+        var dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<60){
+          var push=(1-dist/60)*6;
+          var angle=Math.atan2(dy,dx);
+          /* shift the dot away using a CSS variable */
+          item.style.setProperty('--dot-dx',(-Math.cos(angle)*push)+'px');
+          item.style.setProperty('--dot-dy',(-Math.sin(angle)*push)+'px');
+        }else{
+          item.style.setProperty('--dot-dx','0px');
+          item.style.setProperty('--dot-dy','0px');
+        }
+      });
+    },{passive:true});
+  })();
+
+  /* ─── 7. double-click copy paper title ─────────── */
+  (function(){
+    var pubs=document.getElementById('pubs');
+    if(!pubs)return;
+    pubs.addEventListener('dblclick',function(e){
+      var link=e.target.closest('.pt a');
+      if(!link)return;
+      e.preventDefault();
+      var text=link.textContent.trim();
+      navigator.clipboard.writeText(text).then(function(){
+        var tip=document.createElement('div');
+        tip.className='copy-tip';
+        tip.textContent='Copied!';
+        tip.style.left=e.clientX+'px';
+        tip.style.top=(e.clientY-10)+'px';
+        document.body.appendChild(tip);
+        setTimeout(function(){tip.remove()},800);
+      });
+    });
+  })();
+
+  /* ─── 8. footer wave on scroll to bottom ───────── */
+  (function(){
+    var footer=document.querySelector('footer');
+    if(!footer)return;
+    var waved=false;
+    var origHTML=footer.innerHTML;
+    window.addEventListener('scroll',function(){
+      var s=document.documentElement;
+      if(s.scrollTop+s.clientHeight>=s.scrollHeight-5){
+        if(waved)return;
+        waved=true;
+        /* wrap each visible character in a span with wave delay */
+        var raw=footer.textContent;
+        var di=0;
+        var waveHTML='';
+        for(var k=0;k<raw.length;k++){
+          var ch=raw[k];
+          if(ch===' '){waveHTML+='<span class="wl" style="animation-delay:'+(di*30)+'ms">&nbsp;</span>';}
+          else{waveHTML+='<span class="wl" style="animation-delay:'+(di*30)+'ms">'+ch+'</span>';}
+          di++;
+        }
+        footer.innerHTML=waveHTML;
+        /* reset after wave completes */
+        setTimeout(function(){
+          footer.innerHTML=origHTML;
+          waved=false;
+        },2500);
+      }
+    },{passive:true});
+  })();
+
+
+})();
+</script>
 </body>
 </html>
