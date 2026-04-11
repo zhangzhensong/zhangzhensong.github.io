@@ -517,15 +517,25 @@ footer .wl{display:inline-block;animation:wave .5s ease both}
         if(count>7){
           clearInterval(iv);
           /* ── run away phase ── */
-          var heroW=hero.offsetWidth;
-          var wrapW=wrap.offsetWidth;
-          /* pick a new position far from current */
+          var heroRect=hero.getBoundingClientRect();
+          var wrapRect=wrap.getBoundingClientRect();
+          var isMobile=window.innerWidth<=580;
+          /* on mobile (column layout): stay within hero width, allow more vertical movement */
+          var rangeX=isMobile?(heroRect.width-wrapRect.width-20):(heroRect.width-wrapRect.width-20);
+          var rangeY=isMobile?100:50;
+          var minDist=isMobile?50:100;
+          /* clamp range to avoid going off-screen */
+          rangeX=Math.min(rangeX,heroRect.width-wrapRect.width);
           var newX,newY,attempts=0;
           do{
-            newX=(Math.random()-.5)*(heroW-wrapW-20);
-            newY=(Math.random()-.5)*50;
+            newX=(Math.random()-.5)*rangeX;
+            newY=(Math.random()-.5)*rangeY;
+            /* ensure it stays within hero bounds */
+            var absLeft=wrapRect.left+newX-curX;
+            if(absLeft<heroRect.left)newX+=heroRect.left-absLeft+10;
+            if(absLeft+wrapRect.width>heroRect.right)newX-=(absLeft+wrapRect.width-heroRect.right)+10;
             attempts++;
-          }while(Math.abs(newX-curX)<100&&attempts<10);
+          }while(Math.abs(newX-curX)<minDist&&attempts<10);
           curX=newX;curY=newY;
           wrap.style.transition='transform .55s cubic-bezier(.34,1.56,.64,1)';
           wrap.style.transform='translate('+curX+'px,'+curY+'px) scale(1.05)';
