@@ -349,6 +349,7 @@ footer .wl{display:inline-block;animation:wave .5s ease both}
       <li><a href="#news">News</a></li>
       <li><a href="#pubs">Publications</a></li>
       <li><a href="#awards">Awards</a></li>
+      <li><a href="#interns">Interns</a></li>
     </ul>
     <button class="tm" id="tm" aria-label="Toggle dark mode">☾</button>
   </div>
@@ -409,7 +410,7 @@ footer .wl{display:inline-block;animation:wave .5s ease both}
   </div>
   <div class="hire">
     <svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"/><path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/></svg>
-    <span><strong>We are hiring</strong> — looking for self-motivated interns &amp; full-time researchers in Multimodal Agents and VLMs. Past interns have first-authored papers at CVPR, AAAI, EMNLP and TPAMI, and gone on to PhD study at Tsinghua, HKUST and KAIST. Feel free to drop me an email.</span>
+    <span><strong>We are hiring</strong> — looking for self-motivated interns &amp; full-time researchers in Multimodal Agents and VLMs. Past interns have first-authored papers at CVPR, AAAI, EMNLP and TPAMI. Feel free to drop me an email.</span>
   </div>
 </section>
 
@@ -567,6 +568,22 @@ footer .wl{display:inline-block;animation:wave .5s ease both}
   </ul>
 </section>
 
+<!-- ── former interns ── -->
+<section id="interns" class="reveal">
+  <p class="sh">
+    <svg viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.97 5.97 0 00-.75-2.906A3 3 0 0119 15v3h-3zM4.75 12.094A5.97 5.97 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/></svg>
+    Former Interns
+  </p>
+  <ul class="al">
+    <li class="ai"><strong>Sicheng Yang</strong> &mdash; Tsinghua MSc during the internship, now a Ph.D. student at Tsinghua. First author on <a href="https://arxiv.org/abs/2603.01104">Egocentric Co-Pilot</a> (WWW 2026), <a href="https://arxiv.org/abs/2511.08971">PnP Clarifier</a> (AAAI 2026), <a href="https://arxiv.org/abs/2308.13879">DiffuseStyleGesture+</a> (ICMI 2023, GENEA Reproducibility Award), <a href="https://arxiv.org/abs/2305.11094">QPGesture</a> (CVPR 2023) and <a href="https://arxiv.org/abs/2305.04919">DiffuseStyleGesture</a> (IJCAI 2023).</li>
+    <li class="ai"><strong>Weitong Cai</strong> &mdash; Queen Mary Ph.D. student during the internship, now at Huawei London. First author on <a href="https://arxiv.org/abs/2603.14526">Caption-once, Frames-on-Demand</a> (EMNLP 2026) and <a href="https://arxiv.org/abs/2603.22466">ColorTrigger</a> (CVPR 2026).</li>
+    <li class="ai"><strong>Xu He</strong> &mdash; Tsinghua MSc during the internship, now a Ph.D. student at Tsinghua. First author on <a href="https://arxiv.org/abs/2404.01862">Co-Speech Gesture Video Generation</a> (CVPR 2024).</li>
+    <li class="ai"><strong>Haiwei Xue</strong> &mdash; Tsinghua MSc during the internship, now a Ph.D. student at HKUST. First author on <a href="https://arxiv.org/abs/2509.03883">Human Motion Video Generation: A Survey</a> (TPAMI 2025).</li>
+    <li class="ai"><strong>Xiangjun Gao</strong> &mdash; Ph.D. student at HKUST. First author on <a href="https://arxiv.org/abs/2601.11442">Map2Thought</a> (CVPR Findings 2026).</li>
+    <li class="ai"><strong>Kibum Kim</strong> &mdash; now a Ph.D. student at KAIST.</li>
+  </ul>
+</section>
+
 <footer>Zhensong Zhang · <a href="mailto:zhensongzhang@hotmail.com">zhensongzhang@hotmail.com</a></footer>
 
 </main>
@@ -633,8 +650,7 @@ footer .wl{display:inline-block;animation:wave .5s ease both}
       }
     });
   },{threshold:.15});
-  var al=document.querySelector('.al');
-  if(al)aio.observe(al);
+  document.querySelectorAll('.al').forEach(function(al){aio.observe(al)});
 
   /* ─── avatar runaway ─────────────────────────── */
   (function(){
