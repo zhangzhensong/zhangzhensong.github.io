@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Zhensong Zhang</title>
+<title>Zhensong Zhang — Multimodal Agents</title>
+<meta name="description" content="Zhensong Zhang — researcher at Huawei Noah's Ark Lab focused on Multimodal Agents: visual understanding, spatial intelligence, wearable AI, and computer-use agents."/>
 <style>
 :root {
   --bg:   #ffffff; --ink:  #111111; --mut: #878787;
@@ -99,8 +100,11 @@ main{max-width:var(--w);margin:0 auto;padding:0 24px 110px}
 .hi{order:1;flex:1}
 .hi h1{
   font-size:clamp(1.5rem,3.2vw,2rem);font-weight:700;
-  letter-spacing:-.03em;line-height:1.1;margin-bottom:6px;
+  letter-spacing:-.03em;line-height:1.1;margin-bottom:7px;
 }
+.role{font-size:1.02rem;font-weight:600;color:var(--lk);letter-spacing:-.01em;line-height:1.25;margin-bottom:3px}
+.role .dash{color:var(--mut);font-weight:400;padding:0 2px}
+.tagline{font-size:.8rem;color:var(--mut);letter-spacing:.2px;margin-bottom:14px}
 .deg{font-size:.88rem;color:var(--mut);margin-bottom:16px;display:flex;flex-wrap:wrap}
 .deg span{padding-right:12px}
 .deg span::after{content:'·';padding-left:12px;opacity:.4}
@@ -192,10 +196,23 @@ section+section{padding-top:52px}
 
 .pub-sep{height:1px;background:transparent;transition:background .15s}
 .pub:hover+.pub-sep{background:var(--rule)}
-/* alternating warm/white rows — .sh is child 1, pubs start at child 2 (even positions) */
+/* alternating warm/white rows — .gh is child 1, pubs start at child 2 (even positions) */
 /* pubs at 4n+2 = 2,6,10,14… = 1st,3rd,5th pub; pubs at 4n+4 = 4,8,12… = 2nd,4th,6th pub */
-#pubs .pub:nth-child(4n+2){background:var(--alt)}
-#pubs .pub:nth-child(4n+2):hover{background:var(--hov)}
+#pubs .pgrp .pub:nth-child(4n+2){background:var(--alt)}
+#pubs .pgrp .pub:nth-child(4n+2):hover{background:var(--hov)}
+
+/* ─── pub groups ────────────────────────────────── */
+.pgrp+.pgrp{margin-top:34px}
+.gh{
+  display:flex;align-items:baseline;gap:9px;
+  font-size:.9rem;font-weight:600;line-height:1.4;
+  color:var(--ink);margin-bottom:6px;
+}
+.gh .gn{
+  font-size:10.5px;font-weight:600;letter-spacing:.5px;
+  color:var(--mut);flex-shrink:0;
+}
+.pnote{font-size:.85rem;color:var(--mut);line-height:1.6;margin:-8px 0 24px}
 
 .vt{
   font-size:11.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
@@ -215,6 +232,44 @@ section+section{padding-top:52px}
 .pa strong{color:var(--ink);font-weight:500}
 .pm{font-size:.78rem;color:var(--mut);display:flex;gap:10px;flex-wrap:wrap;font-style:italic}
 .pm a{font-style:normal;color:var(--lk);text-decoration:underline;text-underline-offset:2px}
+
+/* ─── stats strip ───────────────────────────────── */
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 6px}
+.stat{
+  background:var(--tag);border-radius:6px;padding:10px 16px;
+  display:flex;flex-direction:column;gap:3px;
+  transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;
+}
+.stat:hover{transform:translateY(-3px);box-shadow:0 6px 16px rgba(0,0,0,.07)}
+.snum{font-size:1.35rem;font-weight:700;color:var(--lk);letter-spacing:-.02em;line-height:1}
+.slab{font-size:.7rem;color:var(--mut);text-transform:uppercase;letter-spacing:.9px}
+
+/* ─── projects ──────────────────────────────────── */
+.prj{
+  display:grid;grid-template-columns:74px 1fr;gap:16px;
+  align-items:baseline;padding:16px 8px 16px 0;
+  border-radius:5px;position:relative;
+  transition:background .16s,padding-left .16s;
+}
+.prj::before{
+  content:'';position:absolute;left:0;top:18%;bottom:18%;
+  width:2px;border-radius:2px;background:var(--conf);
+  transform:scaleY(0);transition:transform .18s;transform-origin:center;
+}
+.prj:hover{background:var(--hov);padding-left:12px}
+.prj:hover::before{transform:scaleY(1)}
+.prj.p-prod::before{background:var(--conf)}   .prj.p-prod .vt{color:var(--conf)}
+.prj.p-proto::before{background:var(--pre)}   .prj.p-proto .vt{color:var(--pre)}
+.prj.p-sys::before{background:var(--jour)}    .prj.p-sys .vt{color:var(--jour)}
+.prj.p-dir::before{background:var(--conf)}    .prj.p-dir .vt{color:var(--conf)}
+#projects .prj:nth-child(even){background:var(--alt)}
+#projects .prj:nth-child(even):hover{background:var(--hov)}
+.pnm{font-size:.95rem;font-weight:600;line-height:1.4;margin-bottom:4px}
+.prole{font-size:.8rem;color:var(--ink);margin-bottom:4px}
+.prole strong{font-weight:600}
+.pdesc{font-size:.85rem;color:var(--mut);line-height:1.6;margin-bottom:6px}
+.plnk{font-size:.78rem;display:flex;gap:14px;flex-wrap:wrap}
+.plnk a{color:var(--lk);text-decoration:underline;text-underline-offset:2px}
 
 /* ─── awards ────────────────────────────────────── */
 .al{display:flex;flex-direction:column;gap:4px;list-style:none}
@@ -281,6 +336,7 @@ footer .wl{display:inline-block;animation:wave .5s ease both}
   <div class="nw">
     <ul class="nl">
       <li><a href="#bio">Bio</a></li>
+      <li><a href="#projects">Projects</a></li>
       <li><a href="#news">News</a></li>
       <li><a href="#pubs">Publications</a></li>
       <li><a href="#awards">Awards</a></li>
@@ -300,10 +356,12 @@ footer .wl{display:inline-block;animation:wave .5s ease both}
   </div>
   <div class="hi">
     <h1 class="fu d2">Zhensong Zhang</h1>
-    <p class="deg fu d3">
+    <p class="role fu d3"><span class="dash">Research focus:</span> Multimodal Agents</p>
+    <p class="tagline fu d3">Visual understanding · Spatial intelligence · Wearable AI · Computer-use agents</p>
+    <p class="deg fu d4">
       <span>PhD (CUHK)</span><span>MS (UCAS)</span><span>BEng (Xidian)</span>
     </p>
-    <div class="lks fu d4">
+    <div class="lks fu d5">
       <a class="lk-btn" href="mailto:zhensongzhang@hotmail.com">
         <svg viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
         Email
@@ -334,7 +392,13 @@ footer .wl{display:inline-block;animation:wave .5s ease both}
     <svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg>
     Biography
   </p>
-  <p class="bio-txt">I joined Huawei Noah's Ark Lab after obtaining my Ph.D. from <a href="http://www.cuhk.edu.hk/">The Chinese University of Hong Kong</a> in 2018. Before that, I received a BEng. degree and a M.S. degree from <a href="http://en.xidian.edu.cn/">Xidian University</a> and <a href="http://english.ucas.ac.cn/">the University of Chinese Academy of Sciences</a> in 2011 and 2014, respectively. My research focuses on building intelligent systems that understand, model, and interact with the physical world, with particular interests in Visual Language Models, 3D Gaussian Splatting, and wearable AI agents.</p>
+  <p class="bio-txt">I lead research on <strong>multimodal agents</strong> at Huawei Noah's Ark Lab. For years I studied how intelligent systems <em>perceive and understand</em> the visual world — across 3D and spatial perception, long-video and egocentric understanding, and human-centric generation; my focus has since shifted to how they <em>remember, reason, and act</em> in it, and my current work centres on on-device multimodal agents: egocentric perception, long-horizon memory, and computer-use agents. I value shipping as much as publishing: I led the core technology behind Huawei's <strong>sign-language digital human</strong>, unveiled on stage by CEO Richard Yu at the Huawei Developer Conference (HDC) in two consecutive years with full live-stream coverage, and I have driven several system-level prototypes from research to product.</p>
+  <p class="bio-txt">I obtained my Ph.D. from <a href="http://www.cuhk.edu.hk/">The Chinese University of Hong Kong</a> in 2018, and earlier received my B.Eng. and M.S. degrees from <a href="http://en.xidian.edu.cn/">Xidian University</a> and <a href="http://english.ucas.ac.cn/">the University of Chinese Academy of Sciences</a> in 2011 and 2014, respectively.</p>
+  <div class="stats">
+    <div class="stat"><span class="snum">28</span><span class="slab">Patents filed</span></div>
+    <div class="stat"><span class="snum">HDC&nbsp;&times;2</span><span class="slab">Product launches</span></div>
+    <div class="stat"><span class="snum">50+</span><span class="slab">Publications</span></div>
+  </div>
   <div class="hire">
     <svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"/><path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/></svg>
     <span><strong>We are hiring</strong> — looking for self-motivated interns &amp; full-time researchers in VLM. Feel free to drop me an email.</span>
@@ -348,6 +412,7 @@ footer .wl{display:inline-block;animation:wave .5s ease both}
     News
   </p>
   <div class="ns">
+    <div class="nr"><span class="nd">09/2026</span><span class="nt">Caption-once, Frames-on-Demand accepted to EMNLP 2026 Main; CapMem accepted to EMNLP 2026 Industry Track.</span></div>
     <div class="nr"><span class="nd">07/2026</span><span class="nt">WildAnySplat accepted to SIGGRAPH Asia 2026.</span></div>
     <div class="nr"><span class="nd">06/2026</span><span class="nt">GeoNeXt and LatSearch accepted to ECCV 2026.</span></div>
     <div class="nr"><span class="nd">04/2026</span><span class="nt">LiteVSR accepted to ICML 2026.</span></div>
@@ -366,59 +431,127 @@ footer .wl{display:inline-block;animation:wave .5s ease both}
   </div>
 </section>
 
+<!-- ── projects ── -->
+<section id="projects" class="reveal">
+  <p class="sh">
+    <svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+    Selected Projects &amp; Impact
+  </p>
+
+  <div class="prj p-prod">
+    <p class="vt">Product</p>
+    <div>
+      <p class="pnm">Sign-Language Digital Human</p>
+      <p class="prole"><strong>Role:</strong> Led the core technology.</p>
+      <p class="pdesc">Huawei's real-time sign-language avatar. Unveiled on stage by CEO Richard Yu at the Huawei Developer Conference (HDC) in two consecutive years, with full live-stream coverage.</p>
+      <p class="plnk"><a href="https://developer.huawei.com/consumer/cn/blog/topic/03705603468820148">Huawei Developer</a><a href="https://www.qbitai.com/2022/11/39305.html">Press</a></p>
+    </div>
+  </div><div class="pub-sep"></div>
+
+  <div class="prj p-sys">
+    <p class="vt">Research</p>
+    <div>
+      <p class="pnm">Conversational &amp; Interactive Digital Humans</p>
+      <p class="prole"><strong>Role:</strong> Led the research direction.</p>
+      <p class="pdesc">The digital-human direction I led at Huawei — spanning speech- and audio-driven co-speech gesture generation, human-motion video generation, 2D/3D avatars and talking humans, and conversational 3D virtual humans — the research behind the sign-language digital human above. Our entry won the Reproducibility Award at the GENEA Challenge 2023.</p>
+      <p class="plnk"><a href="https://ico3d.github.io/">iCo3D</a><a href="https://arxiv.org/abs/2509.03883">Motion-Video Survey</a><a href="https://github.com/WinKawaks/CaricatureBooth">CaricatureBooth</a><a href="https://www.ijcai.org/proceedings/2025/0474.pdf">VideoHumanMIB</a><a href="https://ieeexplore.ieee.org/document/10890615/">Audio-Driven Human</a><a href="https://arxiv.org/abs/2503.09293">Better Together</a><a href="https://arxiv.org/abs/2503.09342">GASPACHO</a><a href="https://arxiv.org/abs/2404.01862">Co-Speech Gesture Video</a><a href="https://doi.org/10.1109/CVPR52733.2024.00210">Motion Retargeting</a><a href="https://arxiv.org/abs/2312.15567">Conversational Gesture</a><a href="https://arxiv.org/abs/2309.07051">UnifiedGesture</a><a href="https://arxiv.org/abs/2308.13879">DiffuseStyleGesture+</a><a href="https://arxiv.org/abs/2305.11094">QPGesture</a><a href="https://arxiv.org/abs/2305.04919">DiffuseStyleGesture</a><a href="./imgs/genea2023_award.jpg">GENEA&rsquo;23 Award</a></p>
+    </div>
+  </div><div class="pub-sep"></div>
+
+  <div class="prj p-proto">
+    <p class="vt">Research</p>
+    <div>
+      <p class="pnm">3D/4D Reconstruction &amp; Novel-View Synthesis</p>
+      <p class="prole"><strong>Role:</strong> Led the research direction.</p>
+      <p class="pdesc">Work across feed-forward 3D Gaussian Splatting, video-diffusion 4D reconstruction, monocular depth and geometry, and multi-view harmonization — from benchmarks to fast, in-the-wild scene capture. The on-device reconstruction prototype we built seeded <a href="https://news.qq.com/rain/a/20250621A021KT00">REMY</a>, a HarmonyOS 3D spatial-memory app announced at HDC 2025; our monocular-depth model won the <a href="https://link.springer.com/article/10.1007/s11263-023-01915-6">ECCV 2022 RVC challenge</a>.</p>
+      <p class="plnk"><a href="https://arxiv.org/abs/2603.14526">WildAnySplat</a><a href="https://arxiv.org/abs/2512.15508">Off The Grid</a><a href="https://arxiv.org/abs/2512.13639">Charge</a><a href="https://arxiv.org/abs/2603.29734">GRVS</a><a href="https://arxiv.org/abs/2506.18792">ViDAR</a><a href="https://arxiv.org/abs/2507.15748">CHROMA</a><a href="https://arxiv.org/abs/2410.22715">SCRREAM</a></p>
+    </div>
+  </div><div class="pub-sep"></div>
+
+  <div class="prj p-dir">
+    <p class="vt">Research</p>
+    <div>
+      <p class="pnm">On-Device Multimodal Agents</p>
+      <p class="prole"><strong>Role:</strong> Initiated and planned the research agenda.</p>
+      <p class="pdesc">Established the research direction on multimodal agents that perceive and act through real devices &mdash; starting with AI glasses and wearable hardware, now spanning egocentric perception and intent understanding, always-on streaming video sensing, episodic memory and spatial reasoning, and budget-aware long-video understanding. Our team placed second in the <a href="https://egovis.github.io/cvpr25/#challenges/">HD-EPIC VQA Challenge 2025</a>.</p>
+      <p class="plnk"><a href="https://arxiv.org/abs/2603.01104">Egocentric Co-Pilot</a><a href="https://arxiv.org/abs/2511.08971">PnP Clarifier</a><a href="https://lvgd.github.io/ColorTrigger/">ColorTrigger</a><a href="https://arxiv.org/abs/2601.11442">Map2Thought</a></p>
+    </div>
+  </div>
+</section>
+
 <!-- ── publications ── -->
 <section id="pubs" class="reveal">
   <p class="sh">
     <svg viewBox="0 0 20 20"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/></svg>
-    Recent Publications
+    Selected Publications
   </p>
+  <p class="pnote">Grouped by research direction, most recent first within each group. Full list of 50+ papers on <a href="https://scholar.google.com/citations?user=fs8HQxQAAAAJ&amp;hl=en">Google Scholar</a>.</p>
 
-  
-  <div class="pub pre"><p class="vt">Preprint</p><div><p class="pt"><a href="https://arxiv.org/pdf/2503.09342">GASPACHO: Gaussian Splatting for Controllable Humans and Objects</a></p><p class="pa">Aymen Mir, Arthur Moreau, Helisa Dhamo, <strong>Zhensong Zhang</strong>, Eduardo Pérez-Pellitero</p></div></div><div class="pub-sep"></div>
+  <div class="pgrp">
+  <p class="gh">Multimodal Agents &amp; Egocentric AI <span class="gn">6 papers</span></p>
+  <div class="pub conf"><p class="vt">EMNLP</p><div><p class="pt"><a href="https://arxiv.org/abs/2603.14526">Caption-once, Frames-on-Demand: Visual-Need Routing for Budget-Aware Agentic Long Video Understanding</a></p><p class="pa">Weitong Cai, Hang Zhang, Yukai Huang, Yiqiao Xie, Shan Gao, Jiankang Deng, Songcen Xu, Jifei Song, <strong>Zhensong Zhang</strong></p><p class="pm"><em>EMNLP 2026 Main</em></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub conf"><p class="vt">EMNLP</p><div><p class="pt"><a href="https://arxiv.org/abs/2603.14526">CapMem: A Benchmark for Caption-Based Episodic Memory in Egocentric Video</a></p><p class="pa">Dingli Liang, Yiqiao Xie, Yukai Huang, Zhaokai Wang, Weitong Cai, Guangwen Feng, Jifei Song, <strong>Zhensong Zhang</strong>, Hang Zhang</p><p class="pm"><em>EMNLP 2026 Industry Track</em></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://arxiv.org/abs/2603.22466">Color When It Counts: Grayscale-Guided Online Triggering for Always-On Streaming Video Sensing</a></p><p class="pa">Weitong Cai, Hang Zhang, Yukai Huang, Shitong Sun, Jiankang Deng, Songcen Xu, Jifei Song, <strong>Zhensong Zhang</strong></p><p class="pm"><em>CVPR 2026</em> <a href="https://lvgd.github.io/ColorTrigger/">Website</a></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://arxiv.org/abs/2601.11442">Map2Thought: Explicit 3D Spatial Reasoning via Metric Cognitive Maps</a></p><p class="pa">Xiangjun Gao, <strong>Zhensong Zhang</strong>, Dave Zhenyu Chen, Songcen Xu, Long Quan, Eduardo Pérez-Pellitero, Youngkyoon Jang</p><p class="pm"><em>CVPR Findings 2026</em></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub conf"><p class="vt">WWW</p><div><p class="pt"><a href="https://arxiv.org/abs/2603.01104">Egocentric Co-Pilot: Web-Native Smart-Glasses Agents for Assistive Egocentric AI</a></p><p class="pa">Sicheng Yang, Yukai Huang, Weitong Cai, Shitong Sun, Fengyi Fang, You He, Yiqiao Xie, Jiankang Deng, Hang Zhang, Jifei Song, <strong>Zhensong Zhang</strong></p><p class="pm"><em>WWW 2026</em></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub conf"><p class="vt">AAAI</p><div><p class="pt"><a href="https://arxiv.org/abs/2511.08971">Plug-and-Play Clarifier: A Zero-Shot Multimodal Framework for Egocentric Intent Disambiguation</a></p><p class="pa">Sicheng Yang, Yukai Huang, Weitong Cai, Shitong Sun, You He, Jiankang Deng, Hang Zhang, Jifei Song, <strong>Zhensong Zhang</strong></p><p class="pm"><em>AAAI 2026</em></p></div></div>
+  </div>
 
-  <div class="pub pre"><p class="vt">Preprint</p><div><p class="pt"><a href="https://arxiv.org/pdf/2503.09293">Better Together: Unified Motion Capture and 3D Avatar Reconstruction</a></p><p class="pa">Arthur Moreau, Mohammed Brahimi, Richard Shaw, Athanasios Papaioannou, Thomas Tanay, <strong>Zhensong Zhang</strong>, Eduardo Pérez-Pellitero</p></div></div><div class="pub-sep"></div>
+  <div class="pgrp">
+  <p class="gh">3D/4D Reconstruction &amp; Spatial Perception <span class="gn">9 papers</span></p>
+  <div class="pub conf"><p class="vt">SIGGRAPH Asia</p><div><p class="pt"><a href="https://arxiv.org/abs/2603.14526">WildAnySplat: Feed-Forward 3D Gaussian Splatting in the Wild</a></p><p class="pa">Richard Shaw, Arthur Moreau, Athanasios Papaioannou, Thomas Tanay, <strong>Zhensong Zhang</strong>, Eduardo Pérez-Pellitero</p><p class="pm"><em>SIGGRAPH Asia 2026</em></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub conf"><p class="vt">ECCV</p><div><p class="pt"><a href="https://arxiv.org/abs/2603.14526">Video Generative Models as Geometry Learner</a></p><p class="pa">Haosen Yang, Jifei Song, <strong>Zhensong Zhang</strong>, Xiatian Zhu, Jiankang Deng</p><p class="pm"><em>ECCV 2026</em></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://arxiv.org/pdf/2603.29734">GRVS: a Generalizable and Recurrent Approach to Monocular Dynamic View Synthesis</a></p><p class="pa">Thomas Tanay, Mohammed Brahimi, Michal Nazarczuk, Qingwen Zhang, Sibi Catley-Chandar, Arthur Moreau, <strong>Zhensong Zhang</strong>, Eduardo Pérez-Pellitero</p><p class="pm"><em>CVPR Findings 2026</em> <a href="https://thomas-tanay.github.io/grvs">Website</a></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://arxiv.org/abs/2512.13639">Charge: A Comprehensive Novel View Synthesis Benchmark and Dataset to Bind Them All</a></p><p class="pa">Michal Nazarczuk, Thomas Tanay, Arthur Moreau, <strong>Zhensong Zhang</strong>, Eduardo Pérez-Pellitero</p><p class="pm"><em>CVPR 2026</em></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://arxiv.org/abs/2512.15508">Off The Grid: Detection of Primitives for Feed-Forward 3D Gaussian Splatting</a></p><p class="pa">Arthur Moreau, Richard Shaw, Michal Nazarczuk, Jisu Shin, Thomas Tanay, <strong>Zhensong Zhang</strong>, Songcen Xu, Eduardo Pérez-Pellitero</p><p class="pm"><em>CVPR 2026</em> <a href="https://arthurmoreau.github.io/OffTheGrid/">Website</a></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub conf"><p class="vt">ICLR</p><div><p class="pt"><a href="https://arxiv.org/abs/2507.15748">CHROMA: Consistent Harmonization of Multi-View Appearance via Bilateral Grid Prediction</a></p><p class="pa">Jisu Shin, Richard Shaw, Seunghyun Shin, <strong>Zhensong Zhang</strong>, Hae-Gon Jeon, Eduardo Pérez-Pellitero</p><p class="pm"><em>ICLR 2026</em></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub conf"><p class="vt">NeurIPS</p><div><p class="pt"><a href="https://arxiv.org/abs/2506.18792">ViDAR: Video Diffusion-Aware 4D Reconstruction From Monocular Inputs</a></p><p class="pa">Michal Nazarczuk, Sibi Catley-Chandar, Thomas Tanay, <strong>Zhensong Zhang</strong>, Gregory Slabaugh, Eduardo Pérez-Pellitero</p><p class="pm"><em>NeurIPS 2025</em></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub conf"><p class="vt">NeurIPS</p><div><p class="pt"><a href="https://arxiv.org/abs/2410.22715">SCRREAM: SCan, Register, REnder And Map — A Framework for Annotating Accurate and Dense 3D Indoor Scenes with a Benchmark</a></p><p class="pa">HyunJun Jung, Weihang Li, Shun-Cheng Wu, William Bittner, Nikolas Brasch, Jifei Song, Eduardo Pérez-Pellitero, <strong>Zhensong Zhang</strong>, Arthur Moreau, Nassir Navab, Benjamin Busam</p><p class="pm"><em>NeurIPS 2024</em></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub jour"><p class="vt">IJCV</p><div><p class="pt"><a href="https://link.springer.com/article/10.1007/s11263-023-01915-6">Towards a Unified Network for Robust Monocular Depth Estimation: Network Architecture, Training Strategy and Dataset</a></p><p class="pa">Mochu Xiang, Yuchao Dai, Feiyu Zhang, Jiawei Shi, Xinyu Tian, <strong>Zhensong Zhang</strong></p><p class="pm"><em>IJCV, 2024</em> · Winner, ECCV 2022 Robust Vision Challenge</p></div></div>
+  </div>
 
-  <div class="pub conf"><p class="vt">SIGGRAPH Asia</p><div><p class="pt"><a href="https://arxiv.org/abs/2603.14526">WildAnySplat: Feed-Forward 3D Gaussian Splatting in the Wild</a></p><p class="pa">Richard Shaw, Arthur Moreau, Athanasios Papaioannou, Thomas Tanay, <strong>Zhensong Zhang</strong>, Eduardo Pérez-Pellitero</p><p class="pm"><em>SIGGRAPH Asia 2026</em></p></div></div><div class="pub-sep"></div>
+  <div class="pgrp">
+  <p class="gh">Generative &amp; Low-Level Vision <span class="gn">4 papers</span></p>
+  <div class="pub conf"><p class="vt">ECCV</p><div><p class="pt"><a href="https://arxiv.org/abs/2603.14526">LatSearch: Latent Reward-Guided Search for Faster Inference-Time Scaling in Video Diffusion</a></p><p class="pa">Zengqun Zhao, Ziquan Liu, Yu Cao, Shaogang Gong, <strong>Zhensong Zhang</strong>, Jifei Song, Jiankang Deng, Ioannis Patras</p><p class="pm"><em>ECCV 2026</em></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub conf"><p class="vt">ICML</p><div><p class="pt"><a href="https://arxiv.org/abs/2606.09250">LiteVSR: Enabling Cross-Domain Fine-Grained Detail Generation in Light-Weight Transformers for Video Super-Resolution</a></p><p class="pa">Yu Cao, Ziquan Liu, <strong>Zhensong Zhang</strong>, Jiankang Deng, Shaogang Gong, Jifei Song</p><p class="pm"><em>ICML 2026</em></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://arxiv.org/abs/2603.20012">Diffusion-Based Makeup Transfer with Facial Region-Aware Makeup Features</a></p><p class="pa">Zheng Gao, Debin Meng, Yunqi Miao, <strong>Zhensong Zhang</strong>, Songcen Xu, Ioannis Patras, Jifei Song</p><p class="pm"><em>CVPR 2026</em></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub conf"><p class="vt">ICCV</p><div><p class="pt"><a href="https://doi.org/10.1109/ICCV51701.2025.01784">Frequency-Guided Diffusion for Training-Free Text-Driven Image Translation</a></p><p class="pa">Zheng Gao, Jifei Song, <strong>Zhensong Zhang</strong>, Jiankang Deng, Ioannis Patras</p><p class="pm"><em>ICCV 2025</em></p></div></div>
+  </div>
 
-  <div class="pub conf"><p class="vt">ECCV</p><div><p class="pt"><a href="https://arxiv.org/abs/2603.14526">Video Generative Models as Geometry Learner</a></p><p class="pa">Haosen Yang, Jifei Song, <strong>Zhensong Zhang</strong>, Xiatian Zhu, and Jiankang Deng</p><p class="pm"><em>ECCV 2026</em></p></div></div><div class="pub-sep"></div>
-
-  <div class="pub conf"><p class="vt">ECCV</p><div><p class="pt"><a href="https://arxiv.org/abs/2603.14526">LatSearch: Latent Reward-Guided Search for Faster Inference-Time Scaling in Video Diffusion</a></p><p class="pa">Zengqun Zhao, Ziquan Liu, Yu Cao, Shaogang Gong, <strong>Zhensong Zhang</strong>, Jifei Song, Jiankang Deng, Ioannis Patras</p><p class="pm"><em>ECCV 2026</em></p></div></div><div class="pub-sep"></div>
-
-  <div class="pub conf"><p class="vt">ICML</p><div><p class="pt"><a href="https://arxiv.org/abs/2507.15748">LiteVSR: Enabling Cross-Domain Fine-Grained Detail Generation in Light-Weight Transformers for Video Super-Resolution</a></p><p class="pa">Yu Cao, Ziquan Liu, <strong>Zhensong Zhang</strong>, Jiankang Deng, Shaogang Gong, Jifei Song</p><p class="pm"><em>ICML 2026</em></p></div></div><div class="pub-sep"></div>
-
-  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://arxiv.org/pdf/2603.29734">GRVS: a Generalizable and Recurrent Approach to Monocular Dynamic View Synthesis</a></p><p class="pa">Thomas Tanay, Mohammed Brahimi, Michal Nazarczuk, Qingwen Zhang, Sibi Catley-Chandar, Arthur Moreau, <strong>Zhensong Zhang</strong>, Eduardo Pérez-Pellitero</p><p class="pm"><em>CVPR Findings 2026</em> <a href="https://thomas-tanay.github.io/grvs">Website</a></p></div></div><div class="pub-sep"></div>
-
-  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://arxiv.org/abs/2601.11442">Map2Thought: Explicit 3D Spatial Reasoning via Metric Cognitive Maps</a></p><p class="pa">Xiangjun Gao, <strong>Zhensong Zhang</strong>, Dave Zhenyu Chen, Songcen Xu, Long Quan, Eduardo Pérez-Pellitero, Youngkyoon Jang</p><p class="pm"><em>CVPR Findings 2026</em></p></div></div><div class="pub-sep"></div>
-
-  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://arxiv.org/pdf/2503.09293">Diffusion-Based Makeup Transfer with Facial Region-Aware Makeup Features</a></p><p class="pa">Zheng Gao, Debin Meng, Yunqi Miao, <strong>Zhensong Zhang</strong>, Songcen Xu, Ioannis Patras, Jifei Song</p><p class="pm"><em>CVPR 2026</em></p></div></div><div class="pub-sep"></div>
-
-  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://arxiv.org/pdf/2503.09293">Color When It Counts: Grayscale-Guided Online Triggering for Always-On Streaming Video Sensing</a></p><p class="pa">Weitong Cai, Hang Zhang, Yukai Huang, Shitong Sun, Jiankang Deng, Songcen Xu, Jifei Song, <strong>Zhensong Zhang</strong></p><p class="pm"><em>CVPR 2026</em><a href="https://lvgd.github.io/ColorTrigger/">Website</a></p></div></div><div class="pub-sep"></div>
-
-  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://arxiv.org/abs/2512.13639">Charge: A Comprehensive Novel View Synthesis Benchmark and Dataset to Bind Them All</a></p><p class="pa">Michal Nazarczuk, Thomas Tanay, Arthur Moreau, <strong>Zhensong Zhang</strong>, Eduardo Pérez-Pellitero</p><p class="pm"><em>CVPR 2026</em></p></div></div><div class="pub-sep"></div>
-
-  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://arxiv.org/abs/2512.15508">Off The Grid: Detection of Primitives for Feed-Forward 3D Gaussian Splatting</a></p><p class="pa">Arthur Moreau, Richard Shaw, Michal Nazarczuk, Jisu Shin, Thomas Tanay, <strong>Zhensong Zhang</strong>, Songcen Xu, Eduardo Pérez-Pellitero</p><p class="pm"><em>CVPR 2026</em> <a href="https://arthurmoreau.github.io/OffTheGrid/">Website</a></p></div></div><div class="pub-sep"></div>
-
-  <div class="pub conf"><p class="vt">ICLR</p><div><p class="pt"><a href="https://arxiv.org/abs/2507.15748">CHROMA: Consistent Harmonization of Multi-View Appearance via Bilateral Grid Prediction</a></p><p class="pa">Jisu Shin, Richard Shaw, Seunghyun Shin, <strong>Zhensong Zhang</strong>, Hae-Gon Jeon, Eduardo Perez-Pellitero</p><p class="pm"><em>ICLR 2026</em></p></div></div><div class="pub-sep"></div>
-
-  <div class="pub conf"><p class="vt">WWW</p><div><p class="pt"><a href="https://arxiv.org/abs/2603.01104">Egocentric Co-Pilot: Web-Native Smart-Glasses Agents for Assistive Egocentric AI</a></p><p class="pa">Sicheng Yang, Yukai Huang, Weitong Cai, Shitong Sun, Fengyi Fang, You He, Yiqiao Xie, Jiankang Deng, Hang Zhang, Jifei Song, <strong>Zhensong Zhang</strong></p><p class="pm"><em>WWW 2026</em></p></div></div><div class="pub-sep"></div>
-
-  <div class="pub jour"><p class="vt">IJCV</p><div><p class="pt"><a href="https://arxiv.org/abs/2601.13148">ICo3D: An Interactive Conversational 3D Virtual Human</a></p><p class="pa">Richard Shaw, Youngkyoon Jang, Athanasios Papaioannou, Arthur Moreau, Helisa Dhamo, <strong>Zhensong Zhang</strong>, Eduardo Pérez-Pellitero</p><p class="pm"><em>IJCV</em> <a href="https://ico3d.github.io/">Website</a></p></div></div><div class="pub-sep"></div>
-
-  <div class="pub conf"><p class="vt">AAAI</p><div><p class="pt"><a href="https://arxiv.org/abs/2511.08971">Plug-and-Play Clarifier: A Zero-Shot Multimodal Framework for Egocentric Intent Disambiguation</a></p><p class="pa">Sicheng Yang, Yukai Huang, Weitong Cai, Shitong Sun, You He, Jiankang Deng, Hang Zhang, Jifei Song, <strong>Zhensong Zhang</strong></p><p class="pm"><em>AAAI 2026</em></p></div></div><div class="pub-sep"></div>
-
-  <div class="pub conf"><p class="vt">3DV</p><div><p class="pt"><a href="https://arxiv.org/abs/2412.15664">SCENIC: Scene-aware Semantic Navigation with Instruction-guided Control</a></p><p class="pa">Xiaohan Zhang, Sebastian Starke, Vladimir Guzov, <strong>Zhensong Zhang</strong>, Eduardo Pérez Pellitero, Gerard Pons-Moll</p><p class="pm"><em>3DV 2026</em></p></div></div><div class="pub-sep"></div>
-
-  <div class="pub conf"><p class="vt">NeurIPS</p><div><p class="pt"><a href="https://arxiv.org/abs/2506.18792">ViDAR: Video Diffusion-Aware 4D Reconstruction From Monocular Inputs</a></p><p class="pa">Michal Nazarczuk, Sibi Catley-Chandar, Thomas Tanay, <strong>Zhensong Zhang</strong>, Gregory Slabaugh, Eduardo Pérez-Pellitero</p><p class="pm"><em>NeurIPS 2025</em></p></div></div><div class="pub-sep"></div>
-
-  <div class="pub jour"><p class="vt">TPAMI</p><div><p class="pt"><a href="https://arxiv.org/abs/2509.03883">Human Motion Video Generation: A Survey</a></p><p class="pa">Haiwei Xue, Xiangyang Luo, Zhanghao Hu, Xin Zhang, Xunzhi Xiang, Yuqin Dai, Jianzhuang Liu, <strong>Zhensong Zhang</strong>, Minglei Li, Jian Yang, Fei Ma, Zhiyong Wu, Changpeng Yang, Zonghong Dai, Fei Richard Yu</p><p class="pm"><em>IEEE Trans. PAMI, 2025</em> <a href="https://github.com/Winn1y/Awesome-Human-Motion-Video-Generation">Website</a></p></div></div><div class="pub-sep"></div>
-
-  <div class="pub conf"><p class="vt">ICCV</p><div><p class="pt"><a href="https://cvpr.thecvf.com/virtual/2025/poster/32990">Frequency-Guided Diffusion for Training-Free Text-Driven Image Translation</a></p><p class="pa">Zheng Gao, Jifei Song, <strong>Zhensong Zhang</strong>, Jiankang Deng, Ioannis Patras</p><p class="pm"><em>ICCV 2025</em></p></div></div><div class="pub-sep"></div>
-
-  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://cvpr.thecvf.com/virtual/2025/poster/32990">CaricatureBooth: Data-Free Interactive Caricature Generation in a Photo Booth</a></p><p class="pa">Zhiyu Qu, Yunqi Miao, <strong>Zhensong Zhang</strong>, Jifei Song, Jiankang Deng, Yi-Zhe Song</p><p class="pm"><em>CVPR 2025</em></p></div></div><div class="pub-sep"></div>
-
-  <div class="pub conf"><p class="vt">IJCAI</p><div><p class="pt"><a href="https://cvpr.thecvf.com/virtual/2025/poster/32990">VideoHumanMIB: Unlocking Appearance Decoupling for Video Human Motion In-betweening</a></p><p class="pa">Haiwei Xue, <strong>Zhensong Zhang</strong>, Minglei Li, Zonghong Dai, Fei Yu, Fei Ma, Zhiyong Wu</p><p class="pm"><em>IJCAI 2025</em></p></div></div><div class="pub-sep"></div>
-
-  <div class="pub conf"><p class="vt">ICASSP</p><div><p class="pt"><a href="https://cvpr.thecvf.com/virtual/2025/poster/32990">Identity-Preserving Audio-Driven Holistic Human Motion Video Generation</a></p><p class="pa">Haiwei Xue, <strong>Zhensong Zhang</strong>, Minglei Li, Zonghong Dai</p><p class="pm"><em>ICASSP 2025</em></p></div></div>
+    <div class="pgrp">
+  <p class="gh">Digital Humans &amp; Human Motion <span class="gn">8 papers</span></p>
+  <div class="pub jour"><p class="vt">IJCV</p><div><p class="pt"><a href="https://arxiv.org/abs/2601.13148">ICo3D: An Interactive Conversational 3D Virtual Human</a></p><p class="pa">Richard Shaw, Youngkyoon Jang, Athanasios Papaioannou, Arthur Moreau, Helisa Dhamo, <strong>Zhensong Zhang</strong>, Eduardo Pérez-Pellitero</p><p class="pm"><em>IJCV</em> <a href="https://ico3d.github.io/">Website</a></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub conf"><p class="vt">3DV</p><div><p class="pt"><a href="https://arxiv.org/abs/2412.15664">SCENIC: Scene-aware Semantic Navigation with Instruction-guided Control</a></p><p class="pa">Xiaohan Zhang, Sebastian Starke, Vladimir Guzov, <strong>Zhensong Zhang</strong>, Eduardo Pérez-Pellitero, Gerard Pons-Moll</p><p class="pm"><em>3DV 2026</em></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub jour"><p class="vt">TPAMI</p><div><p class="pt"><a href="https://arxiv.org/abs/2509.03883">Human Motion Video Generation: A Survey</a></p><p class="pa">Haiwei Xue, Xiangyang Luo, Zhanghao Hu, Xin Zhang, Xunzhi Xiang, Yuqin Dai, Jianzhuang Liu, <strong>Zhensong Zhang</strong>, Minglei Li, Jian Yang, Fei Ma, Zhiyong Wu, Changpeng Yang, Zonghong Dai, Fei Richard Yu</p><p class="pm"><em>IEEE Trans. PAMI, 2025</em> <a href="https://github.com/Winn1y/Awesome-Human-Motion-Video-Generation">Website</a></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://arxiv.org/abs/2404.01862">Co-Speech Gesture Video Generation via Motion-Decoupled Diffusion Model</a></p><p class="pa">Xu He, Qiaochu Huang, <strong>Zhensong Zhang</strong>, Zhiwei Lin, Zhiyong Wu, Sicheng Yang, Minglei Li, Zhiyi Chen, Songcen Xu, Xiaofei Wu</p><p class="pm"><em>CVPR 2024</em></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub conf"><p class="vt">ICMI</p><div><p class="pt"><a href="https://arxiv.org/abs/2308.13879">The DiffuseStyleGesture+ Entry to the GENEA Challenge 2023</a></p><p class="pa">Sicheng Yang, Haiwei Xue, <strong>Zhensong Zhang</strong>, Minglei Li, Zhiyong Wu, Xiaofei Wu, Songcen Xu, Zonghong Dai</p><p class="pm"><em>ICMI 2023</em> · Reproducibility Award, GENEA Challenge 2023 <a href="./imgs/genea2023_award.jpg">Award</a></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub conf"><p class="vt">CVPR</p><div><p class="pt"><a href="https://arxiv.org/abs/2305.11094">QPGesture: Quantization-Based and Phase-Guided Motion Matching for Natural Speech-Driven Gesture Generation</a></p><p class="pa">Sicheng Yang, Zhiyong Wu, Minglei Li, <strong>Zhensong Zhang</strong>, Lei Hao, Weihong Bao, Haolin Zhuang</p><p class="pm"><em>CVPR 2023</em></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub conf"><p class="vt">IJCAI</p><div><p class="pt"><a href="https://arxiv.org/abs/2305.04919">DiffuseStyleGesture: Stylized Audio-Driven Co-Speech Gesture Generation with Diffusion Models</a></p><p class="pa">Sicheng Yang, Zhiyong Wu, Minglei Li, <strong>Zhensong Zhang</strong>, Lei Hao, Weihong Bao, Ming Cheng, Long Xiao</p><p class="pm"><em>IJCAI 2023</em></p></div></div>
+  <div class="pub-sep"></div>
+  <div class="pub conf"><p class="vt">ECCV</p><div><p class="pt"><a href="https://arxiv.org/abs/2208.00571">CLIFF: Carrying Location Information in Full Frames into Human Pose and Shape Estimation</a></p><p class="pa">Zhihao Li, Jianzhuang Liu, <strong>Zhensong Zhang</strong>, Songcen Xu, Youliang Yan</p><p class="pm"><em>ECCV 2022 (Oral)</em></p></div></div>
+  </div>
 
 </section>
 
@@ -849,8 +982,7 @@ footer .wl{display:inline-block;animation:wave .5s ease both}
     if(!items.length)return;
     document.addEventListener('mousemove',function(e){
       items.forEach(function(item){
-        var dot=item.querySelector(':before');
-        /* ::before isn't directly accessible, use item's transform instead */
+        /* ::before isn't directly accessible, shift it via CSS variables instead */
         var r=item.getBoundingClientRect();
         var dotX=r.left+10; /* ~left:8px + 2px center */
         var dotY=r.top+r.height/2;
