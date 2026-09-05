@@ -50,7 +50,7 @@ nav{
 .nw{width:100%;max-width:var(--w);display:flex;align-items:center;justify-content:center;position:relative}
 .nl{display:flex;gap:26px;list-style:none}
 .nl a{
-  font-size:11px;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;
+  font-size:.6875rem;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;
   color:var(--mut);text-decoration:none;padding-bottom:2px;position:relative;
   transition:color .18s,transform .18s ease-out;
   display:inline-block;
@@ -60,7 +60,7 @@ nav{
 .nl a:hover::after,.nl a.active::after{right:0}
 .tm{
   position:absolute;right:0;background:none;border:none;cursor:pointer;
-  padding:4px 6px;color:var(--mut);font-size:16px;line-height:1;
+  padding:4px 6px;color:var(--mut);font-size:1rem;line-height:1;
   transition:color .18s,transform .3s;
 }
 .tm:hover{color:var(--ink);transform:rotate(22deg)}
@@ -102,12 +102,12 @@ main{max-width:var(--w);margin:0 auto;padding:0 24px 110px}
   font-size:clamp(1.5rem,3.2vw,2rem);font-weight:700;
   letter-spacing:-.03em;line-height:1.1;margin-bottom:7px;
 }
-.role{font-size:1.02rem;font-weight:600;color:var(--lk);letter-spacing:-.01em;line-height:1.25;margin-bottom:3px}
+.role{font-size:1.05rem;font-weight:600;color:var(--lk);letter-spacing:-.01em;line-height:1.25;margin-bottom:3px}
 .role .dash{color:var(--mut);font-weight:400;padding:0 2px}
 .tagline{font-size:.8rem;color:var(--mut);letter-spacing:.2px;margin-bottom:14px}
 .lks{display:flex;gap:7px;flex-wrap:wrap}
 .lk-btn{
-  font-size:12px;font-weight:500;color:var(--lk);
+  font-size:.75rem;font-weight:500;color:var(--lk);
   background:var(--tag);padding:6px 14px;border-radius:3px;
   text-decoration:none;display:inline-flex;align-items:center;gap:5px;
   transition:background .18s,color .18s,transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .18s;
@@ -128,7 +128,7 @@ section{padding-top:36px}
 section+section{padding-top:52px}
 .sh{
   display:flex;align-items:center;gap:8px;
-  font-size:10.5px;font-weight:600;letter-spacing:2.2px;text-transform:uppercase;
+  font-size:.656rem;font-weight:600;letter-spacing:2.2px;text-transform:uppercase;
   color:var(--mut);margin-bottom:20px;
   padding-bottom:10px;border-bottom:1px solid var(--rule);
 }
@@ -212,13 +212,13 @@ section+section{padding-top:52px}
   color:var(--ink);margin-bottom:6px;
 }
 .gh .gn{
-  font-size:10.5px;font-weight:600;letter-spacing:.5px;
+  font-size:.656rem;font-weight:600;letter-spacing:.5px;
   color:var(--mut);flex-shrink:0;
 }
 .pnote{font-size:.85rem;color:var(--mut);line-height:1.6;margin:-8px 0 24px}
 
 .vt{
-  font-size:11.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+  font-size:.719rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
   padding-top:2px;line-height:1.35;
 }
 .pub.conf .vt{color:var(--conf)}
@@ -295,14 +295,14 @@ section+section{padding-top:52px}
 .ai a{color:var(--lk)}
 
 /* ─── footer ─────────────────────────────────────  */
-footer{margin-top:40px;padding:22px 0;border-top:1px solid var(--rule);font-size:11px;color:var(--mut);text-align:center}
+footer{margin-top:40px;padding:22px 0;border-top:1px solid var(--rule);font-size:.6875rem;color:var(--mut);text-align:center}
 footer a{color:var(--mut)}
 footer a:hover{color:var(--ink);text-decoration:none}
 
 /* ─── copy tooltip ─────────────────────────────  */
 .copy-tip{
   position:fixed;pointer-events:none;z-index:300;
-  font-size:11px;font-weight:600;color:var(--bg);background:var(--lk);
+  font-size:.6875rem;font-weight:600;color:var(--bg);background:var(--lk);
   padding:4px 10px;border-radius:4px;white-space:nowrap;
   animation:tipUp .7s ease-out both;
 }
@@ -333,7 +333,7 @@ footer .wl{display:inline-block;animation:wave .5s ease both}
     overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
   }
   .nl::-webkit-scrollbar{display:none}
-  .nl a{font-size:10.5px;letter-spacing:1px;white-space:nowrap}
+  .nl a{font-size:.656rem;letter-spacing:1px;white-space:nowrap}
   /* narrow column: keep the alignment, but allow shorter words to break
      so each line has enough hyphenation points to absorb the slack */
   .bio-txt,.pdesc,.ai,.hire span{hyphenate-limit-chars:5 2 2}
